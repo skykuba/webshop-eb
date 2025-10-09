@@ -14,7 +14,6 @@ This repository contains a Docker-based setup for running the webshop (PrestaSho
 
 1. Clone the repository:
 
-    ```git clone```
 
 2. Change into the docker-compose directory:
 
@@ -51,6 +50,9 @@ This repository contains a Docker-based setup for running the webshop (PrestaSho
 
 The stack exposes two main web entry points by default (check `docker-compose/docker-compose.yml` for exact mappings):
 
+- prestaShop frontend: http://localhost:8080
 - phpMyAdmin: http://localhost:8081
-- PrestaShop frontend: http://localhost:8080
+	- Server: `some-mysql`
+	- Login: `root`
+	- Password: `admin`
 
