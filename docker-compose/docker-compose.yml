@@ -52,6 +52,9 @@ services:
       - type: bind
         source: ./themes/myTheme # local path to the theme
         target:  /var/www/html/themes/myTheme # path to be mounted in the container
+      - type: bind
+        source: ./ps_install_config.sh
+        target: /var/www/html/ps_install_config.sh
       - psdata:/var/www/html
 networks:
   prestashop_network:
