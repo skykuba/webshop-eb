@@ -9,10 +9,18 @@ services:
       - prestashop_network
     volumes:
       - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   phpmyadmin:
       image: phpmyadmin/phpmyadmin
       container_name: phpmyadmin
+      depends_on:
+        mysql:
+          condition: service_healthy
       environment:
         PMA_HOST: ${DB_SERVER}
         PMA_PORT: 3306
@@ -30,7 +38,8 @@ services:
       dockerfile: ./prestashop/Dockerfile
     restart: unless-stopped
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
     environment:
       DB_SERVER: ${DB_SERVER}
       DB_NAME: ${DB_NAME}
