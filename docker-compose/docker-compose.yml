@@ -4,8 +4,7 @@ services:
     image: mysql:5.7
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: prestashop
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     networks:
       - prestashop_network
     volumes:
@@ -15,7 +14,7 @@ services:
       image: phpmyadmin/phpmyadmin
       container_name: phpmyadmin
       environment:
-        PMA_HOST: some-mysql
+        PMA_HOST: ${DB_SERVER}
         PMA_PORT: 3306
         PMA_ARBITRARY: 1
       restart: unless-stopped
@@ -30,15 +29,20 @@ services:
     restart: unless-stopped
     depends_on:
       - mysql
-    ports:
-      - 8080:80
     environment:
-      DB_SERVER: some-mysql
-      DB_NAME: prestashop
-      DB_USER: root
-      DB_PASSWD: admin
-      PS_FOLDER_ADMIN: admin4577
-      PS_FOLDER_INSTALL: install4577
+      DB_SERVER: ${DB_SERVER}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWD: ${DB_ROOT_PASSWORD}
+      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      PS_FOLDER_ADMIN: ${PS_FOLDER_ADMIN}
+      PS_FOLDER_INSTALL: ${PS_FOLDER_INSTALL}
+      PS_DOMAIN: ${PS_DOMAIN}
+      PS_SHOP_NAME: ${PS_SHOP_NAME}
+      PS_ADMIN_MAIL: ${PS_ADMIN_MAIL}
+      PS_ADMIN_PASSWD: ${PS_ADMIN_PASSWD}
+    expose:
+      - '80'
     networks:
       - prestashop_network
     volumes:
