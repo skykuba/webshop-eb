@@ -42,30 +42,34 @@ services:
         condition: service_healthy
     environment:
       DB_SERVER: ${DB_SERVER}
+      DB_PORT: ${DB_PORT}
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWD: ${DB_ROOT_PASSWORD}
-      DB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      DB_PREFIX: ${DB_PREFIX}
+      PS_INSTALL_AUTO: 1
+      PS_ERASE_DB: ${PS_ERASE_DB}
+      PS_INSTALL_DB: ${PS_INSTALL_DB}
+      PS_DOMAIN: ${PS_DOMAIN}
+      PS_LANGUAGE: ${PS_LANGUAGE}
+      PS_COUNTRY: ${PS_COUNTRY}
+      PS_ALL_LANGUAGES: 0
       PS_FOLDER_ADMIN: ${PS_FOLDER_ADMIN}
       PS_FOLDER_INSTALL: ${PS_FOLDER_INSTALL}
-      PS_DOMAIN: ${PS_DOMAIN}
-      PS_SHOP_NAME: ${PS_SHOP_NAME}
-      PS_ADMIN_MAIL: ${PS_ADMIN_MAIL}
-      PS_ADMIN_PASSWD: ${PS_ADMIN_PASSWD}
-    expose:
-      - '80'
+      ADMIN_MAIL: ${PS_ADMIN_MAIL}
+      ADMIN_PASSWD: ${PS_ADMIN_PASSWD}
+      PS_ENABLE_SSL: ${PS_SSL}
+      PS_HANDLE_DYNAMIC_DOMAIN: 0
+      PS_DEMO_MODE: 0
     networks:
       - prestashop_network
     volumes:
       - type: bind
-        source: ./modules/testModule # local path to the module
-        target: /var/www/html/modules/testModule # path to be mounted in the container
+        source: ./modules/testModule
+        target: /var/www/html/modules/testModule
       - type: bind
-        source: ./themes/myTheme # local path to the theme
-        target:  /var/www/html/themes/myTheme # path to be mounted in the container
-      - type: bind
-        source: ./ps_install_config.sh
-        target: /var/www/html/ps_install_config.sh
+        source: ./themes/myTheme
+        target: /var/www/html/themes/myTheme
       - psdata:/var/www/html
 networks:
   prestashop_network:
