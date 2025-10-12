@@ -46,7 +46,12 @@ docker-compose/
    cd docker-compose
    ```
 
-3. **Build and start all services in dev mode:**
+3. **Generate SSL certificates (first time only):**
+   ```bash
+   ./gen-cert.sh
+   ```
+
+4. **Build and start all services in dev mode:**
    ```bash
    docker compose --env-file ../.env.dev -f docker-compose.yml -f docker-compose.dev.yml up --build
    ```
