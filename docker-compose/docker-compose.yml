@@ -25,7 +25,9 @@ services:
 
   prestashop:
     container_name: prestashop
-    image: prestashop/prestashop:1.7.8.10-7.4-apache
+    build:
+      context: .
+      dockerfile: ./prestashop/Dockerfile
     restart: unless-stopped
     depends_on:
       - mysql
