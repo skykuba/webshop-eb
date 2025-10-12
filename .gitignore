@@ -1,1 +1,6 @@
 .env.*
+
+nginx/ssl/
+*.key
+*.crt
+*.pem
