@@ -64,7 +64,7 @@ services:
     networks:
       - prestashop_network
     volumes:
-      - psdata:/var/www/html
+      - ./src:/var/www/html
 
   nginx:
     container_name: nginx
@@ -80,10 +80,10 @@ services:
     volumes:
       - ./nginx/dev.conf:/etc/nginx/conf.d/default.conf:ro
       - ./nginx/ssl:/etc/nginx/ssl:ro
-      - psdata:/var/www/html:ro
+      - ./src:/var/www/html:ro
 
 networks:
   prestashop_network:
 volumes:
-  psdata:
   dbdata:
+  
