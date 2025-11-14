@@ -152,6 +152,11 @@ tests/Resources/download/*
 !/admin-dev/themes/new-theme/public/theme.rtlfix
 !/admin-dev/themes/default/public/theme.rtlfix
 
+/admin4577
+/install4577
+/admin
+/install
+
 themes/*/cache/*
 themes/core.js.map
 themes/core.js
