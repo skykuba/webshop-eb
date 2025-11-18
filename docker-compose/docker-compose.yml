@@ -4,18 +4,25 @@ services:
     image: mysql:5.7
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: admin
-      MYSQL_DATABASE: prestashop
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
     networks:
       - prestashop_network
     volumes:
       - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${DB_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   phpmyadmin:
       image: phpmyadmin/phpmyadmin
       container_name: phpmyadmin
+      depends_on:
+        mysql:
+          condition: service_healthy
       environment:
-        PMA_HOST: some-mysql
+        PMA_HOST: ${DB_SERVER}
         PMA_PORT: 3306
         PMA_ARBITRARY: 1
       restart: unless-stopped
@@ -26,28 +33,43 @@ services:
 
   prestashop:
     container_name: prestashop
-    image: prestashop/prestashop:1.7.8.10-7.4-apache
+    build:
+      context: .
+      dockerfile: ./prestashop/Dockerfile
     restart: unless-stopped
     depends_on:
-      - mysql
-    ports:
-      - 8080:80
+      mysql:
+        condition: service_healthy
     environment:
-      DB_SERVER: some-mysql
-      DB_NAME: prestashop
-      DB_USER: root
-      DB_PASSWD: admin
-      PS_FOLDER_ADMIN: admin4577
-      PS_FOLDER_INSTALL: install4577
+      DB_SERVER: ${DB_SERVER}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWD: ${DB_ROOT_PASSWORD}
+      DB_PREFIX: ${DB_PREFIX}
+      PS_INSTALL_AUTO: 1
+      PS_ERASE_DB: ${PS_ERASE_DB}
+      PS_INSTALL_DB: ${PS_INSTALL_DB}
+      PS_DOMAIN: ${PS_DOMAIN}
+      PS_LANGUAGE: ${PS_LANGUAGE}
+      PS_COUNTRY: ${PS_COUNTRY}
+      PS_ALL_LANGUAGES: 0
+      PS_FOLDER_ADMIN: ${PS_FOLDER_ADMIN}
+      PS_FOLDER_INSTALL: ${PS_FOLDER_INSTALL}
+      ADMIN_MAIL: ${PS_ADMIN_MAIL}
+      ADMIN_PASSWD: ${PS_ADMIN_PASSWD}
+      PS_ENABLE_SSL: ${PS_SSL}
+      PS_HANDLE_DYNAMIC_DOMAIN: 0
+      PS_DEMO_MODE: 0
     networks:
       - prestashop_network
     volumes:
       - type: bind
-        source: ./modules/testModule # local path to the module
-        target: /var/www/html/modules/testModule # path to be mounted in the container
+        source: ./modules/testModule
+        target: /var/www/html/modules/testModule
       - type: bind
-        source: ./themes/myTheme # local path to the theme
-        target:  /var/www/html/themes/myTheme # path to be mounted in the container
+        source: ./themes/myTheme
+        target: /var/www/html/themes/myTheme
       - psdata:/var/www/html
 networks:
   prestashop_network:
