@@ -1,0 +1,249 @@
+body {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f8f9fa;
+    color: #111;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-primary:active,
+.btn-primary:focus {
+    background-color: #0b6651 !important;
+    border-color: #0b6651 !important;
+}
+
+.btn-primary:hover {
+    background-color: #0a5947 !important;
+    border-color: #0a5947 !important;
+}
+
+.btn-secondary {
+    background-color: #eee !important;
+    border-color: #ddd !important;
+    color: #222 !important;
+}
+
+/* Links */
+a {
+    color: #0b6651;
+}
+
+a:hover {
+    color: #084d3d;
+}
+
+/* ------------------------------------------------------- */
+/*  Header */
+/* ------------------------------------------------------- */
+
+#header .header-nav {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+#header .header-top {
+    padding: 12px 0;
+}
+
+/* Search bar */
+#search_widget form input[type="text"] {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 10px 14px;
+    font-size: 15px;
+}
+
+#search_widget form button {
+    background: #0b6651 !important;
+    border-radius: 6px !important;
+}
+
+/* Top menu */
+#header .header-nav .top-menu a {
+    font-weight: 600;
+    color: #333 !important;
+}
+
+#header .header-nav .top-menu a:hover {
+    color: #0b6651 !important;
+}
+
+/* ------------------------------------------------------- */
+/*  Menu główne */
+/* ------------------------------------------------------- */
+
+#_desktop_top_menu {
+    background: white;
+    padding: 10px 0;
+}
+
+#_desktop_top_menu .top-menu a {
+    color: #3f3f3f !important;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 6px;
+}
+
+#_desktop_top_menu .top-menu a:hover {
+    color: rgb(255, 136, 0) !important;
+}
+
+/* ------------------------------------------------------- */
+/*  HOME PAGE */
+/* ------------------------------------------------------- */
+
+/* Hero / Slider */
+#carousel {
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 32px;
+}
+
+#carousel .carousel-item img {
+    border-radius: 10px;
+}
+
+/* Sekcje */
+h2.h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0b3d33;
+    margin-bottom: 16px;
+}
+
+/* ------------------------------------------------------- */
+/*  Product list (kategorie) */
+/* ------------------------------------------------------- */
+
+#products .product-miniature {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+    padding: 12px;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+#products .product-miniature:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+}
+
+#products .product-miniature .thumbnail-container {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Product name */
+#products .product-miniature .product-title a {
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+}
+
+#products .product-miniature .product-title a:hover {
+    color: #0b6651;
+}
+
+/* Price */
+#products .product-price-and-shipping .price {
+    color: #f39c12;
+    font-weight: 700;
+    font-size: 17px;
+}
+
+/* ------------------------------------------------------- */
+/*  Product page */
+/* ------------------------------------------------------- */
+
+#product #main h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0b3d33;
+}
+
+#product .current-price {
+    color: #f39c12;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+#product .product-actions .btn {
+    padding: 14px 20px;
+    font-size: 17px;
+    border-radius: 8px;
+}
+
+/* Tabs */
+#product .tabs {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#product .nav-tabs .nav-link.active {
+    background: #0b6651 !important;
+    color: #fff !important;
+    border-color: #0b6651 !important;
+}
+
+/* ------------------------------------------------------- */
+/*  Footer */
+/* ------------------------------------------------------- */
+
+footer {
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 28px;
+    padding-bottom: 28px;
+}
+
+footer h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0b3d33;
+}
+
+footer a {
+    color: #555 !important;
+}
+
+footer a:hover {
+    color: #0b6651 !important;
+}
+
+/* ------------------------------------------------------- */
+/*  Breadcrumbs */
+/* ------------------------------------------------------- */
+
+.breadcrumb {
+    background: transparent;
+    padding-left: 0;
+}
+
+.breadcrumb li a {
+    color: #0b6651;
+}
+
+.breadcrumb li:last-child {
+    color: #333;
+}
+
+/* ------------------------------------------------------- */
+/*  Cart page */
+/* ------------------------------------------------------- */
+
+#cart .card {
+    border-radius: 10px;
+}
+
+#cart .checkout .btn-primary {
+    padding: 14px 20px;
+    font-size: 18px;
+}
+
+/* ------------------------------------------------------- */
+/*  Utility */
+/* ------------------------------------------------------- */
+
+.shadow-sm {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+}

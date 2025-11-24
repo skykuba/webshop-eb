@@ -33,8 +33,18 @@
     <div class="container">
       <div class="row">
         <div class="hidden-sm-down">
-          <div class="col-md-5 col-xs-12">
-            {hook h='displayNav1'}
+          <div class="col-md-4 col-xs-12">
+            <div class="col-md-5 hidden-sm-down" id="_desktop_logo">
+          {if $shop.logo_details}
+            {if $page.page_name == 'index'}
+              <h1>
+                {renderLogo}
+              </h1>
+            {else}
+              {renderLogo}
+            {/if}
+          {/if}
+        </div>
           </div>
           <div class="col-md-7 right-nav">
               {hook h='displayNav2'}
@@ -58,17 +68,7 @@
   <div class="header-top">
     <div class="container">
        <div class="row">
-        <div class="col-md-2 hidden-sm-down" id="_desktop_logo">
-          {if $shop.logo_details}
-            {if $page.page_name == 'index'}
-              <h1>
-                {renderLogo}
-              </h1>
-            {else}
-              {renderLogo}
-            {/if}
-          {/if}
-        </div>
+
         <div class="header-top-right col-md-10 col-sm-12 position-static">
           {hook h='displayTop'}
         </div>
