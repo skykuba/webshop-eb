@@ -53,6 +53,97 @@ a:hover {
     font-size: 15px;
 }
 
+.right-nav a:hover,
+.header-top-right a:hover {
+    color: rgb(255, 136, 0) !important;
+}
+/*szerokosc*/
+#_desktop_top_menu,
+#top-menu,
+.menu.js-top-menu.position-static {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Usunięcie ograniczenia kontenera */
+.header-top .container,
+.header-nav .container {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+.header-nav {
+    margin-bottom: 20px; /* ustaw dowolną wartość */
+}
+.header-nav,
+.header-nav .container,
+.header-nav .row {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+/* searchbar */
+.search-bar-wrapper{
+    margin-top: 10px;
+}
+
+/*shopping cart*/
+/* ===== WYRÓWNANIE W JEDNEJ LINII Z LOGINEM ===== */
+#_desktop_user_info,
+#_desktop_cart {
+    display: flex !important;
+    align-items: center !important;
+}
+
+#_desktop_cart .blockcart .header {
+    display: flex !important;
+    align-items: center !important;
+}
+
+
+/* ===== USUNIĘCIE SZAREGO TŁA, RAMKI I PROBLEMÓW Z KLIKANIEM ===== */
+#_desktop_cart .blockcart,
+#_desktop_cart .cart-preview {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+/* ===== BIAŁE TŁO KOSZYKA + CZARNY TEKST ===== */
+#_desktop_cart .blockcart .header {
+    background: #ffffff !important;
+    border-radius: 4px;
+    padding: 6px 10px;
+    color: #000 !important;
+}
+
+
+/* ===== KOLOR TEKSTU I IKONY ===== */
+#_desktop_cart .blockcart .header a,
+#_desktop_cart .blockcart .header i,
+#_desktop_cart .blockcart .header span {
+    color: #000000 !important;
+}
+
+
+/* ===== PODŚWIETLENIE NA HOVER (TAK JAK LOGIN) ===== */
+#_desktop_cart .blockcart .header:hover,
+#_desktop_cart .blockcart .header:hover a,
+#_desktop_cart .blockcart .header:hover i,
+#_desktop_cart .blockcart .header:hover span {
+    color: rgb(255, 136, 0) !important; /* pomarańcz jak w menu */
+    cursor: pointer;
+}
+
+
+/* ===== NAPRAWA KLIKALNOŚCI ===== */
+#_desktop_cart *,
+#_desktop_cart a {
+    pointer-events: auto !important;
+    z-index: 999;
+}
+
+
+
 #search_widget form button {
     background: #0b6651 !important;
     border-radius: 6px !important;

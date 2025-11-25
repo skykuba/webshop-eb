@@ -44,9 +44,13 @@
               {renderLogo}
             {/if}
           {/if}
-        </div>
+            </div>
           </div>
-          <div class="col-md-7 right-nav">
+
+          <div class="col-md-3 search-bar-wrapper">
+          {hook h='displaySearch'}
+          </div>
+          <div class="col-md-5 right-nav">
               {hook h='displayNav2'}
           </div>
         </div>
