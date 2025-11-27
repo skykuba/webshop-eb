@@ -1,168 +1,212 @@
 # webshop-eb
 
-## Overview
-
-This repository contains a Docker-based setup for running PrestaShop locally using Docker Compose. The setup includes:
-- **PrestaShop 1.7.8.10** (PHP-FPM)
-- **MySQL 5.7** database
-- **NGINX** web server with SSL support
-- **phpMyAdmin** for database management
+PrestaShop 1.7.8.x project deployed using Docker Compose with environment variable configuration.
 
 ## Requirements
 
-- Docker 
-- Docker Compose v2
+- Docker
+- Docker Compose
 - Git
 
 ## Project Structure
 
 ```
-docker-compose/
-├── docker-compose.yml          # Base configuration (MySQL, PrestaShop, phpMyAdmin)
-├── docker-compose.dev.yml      # Development configuration (NGINX)
-├── docker_run.sh               # PrestaShop installation script
-├── gen-cert.sh					# For SSL
+webshop-eb/
+├── README.md                          # This file
+├── .env.dev                           # Environment variables (unchanged)
 ├── prestashop/
-│   └── Dockerfile              # Custom PrestaShop image
-├── nginx/
-│   ├── dev.conf                # NGINX configuration
-│   └── ssl/                    # SSL certificates
-├── modules/
-│   └── testModule/             # Custom PrestaShop modules
-└── themes/
-    └── myTheme/                # Custom PrestaShop themes
+│   ├── docker-compose.yml             # Services configuration
+│   ├── docker_run.sh                  # PrestaShop installation script
+│   ├── setup.sh                       # Configuration script
+│   ├── gen-cert.sh                    # SSL certificate generator
+│   ├── Docker/
+│   │   └── prestashop/
+│   │       └── Dockerfile             # PrestaShop image
+│   ├── nginx/
+│   │   ├── dev.conf                   # NGINX configuration
+│   │   └── ssl/                       # SSL certificates
+│   └── src/                           # PrestaShop source code
 ```
 
 ## Quick Start
 
-1. **Clone the repository:**
-   ```bash
-   git clone git@github.com:skykuba/webshop-eb.git
-   cd webshop-eb
-   ```
-
-2. **Change into the docker-compose directory:**
-   ```bash
-   cd docker-compose
-   ```
-
-3. **Generate SSL certificates (first time only):**
-   ```bash
-   ./gen-cert.sh
-   ```
-
-4. **Build and start all services in dev mode:**
-   ```bash
-   docker compose --env-file ../.env.dev -f docker-compose.yml -f docker-compose.dev.yml up --build
-   ```
-
-   This command will:
-   - Build the PrestaShop Docker image with MySQL client
-   - Wait for MySQL
-   - Auto-install PrestaShop
-   - Start NGINX with SSL support
-
-## Common Commands
-
-### Starting Services
-
-- **Start with logs (recommended for first run):**
-  ```bash
-  docker compose --env-file ../.env.dev -f docker-compose.yml -f docker-compose.dev.yml up --build
-  ```
-
-- **Start in background (detached):**
-  ```bash
-  docker compose --env-file ../.env.dev -f docker-compose.yml -f docker-compose.dev.yml up -d
-  ```
-
-### Managing Services
-
-- **View running services:**
-  ```bash
-  docker compose --env-file ../.env.dev -f docker-compose.yml -f docker-compose.dev.yml ps
-  ```
-
-- **View logs:**
-  ```bash
-  docker compose --env-file ../.env.dev -f docker-compose.yml -f docker-compose.dev.yml logs -f
-  ```
-
-- **Stop services:**
-  ```bash
-  docker compose --env-file ../.env.dev -f docker-compose.yml -f docker-compose.dev.yml down
-  ```
-
-- **Stop and remove volumes (clean slate):**
-  ```bash
-  docker compose --env-file ../.env.dev -f docker-compose.yml -f docker-compose.dev.yml down -v
-  ```
-
-### Accessing Containers
-
-- **Access PrestaShop container:**
-  ```bash
-  docker exec -it prestashop bash
-  ```
-
-- **Access MySQL container:**
-  ```bash
-  docker exec -it some-mysql bash
-  ```
-
-## Access and Ports
-
-### Web Interfaces
-
-- **PrestaShop Frontend:** 
-  - HTTP: http://localhost
-  - HTTPS: https://localhost *(self-signed certificate)*
-  
-- **PrestaShop Admin Panel:**
-  - URL: http://localhost/admin4577
-  - Email: `admin@gmial.com`
-  - Password: `AdminPassword123`
-
-- **phpMyAdmin:** http://localhost:8081
-  - Server: `some-mysql`
-  - Username: `root`
-  - Password: `admin`
-
-### SSL Certificate
-
-The setup uses self-signed SSL certificates located in `docker-compose/nginx/ssl/`. Your browser will show a security warning - this is normal for development.
-
-## Configuration
-
-### Environment Variables (.env.dev)
-
-Key configuration options:
+### 1. Clone the Repository
 
 ```bash
+git clone git@github.com:skykuba/webshop-eb.git
+cd webshop-eb/prestashop
+```
+
+### 2. Generate SSL Certificates (first time only)
+
+```bash
+./gen-cert.sh
+```
+
+### 3. Start the Project
+
+The entire setup is run using environment variables from the `.env.dev` file:
+
+```bash
+docker compose -f docker-compose.yml up --build
+```
+
+Alternatively, to run in the background:
+
+```bash
+docker compose -f docker-compose.yml up -d --build
+```
+
+**What happens:**
+- Variables from `.env.dev` are automatically loaded
+- MySQL database is initialized
+- PrestaShop is automatically installed
+- NGINX starts with SSL
+- phpMyAdmin is available for database management
+
+## Environment Variables (.env.dev)
+
+The `.env.dev` file contains all necessary configurations and **remains unchanged** between runs:
+
+```env
+# PrestaShop Configuration
 PS_SHOP_NAME=tuttu
 PS_ADMIN_MAIL=admin@gmial.com
 PS_ADMIN_PASSWD=AdminPassword123
-PS_ERASE_DB=1
-PS_INSTALL_DB=1
+PS_LANGUAGE=pl
+PS_COUNTRY=pl
+
+# Database
 DB_NAME=prestashop
 DB_SERVER=some-mysql
 DB_PORT=3306
 DB_USER=root
 DB_PREFIX=ps_
 DB_ROOT_PASSWORD=admin
+
+# Installation
+PS_ERASE_DB=1
+PS_INSTALL_DB=1
 PS_DB_CREATE=1
-PS_LANGUAGE=pl
-PS_COUNTRY=pl
+
+# Security
 PS_SSL=1
-PS_NEWSLETTER=0
 PS_FOLDER_ADMIN=admin4577
 PS_FOLDER_INSTALL=install4577
+
+# Other
+PS_NEWSLETTER=0
 ```
 
-### Custom Modules and Themes
+**Important:** Do not edit this file for each run. Variables are set to stable, working values.
 
-- Place custom modules in: `docker-compose/modules/`
-- Place custom themes in: `docker-compose/themes/`
+## Service Access
 
-These are automatically mounted into the PrestaShop container.
+### PrestaShop Frontend
+
+- **HTTPS:** https://localhost (self-signed certificate)
+
+### Admin Panel
+
+- **URL:** http://localhost/admin4577
+- **Email:** `admin@gmial.com`
+- **Password:** `AdminPassword123`
+
+### phpMyAdmin
+
+- **URL:** http://localhost:8081
+- **Server:** `some-mysql`
+- **Username:** `root`
+- **Password:** `admin`
+
+## Operational Commands
+
+### Starting Services
+
+```bash
+# With logs (recommended for first run)
+docker compose -f docker-compose.yml up --build
+
+# In background (detached mode)
+docker compose -f docker-compose.yml up -d --build
+```
+
+### Managing Services
+
+```bash
+# View running services
+docker compose ps
+
+# View logs
+docker compose logs -f
+
+# View logs from specific service
+docker compose logs -f prestashop
+docker compose logs -f some-mysql
+docker compose logs -f nginx
+
+# Stop services
+docker compose down
+
+# Stop and remove data (clean reset)
+docker compose down -v
+```
+
+### Accessing Containers
+
+```bash
+# Access PrestaShop container
+docker exec -it prestashop bash
+
+# Access MySQL container
+docker exec -it some-mysql bash
+
+# Access NGINX container
+docker exec -it nginx bash
+```
+
+## Usage Examples
+
+### Scenario 1: First Run
+
+```bash
+cd webshop-eb/prestashop
+./gen-cert.sh
+docker compose -f docker-compose.yml up --build
+# Wait for "PrestaShop successfully installed"
+# Open https://localhost in your browser
+```
+
+### Scenario 2: Restart (without rebuild)
+
+```bash
+cd webshop-eb/prestashop
+docker compose -f docker-compose.yml up
+# Services start faster without rebuild
+```
+
+### Scenario 3: Clean Reset
+
+```bash
+cd webshop-eb/prestashop
+docker compose down -v
+./setup.sh
+docker compose -f docker-compose.yml up --build
+# All data is removed, fresh installation
+```
+
+
+## Notes
+
+- **Environment variables** in `.env.dev` are set to sensible values and require no changes
+- **SSL certificates** are self-signed and browser warnings are normal for development
+- **Database data** is stored in a Docker volume and survives restarts (unless you use `down -v`)
+- **PrestaShop code** is installed in `/prestashop/src/`
+
+## Support
+
+If you encounter issues, check:
+1. Docker logs: `docker compose logs -f`
+2. Container status: `docker compose ps`
+3. Port availability: `docker ps -a`
 
