@@ -25,12 +25,20 @@ class Ps_Tuttubenefits extends Module
         return parent::install() && $this->registerHook('displayHome');
     }
 
+    
     public function hookDisplayHome($params)
     {
         $this->context->controller->registerStylesheet(
             'module-tuttu-benefits-style',
             'modules/'.$this->name.'/views/css/style.css'
         );
+        
+        // link do CMS w metodzie, w kontekście
+        $idCms = 6; // ID strony CMS
+        $linkCms = $this->context->link->getCMSLink($idCms);
+
+        // przekazanie do tpl
+        $this->context->smarty->assign('cmsLink', $linkCms);
 
         return $this->display(__FILE__, 'ps_tuttubenefits.tpl');
     }

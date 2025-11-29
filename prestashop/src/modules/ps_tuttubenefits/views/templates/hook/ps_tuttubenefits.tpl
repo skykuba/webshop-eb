@@ -1,13 +1,14 @@
+
 <ul class="benefit_list">
   <li class="benefit_item">
     <div class="benefit_icon_wrapper">
-      <a href="/Gwarancja-Satysfakcji-ccms-pol-52.html">
+      <a href="{$cmsLink}">
         <img height="53" width="53" src="modules/ps_tuttubenefits/views/templates/hook/1.svg" alt="ikona" class="benefit-icon">
       </a>
     </div>
     <div class="benefit_text">
-      <span class="benefit_headline orange"><a href="/Gwarancja-Satysfakcji-ccms-pol-52.html">Gwarancja 100% satysfakcji</a></span>
-      <span class="benefit_headline_sub orange"><a href="/Gwarancja-Satysfakcji-ccms-pol-52.html">"KUP-SPRAWDŹ-WYMIEŃ</a></span>
+      <span class="benefit_headline orange"><a href="{$cmsLink}">Gwarancja 100% satysfakcji</a></span>
+      <span class="benefit_headline_sub orange"><a href="{$cmsLink}">"KUP-SPRAWDŹ-WYMIEŃ</a></span>
     </div>
   </li>
   

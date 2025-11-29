@@ -32,7 +32,20 @@
   <section id="content" class="page-content page-cms page-cms-{$cms.id}">
 
     {block name='cms_content'}
-      {$cms.content nofilter}
+      {if $cms.meta_title == 'Gwarancja'}
+    <h2>Nasza gwarancja</h2>
+    <p>Kupując w naszym sklepie masz 30 dni na zwrot towaru oraz pełną satysfakcję z zakupu.</p>
+
+    <ul>
+      <li>Zwrot bez podania przyczyny</li>
+      <li>Wymiana lub naprawa w razie problemów</li>
+      <li>Profesjonalna obsługa klienta</li>
+    </ul>
+
+  {else}
+    {$cms.content nofilter}
+  {/if}
+
     {/block}
 
     {block name='hook_cms_dispute_information'}
