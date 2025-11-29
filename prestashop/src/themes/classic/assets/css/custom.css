@@ -13,8 +13,8 @@ body {
 }
 
 .btn-primary:hover {
-    background-color: #0a5947 !important;
-    border-color: #0a5947 !important;
+    background-color: #f39c12!important;
+    border-color: #f39c12!important;
 }
 
 .btn-secondary {
@@ -25,11 +25,11 @@ body {
 
 /* Links */
 a {
-    color: #0b6651;
+    color: #000000;
 }
 
 a:hover {
-    color: #084d3d;
+    color: #f39c12;
 }
 
 /* ------------------------------------------------------- */
@@ -56,6 +56,13 @@ a:hover {
 .menu.js-top-menu.position-static {
     width: 100% !important;
     max-width: 100% !important;
+}
+
+#main .container,
+#wrapper .container,
+.container {
+    max-width: 90% !important;
+    width: 90% !important;
 }
 
 /* Usunięcie ograniczenia kontenera */
@@ -90,7 +97,6 @@ a:hover {
     padding: 10px 40px 10px 12px; /* miejsce na ikonę po prawej */
     border: 1px solid #ccc;
     border-radius: 6px;
-    background: #fff;
     font-size: 15px;
 }
 
@@ -157,7 +163,6 @@ a:hover {
 
 /* ===== BIAŁE TŁO KOSZYKA + CZARNY TEKST ===== */
 #_desktop_cart .blockcart .header {
-    background: #ffffff !important;
     border-radius: 4px;
     padding: 6px 10px;
     color: #000 !important;
@@ -206,7 +211,6 @@ a:hover {
 /* ------------------------------------------------------- */
 
 #_desktop_top_menu {
-    background: white;
     padding: 10px 0;
 }
 
@@ -240,7 +244,7 @@ a:hover {
 h2.h2 {
     font-size: 24px;
     font-weight: 700;
-    color: #0b3d33;
+    color: #000000;
     margin-bottom: 16px;
 }
 
@@ -251,7 +255,6 @@ h2.h2 {
 #products .product-miniature {
     background: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
     padding: 12px;
     transition: transform .15s ease, box-shadow .15s ease;
 }
@@ -274,7 +277,7 @@ h2.h2 {
 }
 
 #products .product-miniature .product-title a:hover {
-    color: #0b6651;
+    color: #f39c12;
 }
 
 /* Price */
@@ -340,7 +343,7 @@ footer a {
 }
 
 footer a:hover {
-    color: #0b6651 !important;
+    color: #f39c12 !important;
 }
 
 /* ------------------------------------------------------- */
@@ -377,6 +380,30 @@ footer a:hover {
 /*  Utility */
 /* ------------------------------------------------------- */
 
-.shadow-sm {
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+/* USUNIĘCIE PODŚWIETLENIA / LINII POD MENU */
+#_desktop_top_menu,
+#_desktop_top_menu .top-menu,
+#header .header-nav {
+    box-shadow: none !important;
+    border-bottom: none !important;
+}
+#header,
+header,
+.header-nav,
+.header-top,
+.header-wrapper,
+.header-inner,
+#_desktop_top_menu,
+#_desktop_top_menu .top-menu,
+#top-menu,
+.navbar,
+nav,
+nav[role="navigation"],
+.header-nav .container {
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    background-image: none !important;
+    outline: none !important;
 }

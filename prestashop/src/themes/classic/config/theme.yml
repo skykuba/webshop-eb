@@ -73,13 +73,13 @@ global_settings:
         - ps_shoplocation
         - ps_customersignin
         - ps_shoppingcart
-        - ps_shoplocation
       displaySearch:
         - ps_searchbar
       displayTop:
         - ps_mainmenu
       displayHome:
         - ps_imageslider
+        - ps_tuttubenefits
         - ps_featuredproducts
         - ps_banner
         - ps_customtext

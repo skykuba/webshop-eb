@@ -2,7 +2,7 @@
 
   <div class="shop-locations-trigger">
       <i class="material-icons" aria-hidden="true">location_on</i>
-      <span>Nasze lokalizacje</span>
+      <span>sklepy</span>
   </div>
 
   <div class="shop-locations-dropdown">
@@ -16,22 +16,26 @@
 </div>
 
 <style>
+/* wrapper jak koszyk */
 .shop-locations-wrapper {
-    position: relative;
-    display: inline-block;
+    margin-top: 10px;
+    display: flex !important;
+    align-items: center !important;
+    border-radius: 4px;
     cursor: pointer;
+    position: relative;
 }
 
-/* trigger */
+/* trigger jak nagłówek koszyka */
 .shop-locations-trigger {
     display: flex;
     align-items: center;
     gap: 5px;
-    padding: 8px 10px;
+    color: #000;
 }
 
 .shop-locations-trigger:hover {
-    color: #ff8c00;
+    color: rgb(255, 136, 0) !important;
 }
 
 /* dropdown */
@@ -42,13 +46,14 @@
     top: 100%;
     background: #fff;
     border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 0;
     width: 200px;
-    padding: 10px 0;
-    border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     z-index: 9999;
 }
 
+/* lista elementów */
 .shop-locations-dropdown ul {
     list-style: none;
     padding: 0;
@@ -57,12 +62,13 @@
 
 .shop-locations-dropdown li {
     padding: 8px 15px;
+    font-weight: 600;
 }
 
 .shop-locations-dropdown li:hover {
     background: #f5f5f5;
     cursor: pointer;
-}
+}   
 </style>
 
 <script>
