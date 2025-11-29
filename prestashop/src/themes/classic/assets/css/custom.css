@@ -45,13 +45,6 @@ a:hover {
     padding: 12px 0;
 }
 
-/* Search bar */
-#search_widget form input[type="text"] {
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    padding: 10px 14px;
-    font-size: 15px;
-}
 
 .right-nav a:hover,
 .header-top-right a:hover {
@@ -68,8 +61,11 @@ a:hover {
 /* Usunięcie ograniczenia kontenera */
 .header-top .container,
 .header-nav .container {
-    max-width: 100% !important;
-    width: 100% !important;
+    max-width: 90% !important;
+    width: 90% !important;
+}
+.header-top .container{
+    text-align: center;
 }
 .header-nav {
     margin-bottom: 20px; /* ustaw dowolną wartość */
@@ -81,8 +77,59 @@ a:hover {
     box-shadow: none !important;
 }
 /* searchbar */
-.search-bar-wrapper{
+/* ==== KONTEJNER SEARCHBARA ==== */
+#search_widget .search-form {
+    position: relative;
+    width: 100%;
+}
+
+/* ==== POLE TEKSTOWE ==== */
+#search_widget .search-form input[type="text"] {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px 40px 10px 12px; /* miejsce na ikonę po prawej */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #fff;
+    font-size: 15px;
+}
+
+/* ==== PRZYCISK (z ikoną) ==== */
+#search_widget .search-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ==== IKONKA W ŚRODKU ==== */
+#search_widget .search-button img {
+    width: 18px !important;
+    height: 18px !important;
+    object-fit: contain;
+    display: block;
+}
+
+/* ==== HOVER ==== */
+#search_widget .search-button:hover img {
+    filter: brightness(0.6);
+}
+#search_widget .search-button:hover img {
+    filter: invert(54%) sepia(94%) saturate(1400%) hue-rotate(2deg) brightness(101%) contrast(102%);
+}
+.search-bar-wrapper {
     margin-top: 10px;
+    width: 100%;
+    max-width: 600px; 
 }
 
 /*shopping cart*/
@@ -143,11 +190,6 @@ a:hover {
 }
 
 
-
-#search_widget form button {
-    background: #0b6651 !important;
-    border-radius: 6px !important;
-}
 
 /* Top menu */
 #header .header-nav .top-menu a {
