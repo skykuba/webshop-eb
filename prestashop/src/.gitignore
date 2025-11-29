@@ -177,6 +177,7 @@ app/config/config.php
 # Themes, modules and overrides
 
 modules/*
+!modules/ps_shoplocation/
 override/*
 themes/*/
 !themes/classic

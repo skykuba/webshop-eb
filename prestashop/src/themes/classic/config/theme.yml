@@ -73,6 +73,7 @@ global_settings:
         - ps_shoplocation
         - ps_customersignin
         - ps_shoppingcart
+        - ps_shoplocation
       displaySearch:
         - ps_searchbar
       displayTop:
