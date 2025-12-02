@@ -72,6 +72,7 @@ global_settings:
         - ps_currencyselector
         - ps_shoplocation
         - ps_customersignin
+        - blockwishlist
         - ps_shoppingcart
       displaySearch:
         - ps_searchbar
@@ -81,6 +82,7 @@ global_settings:
         - ps_imageslider
         - ps_tuttubenefits
         - ps_featuredproducts
+        - ps_listyzakupowe
         - ps_banner
         - ps_customtext
       displayFooterBefore:

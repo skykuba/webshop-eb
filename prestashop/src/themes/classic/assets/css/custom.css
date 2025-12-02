@@ -3,6 +3,13 @@ body {
     background: #f8f9fa;
     color: #111;
 }
+@font-face {
+  font-family: 'Google Symbols';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(https://fonts.gstatic.com/icon/font?kit=HhzMU5Ak9u-oMExPeInvcuEmPosC9zyteYEFU68cPrjdKM1XLPTxlGmzczpgWvF1d8Yp7AudBnt3CPar1JFWjoLAUv3G-tSNljixIIGUsC62cYrKiAweYkj-0ruzD3Wq4c0iDTbWp0ubCc7u&skey=f8ec4d50247dc1c1&v=v383) format('woff2');
+}
 
 /* Buttons */
 .btn-primary,
@@ -25,7 +32,7 @@ body {
 
 /* Links */
 a {
-    color: #000000;
+    color: #333;
 }
 
 a:hover {
@@ -36,13 +43,23 @@ a:hover {
 /*  Header */
 /* ------------------------------------------------------- */
 
+header#header {
+    margin-bottom: 0 !important; /* usuwa margines na dole nagłówka */
+    padding-bottom: 0 !important; /* usuwa padding na dole nagłówka */
+}
+#wrapper {
+    margin-top: 0;  /* usuwa margines na górze */
+    padding-top: 3px; /* usuwa padding na górze */
+}
+
 #header .header-nav {
     background: #ffffff;
     border-bottom: 1px solid #e5e5e5;
 }
 
+
 #header .header-top {
-    padding: 12px 0;
+    padding: 10px 0;
 }
 
 
@@ -61,22 +78,28 @@ a:hover {
 #main .container,
 #wrapper .container,
 .container {
-    max-width: 90% !important;
-    width: 90% !important;
+    max-width: 100% !important;
+    width: 100% !important;
 }
-
+#wrapper {
+    margin-top: 0px;
+}
 /* Usunięcie ograniczenia kontenera */
 .header-top .container,
 .header-nav .container {
-    max-width: 90% !important;
-    width: 90% !important;
+    max-width: 95% !important;
+    width: 95% !important;
 }
 .header-top .container{
     text-align: center;
 }
 .header-nav {
-    margin-bottom: 20px; /* ustaw dowolną wartość */
+    margin-bottom: 40px !important; /* ustaw dowolną wartość */
 }
+.header-top {
+    margin-bottom: 0px !important; /* ustaw dowolną wartość */
+}
+
 .header-nav,
 .header-nav .container,
 .header-nav .row {
@@ -98,6 +121,13 @@ a:hover {
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 15px;
+}
+#search_widget input::placeholder {
+    font-style: italic;
+}
+#search_widget input {
+    background-color: white !important;
+    color: #333; /* jeśli chcesz czarny tekst */
 }
 
 /* ==== PRZYCISK (z ikoną) ==== */
@@ -141,9 +171,10 @@ a:hover {
 /*shopping cart*/
 /* ===== WYRÓWNANIE W JEDNEJ LINII Z LOGINEM ===== */
 #_desktop_user_info,
-#_desktop_cart {
+#_desktop_cart{
     display: flex !important;
     align-items: center !important;
+    margin-top: 10px !important;
 }
 
 #_desktop_cart .blockcart .header {
@@ -165,7 +196,7 @@ a:hover {
 #_desktop_cart .blockcart .header {
     border-radius: 4px;
     padding: 6px 10px;
-    color: #000 !important;
+    color: #333 !important;
 }
 
 
@@ -173,7 +204,7 @@ a:hover {
 #_desktop_cart .blockcart .header a,
 #_desktop_cart .blockcart .header i,
 #_desktop_cart .blockcart .header span {
-    color: #000000 !important;
+    color: #333 !important;
 }
 
 
@@ -195,6 +226,17 @@ a:hover {
 }
 
 
+#_desktop_cart .cart-arrow {
+    margin-left: 12px;      /* większy odstęp od liczby produktów */
+    font-size: 40px;         /* większa strzałka */
+    vertical-align: middle;  /* wyrównanie do środka ikony/tekstu */
+    display: inline-block;
+    color: #333;   
+    vertical-align: middle;   /* można zostawić lub zmienić */
+    transform: translateY(-8px);          /* kolor strzałki */
+}
+
+
 
 /* Top menu */
 #header .header-nav .top-menu a {
@@ -211,13 +253,13 @@ a:hover {
 /* ------------------------------------------------------- */
 
 #_desktop_top_menu {
-    padding: 10px 0;
+    padding: 0px 0;
 }
 
 #_desktop_top_menu .top-menu a {
     color: #3f3f3f !important;
     font-weight: 600;
-    padding: 8px 14px;
+    padding: 0px 14px;
     border-radius: 6px;
 }
 
@@ -233,7 +275,9 @@ a:hover {
 #carousel {
     border-radius: 10px;
     overflow: hidden;
-    margin-bottom: 32px;
+    margin: 0 auto 32px auto;
+    width: 90%;
+
 }
 
 #carousel .carousel-item img {
@@ -244,7 +288,7 @@ a:hover {
 h2.h2 {
     font-size: 24px;
     font-weight: 700;
-    color: #000000;
+    color: #333;
     margin-bottom: 16px;
 }
 

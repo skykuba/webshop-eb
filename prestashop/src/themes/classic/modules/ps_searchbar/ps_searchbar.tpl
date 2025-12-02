@@ -26,7 +26,7 @@
 <div id="search_widget" class="search-bar-wrapper">
   <form method="get" action="{$search_controller_url}" class="search-form">
     <input type="hidden" name="controller" value="search">
-    <input type="text" name="s" value="{$search_string}" placeholder="Szukaj w naszym katalogu">
+    <input type="text" name="s" value="{$search_string}" placeholder="Wpisz czego szukasz">
     <button type="submit" class="search-button">
     <img src="/themes/classic/modules/ps_searchbar/image.png" alt="Szukaj" />
 </button>

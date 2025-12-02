@@ -34,7 +34,7 @@
       <div class="row">
         <div class="hidden-sm-down">
           <div class="col-md-4 col-xs-12">
-            <div class="col-md-5 hidden-sm-down" id="_desktop_logo">
+            <div class="col-md-6 hidden-sm-down" id="_desktop_logo">
           {if $shop.logo_details}
             {if $page.page_name == 'index'}
               <h1>
@@ -50,7 +50,7 @@
           <div class="col-md-2 search-bar-wrapper">
           {hook h='displaySearch'}
           </div>
-          <div class="col-md-3 right-nav">
+          <div class="col-md-0 right-nav">
               {hook h='displayNav2'}
           </div>
         </div>

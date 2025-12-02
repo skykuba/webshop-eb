@@ -30,7 +30,7 @@
 
         <i class="material-icons shopping-cart" aria-hidden="true">shopping_cart</i>
         <span class="cart-products-count">{$cart.totals.total_including_tax.value}</span>
-
+        <span class="cart-arrow"> →</span>
         </a>
 
 

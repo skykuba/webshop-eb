@@ -18,7 +18,7 @@
 <style>
 /* wrapper jak koszyk */
 .shop-locations-wrapper {
-    margin-top: 10px;
+    margin-top: 20px;
     display: flex !important;
     align-items: center !important;
     border-radius: 4px;
@@ -31,7 +31,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    color: #000;
+    color: #333;
 }
 
 .shop-locations-trigger:hover {

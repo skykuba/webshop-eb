@@ -1,5 +1,5 @@
 
-<ul class="benefit_list">
+<ul class="benefit_list tuttubenefits">
   <li class="benefit_item">
     <div class="benefit_icon_wrapper">
       <a href="{$cmsLink}">
@@ -175,4 +175,5 @@ ul.benefit_list > li.benefit_item .benefit_text {
     grid-row-gap: 0;
   }
 }
+
 </style>

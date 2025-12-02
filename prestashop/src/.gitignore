@@ -179,6 +179,7 @@ app/config/config.php
 modules/*
 !modules/ps_shoplocation/
 !modules/ps_tuttubenefits/
+!modules/ps_listyzakupowe/
 override/*
 themes/*/
 !themes/classic
