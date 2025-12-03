@@ -68,7 +68,7 @@ def post_categories(categories: List[Dict[str, Any]], api_client: PrestaShopAPIC
             
             is_wanted_category = cat_name in WANTED_CATEGORIES
             
-            # Only process if it's a wanted category or has wanted subcategories
+            # Only process if it's a wanted category
             if is_wanted_category:
                 # Create category in PrestaShop
                 category_data = {
@@ -115,50 +115,84 @@ def filter_products(products: List[Dict[str, Any]], WANTED_SUBCATEGORIES: List[s
     ]
     return filtered_products
 
-def prepare_product_data(product: Dict[str, Any]) -> Dict[str, Any]:
+def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int]) -> Dict[str, Any]:
     '''Prepare product data for Prestashop format.'''
-    """
-    "product": {
-        "active": 1,
-        "id_category_default": subcategory_id, # have use GET /api/categories to get category ids
-        "price": price, # netto price
-        "reference": product['parameters'].get('Kod EAN', ''),
-        "ean13": product['parameters'].get('Kod EAN', ''),
-        "name": {
-            "language": [
-                {
+    
+    # Extract price (remove currency and convert to netto)
+    price_str = product.get('price', '0 zł').replace('zł', '').replace(',', '.').strip()
+    try:
+        price_brutto = float(price_str)
+        price_netto = round(price_brutto / 1.23, 2)  # Remove 23% VAT
+    except ValueError:
+        price_netto = 0.0
+    
+    # Get category IDs
+    category_name = product.get('category', '')
+    subcategory_name = product.get('subcategory', '')
+    
+    category_id = category_id_map.get(category_name, 2)
+    subcategory_id = category_id_map.get(subcategory_name, 2)
+    root_id = category_id_map.get('Root', 2)
+    
+    # Check if product is sized
+    is_sized = category_name.lower() in SIZE_CATEGORIES
+    
+    # Clean description - remove <section> tags
+    long_description = product.get('long_description', '')
+    if long_description.startswith('<section'):
+        start_pos = long_description.find('>')
+        if start_pos != -1:
+            long_description = long_description[start_pos + 1:]
+        long_description = long_description.replace('</section>', '')
+    
+    prepared_product = {
+        "product": {
+            "active": 1,
+            "id_category_default": subcategory_id,
+            "price": price_netto,
+            "reference": product.get('parameters', {}).get('Kod EAN', ''),
+            "ean13": product.get('parameters', {}).get('Kod EAN', ''),
+            "name": {
+                "language": {
                     "id": 1,
-                    "value": product['name']
+                    "value": product.get('name', '')
                 }
-            ]},
-        "description": {
-            "language": [
-                {
+            },
+            "description": {
+                "language": {
                     "id": 1,
-                    "value": product['long_description']
+                    "value": long_description
                 }
-            ]},
-        "description_short": {
-            "language": [
-                {
+            },
+            "description_short": {
+                "language": {
                     "id": 1,
-                    "value": product['short_description']
+                    "value": product.get('short_description', '')
                 }
-            ]},
-        "minimal_quantity": 1,
-        "id_tax_rules_group": 1,
-        "depends_on_stock": if_size, # 1 for size products
-        "out_of_stock": 0, # 0 - deny orders
-        "quantity": total_quantity, # if_size == 1 do not contain quantity
-        "associations": {
-            "categories": [
+            },
+            "minimal_quantity": 1,
+            "id_tax_rules_group": 1,
+            "depends_on_stock": 1 if is_sized else 0,
+            "out_of_stock": 0,  # 0 - deny orders when out of stock
+            "associations": {
+                "categories": [
                     {"id": root_id},
-                    {"id": subcategory_id},
-                    {"id": category_id}
-            ]
+                    {"id": category_id},
+                    {"id": subcategory_id}
+                ]
+            }
+        }
     }
     
-    """
+    # Add quantity only for non-sized products
+    if not is_sized:
+        prepared_product["product"]["quantity"] = 1
+    
+    return prepared_product
+
+# def post_product(prepared_product: Dict[str, Any], api_client: PrestaShopAPIClient) -> None:
+    '''Post a product to Prestashop and return the product ID.'''
+
 # def save_prepared_data(prepared_products: List[Dict[str, Any]], output_data_file: str) -> None:
     '''Save prepared product data to a JSON file.'''
 
