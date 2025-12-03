@@ -74,18 +74,26 @@ def get_leaf_nodes(node):
             leaves.extend(get_leaf_nodes(child))
     return leaves
 
-def save_categories(node, filename='data/categories.txt'):
+def save_categories(node, filename='data/categories.json'):
+    categories_data = []
+    recursive_save_categories(node, categories_data)
     with open(filename, 'w', encoding='utf-8') as file:
-        recursive_save_categories(node, file)
+        json.dump(categories_data, file, ensure_ascii=False, indent=2)
 
-def recursive_save_categories(node, file, level=0):
+def recursive_save_categories(node, categories_list, level=0):
     if level > 0:
-        file.write("-" * (level-1) + f"{node.name} ({node.link})\n")
+        category_dict = {
+            'name': node.name,
+            'link': node.link,
+            'level': level,
+            'children': []
+        }
         for child in node.children:
-            recursive_save_categories(child, file, level + 1)
+            recursive_save_categories(child, category_dict['children'], level + 1)
+        categories_list.append(category_dict)
     else:
         for child in node.children:
-            recursive_save_categories(child, file, level + 1)
+            recursive_save_categories(child, categories_list, level + 1)
 #-------------------------------------------------
 #                  Item functions
 #-------------------------------------------------
@@ -226,6 +234,9 @@ def delete_jsonl_files(folder='data'):
     os.remove(os.path.join(folder, 'products.jsonl'))
 
 if __name__ == "__main__":
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(script_dir)
+    
     session = requests.Session()
     root = build_tree(session)
     save_categories(root)
