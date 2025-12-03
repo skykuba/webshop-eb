@@ -1,0 +1,37 @@
+"""Configuration constants for data preparation."""
+
+from typing import List
+import os
+
+# Categories and subcategories to include
+WANTED_CATEGORIES: List[str] = [
+    "Podróże i trekking",
+    "Buty",
+    "Wspinaczka",
+    "Skitour"
+]
+
+WANTED_SUBCATEGORIES: List[str] = [
+    # Podróże i trekking
+    "noże, scyzoryki i narzędzia",
+    "akcesoria podróżne",
+    # Buty
+    "męskie",
+    "damskie",
+    # Wspinaczka
+    "karabinki i ekspresy",
+    "liny, taśmy i repy",
+    # Skitour
+    "foki i akcesoria",
+    "wiązania i akcesoria"
+]
+
+# Categories that require size combinations
+SIZE_CATEGORIES: List[str] = ["buty"]
+
+# File paths
+SCRIPT_DIR: str = os.path.dirname(os.path.abspath(__file__))
+CATEGORIES_FILE: str = os.path.join(SCRIPT_DIR, "../data/categories.json")
+INPUT_DATA_FILE: str = os.path.join(SCRIPT_DIR, "../data/products.json")
+OUTPUT_DATA_FILE: str = os.path.join(SCRIPT_DIR, "prepared_products.json")
+PHOTOS_OUTPUT_DIR: str = os.path.join(SCRIPT_DIR, "photos")
