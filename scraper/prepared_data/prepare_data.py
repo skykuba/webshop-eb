@@ -3,9 +3,21 @@
 # TODO save two photos per product (if exist) in prepared_data/photos/{photo_name}
 # TODO for sized products (shoes) make combinations.json files with available sizes
 
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
 import json
 import os
+import sys
 from typing import Any, Dict, List
+from prestashop.api import PrestaShopAPIClient
+
+
+WANTED_CATEGORIES: List[str] = [
+    "Podróże i trekking",
+    "Buty",
+    "Wspinaczka",
+    "Skitour"
+]
 
 WANTED_SUBCATEGORIES: List[str] = [
     # Podróże i trekking
@@ -43,8 +55,58 @@ def load_categories(categories_file: str) -> Dict[str, Any]:
         categories: Dict[str, Any] = json.load(f)
     return categories
 
-# def post_categories(categories: Dict[str, Any]) -> Dict[str, int]:
+def post_categories(categories: List[Dict[str, Any]], api_client: PrestaShopAPIClient) -> Dict[str, int]:
     '''Post categories to Prestashop and return a mapping of category names to their Prestashop IDs.'''
+    category_id_map: Dict[str, int] = {}
+    
+    category_id_map['Root'] = 2
+    
+    # Helper function to find categories in nested structure
+    def find_categories_recursive(cats: List[Dict[str, Any]], parent_id: int = 2) -> None:
+        for cat in cats:
+            cat_name = cat['name']
+            
+            is_wanted_category = cat_name in WANTED_CATEGORIES
+            
+            # Only process if it's a wanted category or has wanted subcategories
+            if is_wanted_category:
+                # Create category in PrestaShop
+                category_data = {
+                    "category": {
+                        "active": 1,
+                        "id_parent": parent_id,
+                        "name": {
+                            "language": {
+                                "id": 1,
+                                "value": cat_name
+                            }
+                        },
+                        "link_rewrite": {
+                            "language": {
+                                "id": 1,
+                                "value": cat_name.lower().replace(' ', '-').replace(',', '')
+                            }
+                        }
+                    }
+                }
+                
+                try:
+                    response = api_client._make_request("POST", "categories", data=category_data)
+                    category_id = response['category']['id']
+                    category_id_map[cat_name] = category_id
+                    
+                    # Process children (subcategories) with this category as parent
+                    if cat.get('children'):
+                        find_categories_recursive(cat['children'], category_id)
+                        
+                except Exception as e:
+                    print(f"Error creating category {cat_name}: {e}")
+    
+    # Start processing from root
+    find_categories_recursive(categories)
+    
+    return category_id_map
+
 
 def filter_products(products: List[Dict[str, Any]], WANTED_SUBCATEGORIES: List[str]) -> List[Dict[str, Any]]:
     '''Filter products based on wanted subcategories.'''
