@@ -105,5 +105,13 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
 
 def post_product(prepared_product: Dict[str, Any], api_client: PrestaShopAPIClient) -> int:
     """Post a product to Prestashop and return the product ID."""
-    # TODO: Implement product posting
-    pass
+    try:
+        response = api_client._make_request("POST", "products", data=prepared_product)
+        product_id = response['product']['id']
+        product_name = prepared_product['product']['name']['language']['value']
+        print(f"Created product: {product_name} (ID: {product_id})")
+        return product_id
+    except Exception as e:
+        product_name = prepared_product['product']['name']['language']['value']
+        print(f"Error creating product {product_name}: {e}")
+        return 0
