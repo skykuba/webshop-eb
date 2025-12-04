@@ -29,7 +29,7 @@ WANTED_SUBCATEGORIES: List[str] = [
 # Categories that require size combinations
 SIZE_CATEGORIES: List[str] = ["buty"]
 
-# Available shoe sizes (without half sizes)
+# Available shoe sizes
 SHOE_SIZES: List[int] = [38, 39, 40, 41, 42, 43, 44, 45]
 
 # File paths
