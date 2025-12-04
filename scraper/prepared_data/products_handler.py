@@ -1,6 +1,7 @@
 """Handler for product operations."""
 
 import json
+import random
 from typing import Dict, List, Any
 from prestashop.api import PrestaShopAPIClient
 from config import SIZE_CATEGORIES
@@ -98,7 +99,8 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
     
     # Add quantity only for non-sized products
     if not is_sized:
-        prepared_product["product"]["quantity"] = 1
+        quantity = random.randint(3, 10)
+        prepared_product["product"]["quantity"] = quantity
     
     return prepared_product
 
