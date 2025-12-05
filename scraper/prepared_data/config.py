@@ -5,10 +5,10 @@ import os
 
 # Categories and subcategories to include
 WANTED_CATEGORIES: List[str] = [
-    "Podróże i trekking",
-    "Buty",
-    "Wspinaczka",
-    "Skitour"
+    "podróże i trekking",
+    "buty",
+    "wspinaczka",
+    "skitour"
 ]
 
 WANTED_SUBCATEGORIES: List[str] = [
