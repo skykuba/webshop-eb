@@ -3,7 +3,7 @@
 import os
 import shutil
 from typing import Dict, Any, List
-
+from prestashop.api import PrestaShopAPIClient
 
 def save_product_photos(product: Dict[str, Any], output_photos_dir: str, source_photos_dir: str = "../data/photos") -> List[str]:
     os.makedirs(output_photos_dir, exist_ok=True)
@@ -52,7 +52,7 @@ def save_product_photos(product: Dict[str, Any], output_photos_dir: str, source_
     
     return saved_photos
 
-def post_photos(product_id: int, photo_filenames: List[str], api_client: Any) -> None:
+def post_photos(product_id: int, photo_filenames: List[str], api_client: PrestaShopAPIClient) -> None:
     """Post photos to PrestaShop for the given product ID."""
     current_dir = os.path.dirname(os.path.abspath(__file__))
     photos_dir = os.path.join(current_dir, "../prepared_data/photos")
