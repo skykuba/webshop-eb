@@ -1,11 +1,14 @@
 """Handler for product operations."""
 
 import json
-import random
+import sys
+import os
 from typing import Dict, List, Any
+
+# Add parent directories to path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
+
 from prestashop.api import PrestaShopAPIClient
-from config import SIZE_CATEGORIES
-from convert_to_XML import json_to_xml
 
 
 def load_products(products_file: str) -> List[Dict[str, Any]]:
@@ -29,7 +32,7 @@ def filter_products(products: List[Dict[str, Any]], wanted_subcategories: List[s
     return filtered_products
 
 
-def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int]) -> Dict[str, Any]:
+def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int]) -> str:
     """Prepare product data for Prestashop format."""
     
     # Extract price (remove currency and convert to netto)
@@ -41,25 +44,57 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
         price_netto = 0.0
     
     parameters = product.get('parameters', {})
+    weight = 0
     if 'Waga [g]' in parameters:
-        weight = int(parameters['Waga [g]'])
-    ean = parameters.get('Kod EAN', '')
+        weight_str = str(parameters['Waga [g]'])
+        # Extract only numeric part from weight string (e.g., "583 (1 But)" -> "583")
+        import re
+        weight_match = re.search(r'(\d+(?:\.\d+)?)', weight_str)
+        if weight_match:
+            weight = float(weight_match.group(1))
+        else:
+            weight = 0
 
-    category_name = product.get('category', '')
     subcategory_name = product.get('subcategory', '')
     
-    category_id = category_id_map.get(category_name, 2)
     subcategory_id = category_id_map.get(subcategory_name, 2)
-    root_id = category_id_map.get('Root', 2)
     
-    # Clean description - remove <section> tags
-    long_description = product.get('long_description', '')
-    short_description = product.get('short_description', '')
-    if long_description.startswith('<section'):
-        start_pos = long_description.find('>')
-        if start_pos != -1:
-            long_description = long_description[start_pos + 1:]
-        long_description = long_description.replace('</section>', '')
+    # Clean description - remove attributes from HTML tags (class, style, etc.)
+    import re
+    
+    def clean_html(html_content: str) -> str:
+        """Remove all attributes from HTML tags, keep only tag names and content."""
+        if not html_content:
+            return ''
+        
+        # Remove <section> tags completely
+        if html_content.startswith('<section'):
+            start_pos = html_content.find('>')
+            if start_pos != -1:
+                html_content = html_content[start_pos + 1:]
+        html_content = html_content.replace('</section>', '')
+        
+        # Remove dangerous tags: iframe, script, div with class video-container
+        # Remove entire <div class="video-container">...</div> blocks
+        html_content = re.sub(r'<div[^>]*video-container[^>]*>.*?</div>', '', html_content, flags=re.DOTALL | re.IGNORECASE)
+        
+        # Remove iframe tags
+        html_content = re.sub(r'<iframe[^>]*>.*?</iframe>', '', html_content, flags=re.DOTALL | re.IGNORECASE)
+        
+        # Remove script tags
+        html_content = re.sub(r'<script[^>]*>.*?</script>', '', html_content, flags=re.DOTALL | re.IGNORECASE)
+        
+        # Remove all attributes from HTML tags (class="...", style="...", etc.)
+        # Pattern: <tag attr="value" attr2='value'> -> <tag>
+        html_content = re.sub(r'<(\w+)[^>]*>', r'<\1>', html_content)
+        
+        # Escape CDATA end markers
+        html_content = html_content.replace(']]>', ']]&gt;')
+        
+        return html_content
+    
+    long_description = clean_html(product.get('long_description', ''))
+    short_description = clean_html(product.get('short_description', ''))
 
     # Generate link_rewrite (URL-friendly name)
     product_name = product.get('name', '')
@@ -74,114 +109,127 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
                     .replace('ś', 's').replace('ź', 'z').replace('ż', 'z')
                     .replace('--', '-')
                     .strip('-'))
-    
-    prepared_product = {
-        "product": {
-            "id_category_default": subcategory_id,
-            "id_shop_default": 1,
-            "weight": weight,
-            "price": price_netto,
-            "id_tax_rules_group": 1,
-            "reference": ean,
-            "ean13": ean,
-            "name": {
-                "language": [
-                    {"id": 1, "value": product_name}
-                ]
-            },
-            "link_rewrite": {
-                "language": [
-                    {"id": 1, "value": link_rewrite}
-                ]
-            },
-            "description": {
-                "language": [
-                    {"id": 1, "value": long_description}
-                ]
-            },
-            "description_short": {
-                "language": [
-                    {"id": 1, "value": short_description}
-                ]
-            },
-            "associations": {
-                "categories": {
-                    "category": [
-                        {"id": subcategory_id}
-                    ]
-                }
-            },
-            "minimal_quantity": 1,
-            "available_for_order": 1,
-            "show_price": 1,
-            "state": 1,
-            "active": 1
-        }
-    }
-    
-    return prepared_product
+    xml_data = f''' <prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <product>
+                            <id_category_default><![CDATA[{subcategory_id}]]></id_category_default>
+                            <id_shop_default><![CDATA[1]]></id_shop_default>
+                            <weight><![CDATA[{weight}]]></weight>
+                            <price><![CDATA[{price_netto}]]></price>
+                            <id_tax_rules_group><![CDATA[1]]></id_tax_rules_group>
+                            <name>
+                                <language id="1"><![CDATA[{product_name}]]></language>
+                            </name>
+                            <description>
+                                <language id="1"><![CDATA[{long_description}]]></language>
+                            </description>
+                            <description_short>
+                                <language id="1"><![CDATA[{short_description}]]></language>
+                            </description_short>
+                            <link_rewrite>
+                                <language id="1"><![CDATA[{link_rewrite}]]></language>
+                            </link_rewrite>
+                            <meta_title>
+                                <language id="1"><![CDATA[{product_name}]]></language>
+                            </meta_title>
+                            <meta_description>
+                                <language id="1"><![CDATA[{short_description}]]></language>
+                            </meta_description>
+                            <associations>
+                            <categories>
+                                <category>
+                                <id><![CDATA[{subcategory_id}]]></id>
+                                </category>
+                            </categories>
+                            </associations>
+                            <minimal_quantity><![CDATA[1]]></minimal_quantity>
+                            <additional_delivery_times><![CDATA[1]]></additional_delivery_times>
+                            <available_for_order><![CDATA[1]]></available_for_order>
+                            <show_price><![CDATA[1]]></show_price>
+                            <state><![CDATA[1]]></state>
+                            <active><![CDATA[1]]></active>
+                        </product>
+                    </prestashop>'''
+    return xml_data
 
 
-def post_product(prepared_product: Dict[str, Any], api_client: PrestaShopAPIClient) -> int:
+def post_product(prepared_product: str, api_client: PrestaShopAPIClient) -> int:
     """Post a product to Prestashop and return the product ID."""
-    product_name = prepared_product['product']['name']['language'][0]['value']
-    
     try:
-        xml_data = json_to_xml(prepared_product)
-        response = api_client._make_request("POST", "products", data=xml_data)
-        product_id = int(response['product']['id'])
-        return product_id
+        response = api_client._make_request("POST", "products", data=prepared_product)
+        
+        if 'product' in response and 'id' in response['product']:
+            product_id = int(response['product']['id'])
+            print(f"Created product (ID: {product_id})")
+            return product_id
+        else:
+            print(f"Error: No product ID in response")
+            return -1
+            
     except Exception as e:
-        print(f"Error creating product {product_name}: {e}")
+        # Print detailed error including response body if available
+        error_msg = str(e)
+        if hasattr(e, 'response') and e.response is not None:
+            try:
+                error_detail = e.response.json()
+                print(f"Error creating product: {error_msg}")
+                print(f"   API Response: {error_detail}")
+                
+                # If it's a description validation error, show the description
+                if 'errors' in error_detail:
+                    for error in error_detail['errors']:
+                        if 'description' in error.get('message', '').lower():
+                            # Extract description from XML to show what's wrong
+                            import re
+                            desc_match = re.search(r'<description>.*?<language id="1"><!\[CDATA\[(.*?)\]\]></language>.*?</description>', prepared_product, re.DOTALL)
+                            if desc_match:
+                                desc_content = desc_match.group(1)
+                                print(f"   Description content (first 500 chars):")
+                                print(f"   {desc_content[:500]}")
+            except:
+                print(f"Error creating product: {error_msg}")
+        else:
+            print(f"Error creating product: {error_msg}")
         return -1
 
 
-def set_product_stock(product_id: int, quantity: int, api_client: PrestaShopAPIClient, is_sized: bool) -> bool:
-    """Set stock quantity for a product via stock_availables API using CDATA format."""
+def set_product_stock(product_id: int, quantity: int, api_client: PrestaShopAPIClient, is_sized: bool = False) -> bool:
+    """
+    Set stock quantity for a product via stock_availables API.
+    
+    Note: This should ONLY be called for products WITHOUT combinations.
+    For products with combinations (sizes), stock is set per combination.
+    """
     try:
-        response = api_client._make_request("GET", f"stock_availables?filter[id_product]={product_id}&display=full")
-        stock_availables = response.get('stock_availables', [])
-        if not stock_availables:
-            print(f"No stock_available found for product ID {product_id}")
-            return False
-        stock_id = int(stock_availables[0]['id'])        
+        response = api_client._make_request("GET", f"stock_availables?filter[id_product]={product_id}&filter[id_product_attribute]=0&display=full")
         
-        xml_data = f""" <?xml version="1.0" encoding="UTF-8"?>
-                        <prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
-                            <stock_availables>
-                                <stock_available>
-                                    <id>
-                                        <![CDATA[{stock_id}]]>
-                                    </id>
-                                    <id_product xlink:href="http://localhost:8080/api/products/{product_id}">
-                                        <![CDATA[{product_id}]]>
-                                    </id_product>
-                                    <id_product_attribute>
-                                        <![CDATA[0]]>
-                                    </id_product_attribute>
-                                    <id_shop xlink:href="http://localhost:8080/api/shops/1">
-                                        <![CDATA[1]]>
-                                    </id_shop>
-                                    <id_shop_group>
-                                        <![CDATA[0]]>
-                                    </id_shop_group>
-                                    <quantity>
-                                        <![CDATA[{0 if is_sized else quantity}]]>
-                                    </quantity>
-                                    <depends_on_stock>
-                                        <![CDATA[{1 if is_sized else 0}]]>
-                                    </depends_on_stock>
-                                    <out_of_stock>
-                                        <![CDATA[2]]>
-                                    </out_of_stock>
-                                    <location>
-                                        <![CDATA[]]>
-                                    </location>
-                                </stock_available>
-                            </stock_availables>
-                        </prestashop>"""
-
+        # Handle both dict and list responses
+        if isinstance(response, dict):
+            stock_availables = response.get('stock_availables', [])
+        else:
+            stock_availables = response
+            
+        if not stock_availables:
+            print(f"No stock_available found for product {product_id}")
+            return False
+        
+        stock_id = int(stock_availables[0]['id'])
+        
+        # Set stock quantity for product without combinations
+        xml_data = f"""<?xml version="1.0" encoding="UTF-8"?>
+<prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+    <stock_available>
+        <id><![CDATA[{stock_id}]]></id>
+        <id_product><![CDATA[{product_id}]]></id_product>
+        <id_product_attribute><![CDATA[0]]></id_product_attribute>
+        <id_shop><![CDATA[1]]></id_shop>
+        <quantity><![CDATA[{quantity}]]></quantity>
+        <depends_on_stock><![CDATA[0]]></depends_on_stock>
+        <out_of_stock><![CDATA[2]]></out_of_stock>
+    </stock_available>
+</prestashop>"""
+        
         api_client._make_request("PUT", f"stock_availables/{stock_id}", data=xml_data)
+        print(f"Set stock for product {product_id}: {quantity} units")
         return True
     except Exception as e:
         print(f"Error setting stock for product {product_id}: {e}")
