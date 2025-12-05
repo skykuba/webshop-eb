@@ -120,3 +120,48 @@ class PrestaShopAPIClient:
     def get_product(self, product_id: int) -> Dict[str, Any]:
         """Get product by ID"""
         return self._make_request("GET", f"products/{product_id}")
+    
+    def upload_image(self, endpoint: str, image_path: str) -> Dict[str, Any]:
+        """
+        Upload an image to PrestaShop API
+        
+        Args:
+            endpoint: API endpoint (e.g., 'images/products/123')
+            image_path: Path to the image file
+            
+        Returns:
+            Response as dictionary (JSON)
+        """
+        url = self._build_url(endpoint)
+        
+        params = {
+            "ws_key": self.ws_key,
+            "output_format": "JSON"
+        }
+        
+        try:
+            with open(image_path, 'rb') as image_file:
+                files = {'image': image_file}
+                response = requests.post(
+                    url,
+                    files=files,
+                    params=params,
+                    verify=self.verify_ssl,
+                    timeout=self.timeout
+                )
+                
+            response.raise_for_status()
+            
+            if not response.text or response.text.strip() == '':
+                return {'success': True}
+            
+            try:
+                return response.json()
+            except ValueError:
+                return {'success': True, 'response': response.text}
+                
+        except requests.exceptions.HTTPError as e:
+            e.response = response
+            raise
+        except requests.exceptions.RequestException as e:
+            raise
