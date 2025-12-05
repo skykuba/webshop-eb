@@ -34,32 +34,22 @@ def post_categories(categories: List[Dict[str, Any]], api_client: PrestaShopAPIC
                 print(f"Creating category: {cat_name} (parent: {parent_name}, parent_id: {parent_id})")
                 
                 # Create category in PrestaShop
-                category_data = {
-                    "category": {
-                        "active": 1,
-                        "id_parent": parent_id,
-                        "name": {
-                            "language": [
-                                {
-                                    "id": 1,
-                                    "value": cat_name
-                                }
-                            ]
-                        },
-                        "link_rewrite": {
-                            "language": [
-                                {
-                                    "id": 1,
-                                    "value": cat_name.lower().replace(' ', '-').replace(',', '')
-                                }
-                            ]
-                        }
-                    }
-                }
+                data = f'''<?xml version="1.0" encoding="UTF-8"?>
+                            <prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <category>
+                                <name>
+                                    <language id="1"><![CDATA[{cat_name}]]></language>
+                                </name>
+                                <link_rewrite>
+                                    <language id="1"><![CDATA[{cat_name.lower().replace(' ', '-').replace(',', '')}]]></language>
+                                </link_rewrite>
+                                <active>1</active>
+                                <id_parent>{parent_id}</id_parent>
+                            </category>
+                            </prestashop>'''
                 
                 try:
-                    xml_data = json_to_xml(category_data)
-                    response = api_client._make_request("POST", "categories", data=xml_data)
+                    response = api_client._make_request("POST", "categories", data=data)
                     category_id = response['category']['id']
                     category_id_map[cat_name] = category_id
                     print(f"✓ Created category '{cat_name}' with ID: {category_id}")

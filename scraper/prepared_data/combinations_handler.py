@@ -37,23 +37,24 @@ def generate_combinations(
         if attribute_id is None:
             print(f"Warning: No attribute ID found for size {size}")
             continue
-        
-        combination_data = {
-            "combination": {
-                "id_product": product_id,
-                "quantity": quantity,
-                "minimal_quantity": 1,
-                "associations": {
-                    "product_option_values": [
-                        {"id": attribute_id}
-                    ]
-                }
-            }
-        }
+
+        data = f'''<prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <combination>
+                            <id_product><![CDATA[{product_id}]]></id_product>
+                            <minimal_quantity><![CDATA[1]]></minimal_quantity>
+                            <quantity><![CDATA[{quantity}]]></quantity>
+                            <associations>
+                                <product_option_values>
+                                    <product_option_value>
+                                        <![CDATA[{attribute_id}]]>
+                                    </product_option_value>
+                                </product_option_values>
+                            </associations>
+                        </combination>
+                    </prestashop>'''
         
         try:
-            xml_data = json_to_xml(combination_data)
-            response = api_client._make_request("POST", "combinations", data=xml_data)
+            response = api_client._make_request("POST", "combinations", data)
             combination_id = response['combination']['id']
             print(f"Created combination: Size {size}, Quantity {quantity} (ID: {combination_id})")
         except Exception as e:

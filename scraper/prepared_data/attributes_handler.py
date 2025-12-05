@@ -8,33 +8,22 @@ from convert_to_XML import json_to_xml
 
 def create_attribute_group(api_client: PrestaShopAPIClient, group_name: str = "Rozmiar") -> int:
     """ Create an attribute group in PrestaShop. """
-    attribute_group_data = {
-        "product_option": {
-            "is_color_group": 0,
-            "group_type": "select",
-            "position": 1,
-            "name": {
-                "language": [
-                    {
-                        "id": 1,
-                        "value": group_name
-                    }
-                ]
-            },
-            "public_name": {
-                "language": [
-                    {
-                        "id": 1,
-                        "value": group_name
-                    }
-                ]
-            }
-        }
-    }
-    
+    data = f'''<?xml version="1.0" encoding="UTF-8"?>
+                <prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <product_option>
+                        <is_color_group><![CDATA[0]]></is_color_group>
+                        <group_type><![CDATA[select]]></group_type>
+                        <name>
+                            <language id="1"><![CDATA[{group_name}]]></language>
+                        </name>
+                        <public_name>
+                            <language id="1"><![CDATA[{group_name}]]></language>
+                        </public_name>
+                    </product_option>
+                </prestashop>
+    '''
     try:
-        xml_data = json_to_xml(attribute_group_data)
-        response = api_client._make_request("POST", "product_options", data=xml_data)
+        response = api_client._make_request("POST", "product_options", data=data)
         group_id = response['product_option']['id']
         print(f"Created attribute group: {group_name} (ID: {group_id})")
         return group_id
@@ -51,23 +40,18 @@ def create_size_attributes(api_client: PrestaShopAPIClient, group_id: int, sizes
     size_id_map: Dict[int, int] = {}
     
     for size in sizes:
-        attribute_data = {
-            "product_option_value": {
-                "id_attribute_group": group_id,
-                "name": {
-                    "language": [
-                        {
-                            "id": 1,
-                            "value": str(size)
-                        }
-                    ]
-                }
-            }
-        }
-        
+        data = f'''<?xml version="1.0" encoding="UTF-8"?>
+                    <prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <product_option_value>
+                            <id_attribute_group><![CDATA[{group_id}]]></id_attribute_group>
+                            <name>
+                                <language id="1"><![CDATA[{str(size)}]]></language>
+                            </name>
+                        </product_option_value>
+                    </prestashop>
+        '''
         try:
-            xml_data = json_to_xml(attribute_data)
-            response = api_client._make_request("POST", "product_option_values", data=xml_data)
+            response = api_client._make_request("POST", "product_option_values", data=data)
             attribute_id = response['product_option_value']['id']
             size_id_map[size] = attribute_id
             print(f"Created size attribute: {size} (ID: {attribute_id})")
