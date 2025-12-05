@@ -5,6 +5,7 @@ import random
 from typing import Dict, List, Any
 from prestashop.api import PrestaShopAPIClient
 from config import SIZE_CATEGORIES
+from convert_to_XML import json_to_xml
 
 
 def load_products(products_file: str) -> List[Dict[str, Any]]:
@@ -114,12 +115,13 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
 def post_product(prepared_product: Dict[str, Any], api_client: PrestaShopAPIClient) -> int:
     """Post a product to Prestashop and return the product ID."""
     try:
-        response = api_client._make_request("POST", "products", data=prepared_product)
+        xml_data = json_to_xml(prepared_product)
+        response = api_client._make_request("POST", "products", data=xml_data)
         product_id = response['product']['id']
-        product_name = prepared_product['product']['name']['language']['value']
+        product_name = prepared_product['product']['name']['language'][0]['value']
         print(f"Created product: {product_name} (ID: {product_id})")
         return product_id
     except Exception as e:
-        product_name = prepared_product['product']['name']['language']['value']
+        product_name = prepared_product['product']['name']['language'][0]['value']
         print(f"Error creating product {product_name}: {e}")
         return 0

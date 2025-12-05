@@ -4,6 +4,7 @@ import random
 from typing import Dict, List, Optional
 from prestashop.api import PrestaShopAPIClient
 from config import SHOE_SIZES
+from convert_to_XML import json_to_xml
 
 
 def generate_combinations(
@@ -51,7 +52,8 @@ def generate_combinations(
         }
         
         try:
-            response = api_client._make_request("POST", "combinations", data=combination_data)
+            xml_data = json_to_xml(combination_data)
+            response = api_client._make_request("POST", "combinations", data=xml_data)
             combination_id = response['combination']['id']
             print(f"Created combination: Size {size}, Quantity {quantity} (ID: {combination_id})")
         except Exception as e:

@@ -4,6 +4,7 @@ import json
 from typing import Dict, List, Any
 from prestashop.api import PrestaShopAPIClient
 from config import WANTED_CATEGORIES
+from convert_to_XML import json_to_xml
 
 
 def load_categories(categories_file: str) -> List[Dict[str, Any]]:
@@ -53,7 +54,8 @@ def post_categories(categories: List[Dict[str, Any]], api_client: PrestaShopAPIC
                 }
                 
                 try:
-                    response = api_client._make_request("POST", "categories", data=category_data)
+                    xml_data = json_to_xml(category_data)
+                    response = api_client._make_request("POST", "categories", data=xml_data)
                     category_id = response['category']['id']
                     category_id_map[cat_name] = category_id
                     
