@@ -13,16 +13,20 @@ def create_attribute_group(api_client: PrestaShopAPIClient, group_name: str = "R
             "group_type": "select",
             "position": 1,
             "name": {
-                "language": {
-                    "id": 1,
-                    "value": group_name
-                }
+                "language": [
+                    {
+                        "id": 1,
+                        "value": group_name
+                    }
+                ]
             },
             "public_name": {
-                "language": {
-                    "id": 1,
-                    "value": group_name
-                }
+                "language": [
+                    {
+                        "id": 1,
+                        "value": group_name
+                    }
+                ]
             }
         }
     }
@@ -49,10 +53,12 @@ def create_size_attributes(api_client: PrestaShopAPIClient, group_id: int, sizes
             "product_option_value": {
                 "id_attribute_group": group_id,
                 "name": {
-                    "language": {
-                        "id": 1,
-                        "value": str(size)
-                    }
+                    "language": [
+                        {
+                            "id": 1,
+                            "value": str(size)
+                        }
+                    ]
                 }
             }
         }

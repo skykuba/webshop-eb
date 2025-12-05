@@ -66,22 +66,28 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
             "reference": product.get('parameters', {}).get('Kod EAN', ''),
             "ean13": product.get('parameters', {}).get('Kod EAN', ''),
             "name": {
-                "language": {
-                    "id": 1,
-                    "value": product.get('name', '')
-                }
+                "language": [
+                    {
+                        "id": 1,
+                        "value": product.get('name', '')
+                    }
+                ]
             },
             "description": {
-                "language": {
-                    "id": 1,
-                    "value": long_description
-                }
+                "language": [
+                    {
+                        "id": 1,
+                        "value": long_description
+                    }
+                ]
             },
             "description_short": {
-                "language": {
-                    "id": 1,
-                    "value": product.get('short_description', '')
-                }
+                "language": [
+                    {
+                        "id": 1,
+                        "value": product.get('short_description', '')
+                    }
+                ]
             },
             "minimal_quantity": 1,
             "id_tax_rules_group": 1,

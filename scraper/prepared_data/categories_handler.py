@@ -34,16 +34,20 @@ def post_categories(categories: List[Dict[str, Any]], api_client: PrestaShopAPIC
                         "active": 1,
                         "id_parent": parent_id,
                         "name": {
-                            "language": {
-                                "id": 1,
-                                "value": cat_name
-                            }
+                            "language": [
+                                {
+                                    "id": 1,
+                                    "value": cat_name
+                                }
+                            ]
                         },
                         "link_rewrite": {
-                            "language": {
-                                "id": 1,
-                                "value": cat_name.lower().replace(' ', '-').replace(',', '')
-                            }
+                            "language": [
+                                {
+                                    "id": 1,
+                                    "value": cat_name.lower().replace(' ', '-').replace(',', '')
+                                }
+                            ]
                         }
                     }
                 }
