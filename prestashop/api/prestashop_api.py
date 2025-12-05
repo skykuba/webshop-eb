@@ -1,8 +1,13 @@
 import os
 import requests
+import warnings
 from typing import Dict, Optional, Any
 from urllib.parse import urljoin
 from dotenv import load_dotenv
+from urllib3.exceptions import InsecureRequestWarning
+
+# Disable SSL warnings for self-signed certificates
+warnings.filterwarnings('ignore', category=InsecureRequestWarning)
 
 class PrestaShopAPIClient:
     """API Client for PrestaShop 1.7.8.x"""
@@ -29,7 +34,10 @@ class PrestaShopAPIClient:
 
         # Load ws_key from .env.dev if not provided
         if ws_key is None:
-            load_dotenv("../.env.dev")
+            # Get the directory where this file is located
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            env_path = os.path.join(current_dir, "../.env.dev")
+            load_dotenv(env_path)
             ws_key = os.getenv("API_KEY")
 
         if not ws_key:
@@ -87,6 +95,11 @@ class PrestaShopAPIClient:
                 timeout=self.timeout,
             )
             response.raise_for_status()
+            
+            # DELETE requests often return empty response
+            if method == "DELETE" or not response.text:
+                return {}
+            
             return response.json()
         except requests.exceptions.HTTPError as e:
             print(f"HTTP Error: {e.response.status_code}")
