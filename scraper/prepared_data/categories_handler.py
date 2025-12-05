@@ -52,14 +52,14 @@ def post_categories(categories: List[Dict[str, Any]], api_client: PrestaShopAPIC
                     response = api_client._make_request("POST", "categories", data=data)
                     category_id = response['category']['id']
                     category_id_map[cat_name] = category_id
-                    print(f"✓ Created category '{cat_name}' with ID: {category_id}")
+                    print(f"Created category '{cat_name}' with ID: {category_id}")
                     
                     # Process children (subcategories) with this category as parent
                     if cat.get('children'):
                         find_categories_recursive(cat['children'], category_id, cat_name)
                         
                 except Exception as e:
-                    print(f"✗ Error creating category {cat_name}: {e}")
+                    print(f"Error creating category {cat_name}: {e}")
             else:
                 # Even if this category is not wanted, check its children
                 # (in case subcategories are wanted but parent is not)
