@@ -1,6 +1,5 @@
 import os
 import requests
-import json
 from typing import Dict, Optional, Any
 from urllib.parse import urljoin
 from dotenv import load_dotenv
@@ -46,7 +45,7 @@ class PrestaShopAPIClient:
         self,
         method: str,
         endpoint: str,
-        data: Optional[Dict[str, Any]] = None,
+        data: Optional[str] = None,
         params: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """
@@ -55,7 +54,7 @@ class PrestaShopAPIClient:
         Args:
             method: HTTP method (GET, POST, PUT, DELETE)
             endpoint: API endpoint (e.g., 'products')
-            data: Data to send
+            data: XML string to send
             params: Query parameters
 
         Returns:
@@ -63,18 +62,27 @@ class PrestaShopAPIClient:
         """
         url = self._build_url(endpoint)
 
-        # Add ws_key and output_format to parameters
+        # Add ws_key to parameters
         if params is None:
             params = {}
         params["ws_key"] = self.ws_key
         params["output_format"] = "JSON"
+        
+        # Prepare headers and data
+        headers = {}
+        request_data = None
+        
+        if data is not None:
+            headers["Content-Type"] = "application/xml"
+            request_data = data.encode('utf-8')
 
         try:
             response = requests.request(
                 method=method,
                 url=url,
-                json=data,
+                data=request_data,
                 params=params,
+                headers=headers,
                 verify=self.verify_ssl,
                 timeout=self.timeout,
             )
