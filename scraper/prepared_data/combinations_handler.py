@@ -57,13 +57,13 @@ def generate_combinations(
         try:
             response = api_client._make_request("POST", "combinations", data)
             combination_id = int(response['combination']['id'])
-            print(f"✓ Created combination: Size {size} (ID: {combination_id})")
+            print(f"Created combination: Size {size} (ID: {combination_id})")
             
             # Now set stock for this combination
             set_combination_stock(product_id, combination_id, quantity, api_client)
             
         except Exception as e:
-            print(f"✗ Error creating combination for size {size}: {e}")
+            print(f"Error creating combination for size {size}: {e}")
         
         # Increase unavailable probability by 20 percentage points
         unavailable_probability = min(unavailable_probability + 0.2, 1.0)
