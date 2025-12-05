@@ -94,6 +94,17 @@ class PrestaShopAPIClient:
                 verify=self.verify_ssl,
                 timeout=self.timeout,
             )
+            
+            if response.status_code == 500 and method in ["POST", "PUT"]:
+                try:
+                    json_response = response.json()
+                    resource_keys = ['product', 'combination', 'stock_available', 'specific_price']
+                    for key in resource_keys:
+                        if key in json_response and 'id' in json_response.get(key, {}):
+                            return json_response
+                except:
+                    pass
+            
             response.raise_for_status()
             
             # DELETE requests often return empty response
@@ -102,11 +113,8 @@ class PrestaShopAPIClient:
             
             return response.json()
         except requests.exceptions.HTTPError as e:
-            print(f"HTTP Error: {e.response.status_code}")
-            print(f"Response: {e.response.text}")
             raise
         except requests.exceptions.RequestException as e:
-            print(f"Request Error: {e}")
             raise
         
     def get_product(self, product_id: int) -> Dict[str, Any]:
