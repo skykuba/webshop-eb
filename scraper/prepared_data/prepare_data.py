@@ -52,6 +52,9 @@ def main() -> None:
     print("\n[3/8] Creating categories in PrestaShop...")
     category_id_map = post_categories(categories, api_client)
     print(f"Created {len(category_id_map)} categories")
+    print("Category ID map:")
+    for cat_name, cat_id in category_id_map.items():
+        print(f"  '{cat_name}' -> ID {cat_id}")
     
     # Create size attributes for shoes
     print("\n[4/8] Creating size attributes...")
@@ -66,7 +69,7 @@ def main() -> None:
     
     for i, product in enumerate(filtered_products, 1):
         product_id = -1
-        print(f"\nProcessing product {i}/{len(filtered_products)}")
+        print(f"\n--- Processing product {i}/{len(filtered_products)} ---")
         
         # Prepare product data
         prepared = prepare_product_data(product, category_id_map)
@@ -84,7 +87,7 @@ def main() -> None:
             
             if category_name in SIZE_CATEGORIES:
                 # Generate combinations for sized products (shoes)
-                print("\n[6/8] Generating size combinations...")
+                print("Generating size combinations...")
                 generate_combinations(product_id, size_id_map, api_client)
             else:
                 # Set stock quantity for non-sized products
@@ -92,7 +95,6 @@ def main() -> None:
                 set_product_stock(product_id, quantity, api_client)
             
             # Save photos
-            print("\n[7/8] Saving product photos...")
             save_product_photos(product, PHOTOS_OUTPUT_DIR)
         
         prepared_products.append(prepared)
