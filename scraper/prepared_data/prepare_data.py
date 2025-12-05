@@ -62,24 +62,27 @@ def main() -> None:
     # Prepare and post products
     print("\n[5/8] Preparing and posting products...")
     prepared_products = []
-    discount_chance = 0.05  # 5% chance for discount
+    discount_chance = 0.10  # chance for discount
     
     for i, product in enumerate(filtered_products, 1):
-        print(f"\n--- Processing product {i}/{len(filtered_products)} ---")
+        product_name = product.get('name', 'Unknown')
+        print(f"\n--- Processing product {i}/{len(filtered_products)}: {product_name} ---")
         
         # Prepare product data
         prepared = prepare_product_data(product, category_id_map)
         product_id = post_product(prepared, api_client)
         
-        # Apply random discount
-        if random.random() < discount_chance:
-            prepared = apply_discount(product_id)
-        
-        # Post product to PrestaShop
-        
-        if product_id != 0:
-            quantity = random.randint(3, 10)
-            set_product_stock(product_id, quantity, api_client)
+        if product_id > 0:
+            # Apply random discount
+            if random.random() < discount_chance:
+                apply_discount(product_id, api_client=api_client)
+            
+            if product.get('category') in SIZE_CATEGORIES:
+                generate_combinations(product_id, size_id_map, api_client)
+            else:
+                quantity = random.randint(3, 10)
+                set_product_stock(product_id, quantity, api_client, is_sized=False)
+            
             photos = save_product_photos(product, PHOTOS_OUTPUT_DIR)
             post_photos(product_id, photos, api_client)
         
