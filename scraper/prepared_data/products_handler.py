@@ -48,6 +48,10 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
     subcategory_id = category_id_map.get(subcategory_name, 2)
     root_id = category_id_map.get('Root', 2)
     
+    # Debug category mapping
+    print(f"  Category: '{category_name}' -> ID {category_id}")
+    print(f"  Subcategory: '{subcategory_name}' -> ID {subcategory_id}")
+    
     # Check if product is sized
     is_sized = category_name.lower() in SIZE_CATEGORIES
     
@@ -59,46 +63,55 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
             long_description = long_description[start_pos + 1:]
         long_description = long_description.replace('</section>', '')
     
+    # Generate link_rewrite (URL-friendly name)
+    product_name = product.get('name', '')
+    link_rewrite = (product_name.lower()
+                    .replace(' ', '-')
+                    .replace(',', '')
+                    .replace('/', '-')
+                    .replace('(', '')
+                    .replace(')', '')
+                    .replace('ą', 'a').replace('ć', 'c').replace('ę', 'e')
+                    .replace('ł', 'l').replace('ń', 'n').replace('ó', 'o')
+                    .replace('ś', 's').replace('ź', 'z').replace('ż', 'z')
+                    .replace('--', '-')
+                    .strip('-'))
+    
     prepared_product = {
         "product": {
-            "active": 1,
             "id_category_default": subcategory_id,
+            "id_shop_default": 1,
+            "weight": 0,
             "price": price_netto,
-            "reference": product.get('parameters', {}).get('Kod EAN', ''),
-            "ean13": product.get('parameters', {}).get('Kod EAN', ''),
+            "id_tax_rules_group": 1,
             "name": {
                 "language": [
-                    {
-                        "id": 1,
-                        "value": product.get('name', '')
-                    }
+                    {"id": 1, "value": product_name}
+                ]
+            },
+            "link_rewrite": {
+                "language": [
+                    {"id": 1, "value": link_rewrite}
                 ]
             },
             "description": {
                 "language": [
-                    {
-                        "id": 1,
-                        "value": long_description
-                    }
+                    {"id": 1, "value": long_description}
                 ]
             },
-            "description_short": {
-                "language": [
-                    {
-                        "id": 1,
-                        "value": product.get('short_description', '')
-                    }
-                ]
+            "associations": {
+                "categories": {
+                    "category": [
+                        {"id": subcategory_id}
+                    ]
+                }
             },
             "minimal_quantity": 1,
-            "id_tax_rules_group": 1,
-            "associations": {
-                "categories": [
-                    {"id": root_id},
-                    {"id": category_id},
-                    {"id": subcategory_id}
-                ]
-            }
+            "additional_delivery_times": 1,
+            "available_for_order": 1,
+            "show_price": 1,
+            "state": 1,
+            "active": 1
         }
     }
     
@@ -113,11 +126,11 @@ def post_product(prepared_product: Dict[str, Any], api_client: PrestaShopAPIClie
         xml_data = json_to_xml(prepared_product)
         response = api_client._make_request("POST", "products", data=xml_data)
         product_id = int(response['product']['id'])
-        print(f"Created product: {product_name} (ID: {product_id})")
+        print(f"✓ Created product: {product_name} (ID: {product_id})")
         return product_id
     except Exception as e:
-        print(f"Error creating product {product_name}: {e}")
-        return 0
+        print(f"✗ Error creating product {product_name}: {e}")
+        return -1
 
 
 def set_product_stock(product_id: int, quantity: int, api_client: PrestaShopAPIClient) -> bool:

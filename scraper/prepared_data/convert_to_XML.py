@@ -46,10 +46,35 @@ def dict_to_xml(parent, data):
 
 
 def prettify_xml(elem):
-    """ Return a pretty-printed XML string for the Element. """
-    rough_string = ET.tostring(elem, encoding='utf-8')
-    reparsed = minidom.parseString(rough_string)
-    return reparsed.toprettyxml(indent="  ", encoding='utf-8').decode('utf-8')
+    """ Return a pretty-printed XML string for the Element with CDATA preserved. """
+    rough_string = ET.tostring(elem, encoding='utf-8').decode('utf-8')
+    
+    # Don't use minidom as it escapes CDATA
+    # Instead, manually add CDATA sections where needed
+    import re
+    
+    # Wrap text content in CDATA for specific tags
+    def add_cdata(match):
+        tag = match.group(1)
+        content = match.group(2)
+        # Skip empty content or already has CDATA
+        if not content or content.strip() == '' or '<![CDATA[' in content:
+            return match.group(0)
+        # Add CDATA wrapper
+        return f'<{tag}><![CDATA[{content}]]></{tag.split()[0]}>'
+    
+    # Add CDATA to language tags
+    rough_string = re.sub(r'<(language[^>]*)>([^<]+)</language>', add_cdata, rough_string)
+    
+    # Pretty print manually
+    from xml.dom import minidom
+    try:
+        reparsed = minidom.parseString(rough_string.encode('utf-8'))
+        pretty = reparsed.toprettyxml(indent="  ", encoding='utf-8').decode('utf-8')
+        return pretty
+    except:
+        # If parsing fails, return without prettifying
+        return rough_string
 
 
 def json_to_xml(data):
