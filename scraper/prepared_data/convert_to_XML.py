@@ -5,14 +5,33 @@ from xml.dom import minidom
 
 
 def dict_to_xml(parent, data):
-    """ Recursively convert a dictionary to XML elements. """
+    """
+    Recursively convert a dictionary to XML elements.
+    
+    Special handling for 'language' fields in PrestaShop format:
+    Input: {"language": [{"id": 1, "value": "Text"}]}
+    Output: <language id="1"><![CDATA[Text]]></language>
+    """
     if isinstance(data, dict):
         for key, value in data.items():
             if isinstance(value, list):
-                # Handle lists - create multiple elements with the same tag
-                for item in value:
-                    child = ET.SubElement(parent, key)
-                    dict_to_xml(child, item)
+                # Special handling for language fields
+                if key == "language":
+                    for item in value:
+                        if isinstance(item, dict) and "id" in item and "value" in item:
+                            # PrestaShop language format
+                            lang_elem = ET.SubElement(parent, key)
+                            lang_elem.set("id", str(item["id"]))
+                            lang_elem.text = item["value"]
+                        else:
+                            # Regular list item
+                            child = ET.SubElement(parent, key)
+                            dict_to_xml(child, item)
+                else:
+                    # Handle regular lists - create multiple elements with the same tag
+                    for item in value:
+                        child = ET.SubElement(parent, key)
+                        dict_to_xml(child, item)
             elif isinstance(value, dict):
                 # Handle nested dictionaries
                 child = ET.SubElement(parent, key)

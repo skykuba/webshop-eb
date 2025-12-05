@@ -92,8 +92,6 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
             },
             "minimal_quantity": 1,
             "id_tax_rules_group": 1,
-            "depends_on_stock": 1 if is_sized else 0,
-            "out_of_stock": 0,  # 0 - deny orders when out of stock
             "associations": {
                 "categories": [
                     {"id": root_id},
@@ -104,24 +102,49 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
         }
     }
     
-    # Add quantity only for non-sized products
-    if not is_sized:
-        quantity = random.randint(3, 10)
-        prepared_product["product"]["quantity"] = quantity
-    
     return prepared_product
 
 
 def post_product(prepared_product: Dict[str, Any], api_client: PrestaShopAPIClient) -> int:
     """Post a product to Prestashop and return the product ID."""
+    product_name = prepared_product['product']['name']['language'][0]['value']
+    
     try:
         xml_data = json_to_xml(prepared_product)
         response = api_client._make_request("POST", "products", data=xml_data)
-        product_id = response['product']['id']
-        product_name = prepared_product['product']['name']['language'][0]['value']
+        product_id = int(response['product']['id'])
         print(f"Created product: {product_name} (ID: {product_id})")
         return product_id
     except Exception as e:
-        product_name = prepared_product['product']['name']['language'][0]['value']
         print(f"Error creating product {product_name}: {e}")
         return 0
+
+
+def set_product_stock(product_id: int, quantity: int, api_client: PrestaShopAPIClient) -> bool:
+    """Set stock quantity for a product via stock_availables API using CDATA format."""
+    try:
+        # Get stock_available ID for this product
+        response = api_client._make_request("GET", f"products/{product_id}")
+        stock_availables = response['product']['associations']['stock_availables']
+        stock_id = stock_availables[0]['id']
+        
+        # Create XML with CDATA format
+        xml_data = f'''<?xml version="1.0" encoding="UTF-8"?>
+<prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
+  <stock_available>
+    <id><![CDATA[{stock_id}]]></id>
+    <id_product><![CDATA[{product_id}]]></id_product>
+    <id_product_attribute><![CDATA[0]]></id_product_attribute>
+    <id_shop><![CDATA[1]]></id_shop>
+    <quantity><![CDATA[{quantity}]]></quantity>
+    <depends_on_stock><![CDATA[0]]></depends_on_stock>
+    <out_of_stock><![CDATA[2]]></out_of_stock>
+  </stock_available>
+</prestashop>'''
+        
+        api_client._make_request("PUT", f"stock_availables/{stock_id}", data=xml_data)
+        print(f"Set stock for product {product_id}: {quantity} units")
+        return True
+    except Exception as e:
+        print(f"Error setting stock for product {product_id}: {e}")
+        return False

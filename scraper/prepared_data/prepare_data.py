@@ -22,7 +22,8 @@ from products_handler import (
     save_prepared_data,
     filter_products,
     prepare_product_data,
-    post_product
+    post_product,
+    set_product_stock
 )
 from photos_handler import save_product_photos
 from combinations_handler import generate_combinations
@@ -78,15 +79,21 @@ def main() -> None:
         product_id = post_product(prepared, api_client)
         
         if product_id != -1:
-            # Save photos
-            print("\n[6/8] Saving product photos...")
-            save_product_photos(product, PHOTOS_OUTPUT_DIR)
-            
-            # Generate combinations for sized products (shoes)
+            # Check if product needs size combinations or stock quantity
             category_name = product.get('category', '').lower()
+            
             if category_name in SIZE_CATEGORIES:
-                print("\n[7/8] Generating size combinations...")
+                # Generate combinations for sized products (shoes)
+                print("\n[6/8] Generating size combinations...")
                 generate_combinations(product_id, size_id_map, api_client)
+            else:
+                # Set stock quantity for non-sized products
+                quantity = random.randint(3, 10)
+                set_product_stock(product_id, quantity, api_client)
+            
+            # Save photos
+            print("\n[7/8] Saving product photos...")
+            save_product_photos(product, PHOTOS_OUTPUT_DIR)
         
         prepared_products.append(prepared)
     
