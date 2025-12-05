@@ -25,7 +25,7 @@ from products_handler import (
     post_product,
     set_product_stock
 )
-from photos_handler import save_product_photos
+from photos_handler import save_product_photos, post_photos
 from combinations_handler import generate_combinations
 from attributes_handler import create_attribute_group, create_size_attributes
 from discount_handler import apply_discount
@@ -52,9 +52,6 @@ def main() -> None:
     print("\n[3/8] Creating categories in PrestaShop...")
     category_id_map = post_categories(categories, api_client)
     print(f"Created {len(category_id_map)} categories")
-    print("Category ID map:")
-    for cat_name, cat_id in category_id_map.items():
-        print(f"  '{cat_name}' -> ID {cat_id}")
     
     # Create size attributes for shoes
     print("\n[4/8] Creating size attributes...")
@@ -68,34 +65,23 @@ def main() -> None:
     discount_chance = 0.05  # 5% chance for discount
     
     for i, product in enumerate(filtered_products, 1):
-        product_id = -1
         print(f"\n--- Processing product {i}/{len(filtered_products)} ---")
         
         # Prepare product data
         prepared = prepare_product_data(product, category_id_map)
+        product_id = post_product(prepared, api_client)
         
         # Apply random discount
         if random.random() < discount_chance:
-            prepared = apply_discount(prepared)
+            prepared = apply_discount(product_id)
         
         # Post product to PrestaShop
-        product_id = post_product(prepared, api_client)
         
-        if product_id != -1:
-            # Check if product needs size combinations or stock quantity
-            category_name = product.get('category', '').lower()
-            
-            if category_name in SIZE_CATEGORIES:
-                # Generate combinations for sized products (shoes)
-                print("Generating size combinations...")
-                generate_combinations(product_id, size_id_map, api_client)
-            else:
-                # Set stock quantity for non-sized products
-                quantity = random.randint(3, 10)
-                set_product_stock(product_id, quantity, api_client)
-            
-            # Save photos
-            save_product_photos(product, PHOTOS_OUTPUT_DIR)
+        if product_id != 0:
+            quantity = random.randint(3, 10)
+            set_product_stock(product_id, quantity, api_client)
+            photos = save_product_photos(product, PHOTOS_OUTPUT_DIR)
+            post_photos(product_id, photos, api_client)
         
         prepared_products.append(prepared)
     
@@ -104,7 +90,6 @@ def main() -> None:
     save_prepared_data(prepared_products, OUTPUT_DATA_FILE)
     
     print("\n" + "=" * 80)
-    print("COMPLETED!")
     print(f"Total products processed: {len(prepared_products)}")
     print("=" * 80)
 
