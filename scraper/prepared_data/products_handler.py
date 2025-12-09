@@ -27,7 +27,9 @@ def save_prepared_data(prepared_products: List[Dict[str, Any]], output_data_file
 def filter_products(products: List[Dict[str, Any]], wanted_subcategories: List[str]) -> List[Dict[str, Any]]:
     """Filter products based on wanted subcategories."""
     filtered_products: List[Dict[str, Any]] = [
-        product for product in products if product.get('subcategory') in wanted_subcategories
+        product for product in products 
+        if product.get('subcategory') in wanted_subcategories 
+        and len(product.get('photos', [])) >= 2
     ]
     return filtered_products
 
@@ -74,7 +76,6 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
                 html_content = html_content[start_pos + 1:]
         html_content = html_content.replace('</section>', '')
         
-        # Remove dangerous tags: iframe, script, div with class video-container
         # Remove entire <div class="video-container">...</div> blocks
         html_content = re.sub(r'<div[^>]*video-container[^>]*>.*?</div>', '', html_content, flags=re.DOTALL | re.IGNORECASE)
         
