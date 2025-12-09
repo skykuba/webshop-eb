@@ -151,6 +151,20 @@ VALUES
 
 INSERT INTO ps_cms_shop (id_cms, id_shop)
 VALUES(@last_id, 1);
+
+-- -----------------------------------
+
+INSERT INTO ps_cms (id_cms_category, active, position, indexation)
+VALUES (1, 1, 3, 1);
+
+SET @last_id = LAST_INSERT_ID();
+
+INSERT INTO ps_cms_lang (id_cms, id_lang, meta_title, meta_description, meta_keywords, content, link_rewrite)
+VALUES 
+(@last_id, 1, 'Newsletter', 'Subskrybuj nasz newsletter', 'newsletter', '<h1>Newsletter</h1><p>Zapisz się do naszego newslettera i otrzymuj najnowsze wiadomości i promocje.</p>', 'newsletter');
+
+INSERT INTO ps_cms_shop (id_cms, id_shop)
+VALUES(@last_id, 1);
 EOF
 )
 
@@ -159,4 +173,4 @@ EOF
 # --------------------------
 docker exec -i "$DB_CONTAINER" mysql -u"$DB_USER" -p"$DB_PASSWORD" "$DB_NAME" -e "$SQL"
 
-echo "Strona CMS 'Gwarancja' została utworzona."
+echo "Strona CMS Gwarancja zostala utworzona."
