@@ -13,14 +13,19 @@ WANTED_CATEGORIES: List[str] = [
 
 WANTED_SUBCATEGORIES: List[str] = [
     # Podróże i trekking
-    "noże, scyzoryki i narzędzia",
-    "akcesoria podróżne",
+    "plecaki",
+    "kuchnia turystyczna",
     # Buty
     "męskie",
     "damskie",
     # Wspinaczka
+    "przyrządy",
+    "raki i raczki",
+    "woreczki i magnezja",
+    "via ferrata",
     "karabinki i ekspresy",
     "liny, taśmy i repy",
+    "lawinowe ABC",
     # Skitour
     "foki i akcesoria",
     "wiązania i akcesoria"

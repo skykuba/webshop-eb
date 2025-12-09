@@ -12,32 +12,37 @@
 ### Podróże i trekking
 | Subcategory | Products |
 |-------------|----------|
-| noże, scyzoryki i narzędzia | 138 |
-| akcesoria podróżne | 264 |
-| **Total** | **402** |
+| kuchnia turystyczna | 193 |
+| plecaki | 506 |
+| **Total** | **699** |
 
 ### Buty *(sized products)*
 | Subcategory | Products |
 |-------------|----------|
-| męskie | 208 |
-| damskie | 153 |
-| **Total** | **361** |
+| męskie | 183 |
+| damskie | 139 |
+| **Total** | **322** |
 
 ### Wspinaczka
 | Subcategory | Products |
 |-------------|----------|
-| karabinki i ekspresy | 117 |
-| liny, taśmy i repy | 51 |
-| **Total** | **168** |
+| przyrządy | 31 |
+| raki i raczki | 31 |
+| woreczki i magnezja | 32 |
+| via ferrata | 73 |
+| karabinki i ekspresy | 18 |
+| liny, taśmy i repy | 8 |
+| lawinowe ABC | 2 |
+| **Total** | **195** |
 
 ### Skitour
 | Subcategory | Products |
 |-------------|----------|
-| foki i akcesoria | 57 |
-| wiązania i akcesoria | 37 |
-| **Total** | **94** |
+| foki i akcesoria | 10 |
+| wiązania i akcesoria | 13 |
+| **Total** | **23** |
 
 ---
 
 ## Summary
-**TOTAL PRODUCTS: 1025**
+**TOTAL PRODUCTS| 1239**

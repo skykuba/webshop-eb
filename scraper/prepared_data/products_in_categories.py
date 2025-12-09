@@ -13,6 +13,11 @@ def assign_products(products: List[Dict[str, Any]]) -> Dict[str, Dict[str, List[
     categories_dict: Dict[str, Dict[str, List[Dict[str, Any]]]] = {}
     
     for product in products:
+        # Skip products with less than 2 photos
+        photos = product.get('photos', [])
+        if len(photos) < 2:
+            continue
+        
         category: str = product.get('category')
         subcategory: str = product.get('subcategory')
         

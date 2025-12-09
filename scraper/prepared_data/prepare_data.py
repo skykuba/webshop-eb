@@ -66,6 +66,12 @@ def main() -> None:
     
     for i, product in enumerate(filtered_products, 1):
         product_name = product.get('name', 'Unknown')
+        
+        # Skip products with less than 2 photos
+        photos_list = product.get('photos', [])
+        if len(photos_list) < 2:
+            continue
+        
         print(f"\n--- Processing product {i}/{len(filtered_products)}: {product_name} ---")
         
         # Prepare product data
@@ -94,6 +100,7 @@ def main() -> None:
     
     print("\n" + "=" * 80)
     print(f"Total products processed: {len(prepared_products)}")
+    print(f"Products skipped (less than 2 photos): {skipped_count}")
     print("=" * 80)
 
 
