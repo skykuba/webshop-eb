@@ -368,3 +368,7 @@ tools/build/releases/*
 
 ## Docker configuration
 install.lock
+
+# Img for newsletter page customization 
+!img/bon.png
+!img/newsletter-bg.png
