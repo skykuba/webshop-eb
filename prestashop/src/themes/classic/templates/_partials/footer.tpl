@@ -22,13 +22,29 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
+
+  {if $page.page_name === 'index'}
 <div class="container">
   <div class="row">
     {block name='hook_footer_before'}
       {hook h='displayFooterBefore'}
     {/block}
   </div>
+  <!-- Newsletter - only on homepage -->
+  <div class="row">
+    <div class="col-md-12">
+      <div id="menu_newsletter" class="newsletter_main_page">
+        <div class="newsletter_main_page__content">
+          <a href="{$urls.base_url}content/16-newsletter" class="newsletter_main_page__button">
+            {l s='Subscribe' d='Shop.Theme.Actions'}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+  {/if}
+
 <div class="footer-container">
   <div class="container">
     <div class="row">
