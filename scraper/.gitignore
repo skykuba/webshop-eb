@@ -1,0 +1,8 @@
+/__pycache__/
+/prepared_data/__pycache__/
+
+data/photos/
+/prepared_data/photos/
+
+/data/products.json
+/prepared_data/products_in_categories.json
