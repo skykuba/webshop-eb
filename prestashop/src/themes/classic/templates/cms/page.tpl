@@ -45,13 +45,13 @@
   {elseif $cms.meta_title == 'Newsletter'}
         <div class="newsletter-promo">
         <div class="newsletter-promo-text">
-          <h3>Każda osoba, która zapisze się do naszego NEWSLETTERA na powitanie otrzyma od nas kod rabatowy o wartości 25zł na pierwsze zakupy!</h3>
+          <h3 style="text-align: center; color: red;">Każda osoba, która zapisze się do naszego NEWSLETTERA na powitanie otrzyma od nas kod rabatowy o wartości 25zł na pierwsze zakupy!</h3>
           
           <p>Od tej chwili będziesz otrzymywać informacje na temat akcji specjalnych dla subskrybentów, promocjach, wyprzedażach, nowościach, a także wydarzeniach w świecie turystycznym.</p>
           
-          <p>Wpisz swój adres w pola na stronie.</p>
-          
-          <h4>Jak wykorzystać kod?</h4>
+          <h4 style="text-align: center; color: red;">Wpisz swój adres w pola na stronie.</h4>
+          <br>
+          <h5>Jak wykorzystać kod?</h5>
           
           <p>Twój kod działa na wszystkie produkty (przecenione i nieprzecenione) i można go zrealizować w zamówieniach o wartości min. 100zł w sklepie internetowym, lub wydrukuj swój kod rabatowy i zrób zakupy w sklepie stacjonarnym na takich samych zasadach.</p>
           
