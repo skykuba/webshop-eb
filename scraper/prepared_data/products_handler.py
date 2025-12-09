@@ -38,7 +38,7 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
     """Prepare product data for Prestashop format."""
     
     # Extract price (remove currency and convert to netto)
-    price_str = product.get('price', '0 zł').replace('zł', '').replace(',', '.').strip()
+    price_str = product.get('price', '0 zł').replace('zł', '').replace(',', '.').replace(' ', '').replace('-', '').replace('\n', '').replace('\t', '').strip()
     try:
         price_brutto = float(price_str)
         price_netto = round(price_brutto / 1.23, 2)  # Remove 23% VAT

@@ -98,7 +98,6 @@ def main() -> None:
     
     print("\n" + "=" * 80)
     print(f"Total products processed: {len(prepared_products)}")
-    print(f"Products skipped (less than 2 photos): {skipped_count}")
     print("=" * 80)
 
 
