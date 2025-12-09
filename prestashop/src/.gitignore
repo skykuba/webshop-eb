@@ -180,6 +180,8 @@ modules/*
 !modules/ps_shoplocation/
 !modules/ps_tuttubenefits/
 !modules/ps_listyzakupowe/
+!modules/ps_mywishlist/
+!modules/ps_wishlistbutton/
 override/*
 themes/*/
 !themes/classic

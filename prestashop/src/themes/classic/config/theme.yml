@@ -72,7 +72,7 @@ global_settings:
         - ps_currencyselector
         - ps_shoplocation
         - ps_customersignin
-        - blockwishlist
+        - ps_wishlistbutton
         - ps_shoppingcart
       displaySearch:
         - ps_searchbar
@@ -109,7 +109,7 @@ global_settings:
         - ps_featuredproducts
       displayProductActions:
         - blockwishlist
-
+  
   image_types:
     cart_default:
       width: 125
