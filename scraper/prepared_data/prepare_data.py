@@ -86,7 +86,10 @@ def main() -> None:
             if product.get('category') in SIZE_CATEGORIES:
                 generate_combinations(product_id, size_id_map, api_client)
             else:
-                quantity = random.randint(3, 10)
+                if random.random() < 0.05:
+                    quantity = 0  # Out of stock
+                else:
+                    quantity = random.randint(3, 10)
                 set_product_stock(product_id, quantity, api_client, is_sized=False)
             
             photos = save_product_photos(product, PHOTOS_OUTPUT_DIR)
