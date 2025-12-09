@@ -95,7 +95,7 @@ def post_photos(product_id: int, photo_filenames: List[str], api_client: PrestaS
             upload_path = filepath
             compressed = False
             
-            # Convert WebP to JPEG (PrestaShop doesn't support WebP)
+            # Convert WEBP to JPEG
             if filepath.lower().endswith('.webp'):
                 print(f"  Converting WebP to JPEG: {filename}")
                 jpeg_path = os.path.join(photos_dir, f"converted_{filename.rsplit('.', 1)[0]}.jpg")

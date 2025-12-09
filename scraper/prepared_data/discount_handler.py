@@ -1,7 +1,6 @@
 """Handler for product discounts operations."""
 
 import random
-from typing import Dict, Any
 from prestashop.api import PrestaShopAPIClient
 
 def apply_discount(
@@ -11,10 +10,10 @@ def apply_discount(
     api_client: PrestaShopAPIClient = PrestaShopAPIClient()
 ) -> None:
     """ Apply a random discount to a product using specific_prices (proper promotion). """
-    # Calculate random discount percentage
+    # Random discount percentage
     discount_percentage = random.uniform(min_discount_percentage, max_discount_percentage)
 
-    # Create specific_price entry for promotion (no dates = permanent)
+    # Create specific_price entry for promotion
     specific_price = f'''<?xml version="1.0" encoding="UTF-8"?>
 <prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
 <specific_price>
@@ -39,6 +38,5 @@ def apply_discount(
     
     try:
         response = api_client._make_request("POST", "specific_prices", data=specific_price)
-        specific_price_id = response['specific_price']['id']
     except Exception as e:
         print(f"Error applying discount to product {product_id}: {e}")

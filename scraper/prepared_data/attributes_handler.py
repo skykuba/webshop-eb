@@ -3,7 +3,6 @@
 from typing import Dict, List
 from prestashop.api import PrestaShopAPIClient
 from config import SHOE_SIZES
-from convert_to_XML import json_to_xml
 
 
 def create_attribute_group(api_client: PrestaShopAPIClient, group_name: str = "Rozmiar") -> int:

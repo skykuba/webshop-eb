@@ -4,7 +4,6 @@ import json
 from typing import Dict, List, Any
 from prestashop.api import PrestaShopAPIClient
 from config import WANTED_CATEGORIES, WANTED_SUBCATEGORIES
-from convert_to_XML import json_to_xml
 
 
 def load_categories(categories_file: str) -> List[Dict[str, Any]]:
@@ -61,8 +60,6 @@ def post_categories(categories: List[Dict[str, Any]], api_client: PrestaShopAPIC
                 except Exception as e:
                     print(f"Error creating category {cat_name}: {e}")
             else:
-                # Even if this category is not wanted, check its children
-                # (in case subcategories are wanted but parent is not)
                 if cat.get('children') and is_wanted_category:
                     find_categories_recursive(cat['children'], parent_id, parent_name)
     

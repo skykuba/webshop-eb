@@ -37,7 +37,7 @@ def filter_products(products: List[Dict[str, Any]], wanted_subcategories: List[s
 def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int]) -> str:
     """Prepare product data for Prestashop format."""
     
-    # Extract price (remove currency and convert to netto)
+    # Extract price
     price_str = product.get('price', '0 zł').replace('zł', '').replace(',', '.').replace(' ', '').replace('-', '').replace('\n', '').replace('\t', '').strip()
     try:
         price_brutto = float(price_str)
@@ -49,7 +49,6 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
     weight = 0
     if 'Waga [g]' in parameters:
         weight_str = str(parameters['Waga [g]'])
-        # Extract only numeric part from weight string (e.g., "583 (1 But)" -> "583")
         import re
         weight_match = re.search(r'(\d+(?:\.\d+)?)', weight_str)
         if weight_match:
@@ -61,7 +60,6 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
     
     subcategory_id = category_id_map.get(subcategory_name, 2)
     
-    # Clean description - remove attributes from HTML tags (class, style, etc.)
     import re
     
     def clean_html(html_content: str) -> str:
@@ -69,7 +67,7 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
         if not html_content:
             return ''
         
-        # Remove <section> tags completely
+        # Remove <section> tags
         if html_content.startswith('<section'):
             start_pos = html_content.find('>')
             if start_pos != -1:
@@ -97,7 +95,7 @@ def prepare_product_data(product: Dict[str, Any], category_id_map: Dict[str, int
     long_description = clean_html(product.get('long_description', ''))
     short_description = clean_html(product.get('short_description', ''))
 
-    # Generate link_rewrite (URL-friendly name)
+    # Generate link_rewrite
     product_name = product.get('name', '')
     link_rewrite = (product_name.lower()
                     .replace(' ', '-')
@@ -167,29 +165,8 @@ def post_product(prepared_product: str, api_client: PrestaShopAPIClient) -> int:
             return -1
             
     except Exception as e:
-        # Print detailed error including response body if available
         error_msg = str(e)
-        if hasattr(e, 'response') and e.response is not None:
-            try:
-                error_detail = e.response.json()
-                print(f"Error creating product: {error_msg}")
-                print(f"   API Response: {error_detail}")
-                
-                # If it's a description validation error, show the description
-                if 'errors' in error_detail:
-                    for error in error_detail['errors']:
-                        if 'description' in error.get('message', '').lower():
-                            # Extract description from XML to show what's wrong
-                            import re
-                            desc_match = re.search(r'<description>.*?<language id="1"><!\[CDATA\[(.*?)\]\]></language>.*?</description>', prepared_product, re.DOTALL)
-                            if desc_match:
-                                desc_content = desc_match.group(1)
-                                print(f"   Description content (first 500 chars):")
-                                print(f"   {desc_content[:500]}")
-            except:
-                print(f"Error creating product: {error_msg}")
-        else:
-            print(f"Error creating product: {error_msg}")
+        print(f"Error creating product: {error_msg}")
         return -1
 
 
@@ -203,7 +180,6 @@ def set_product_stock(product_id: int, quantity: int, api_client: PrestaShopAPIC
     try:
         response = api_client._make_request("GET", f"stock_availables?filter[id_product]={product_id}&filter[id_product_attribute]=0&display=full")
         
-        # Handle both dict and list responses
         if isinstance(response, dict):
             stock_availables = response.get('stock_availables', [])
         else:

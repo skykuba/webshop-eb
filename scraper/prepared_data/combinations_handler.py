@@ -4,7 +4,6 @@ import random
 from typing import Dict, List, Optional
 from prestashop.api import PrestaShopAPIClient
 from config import SHOE_SIZES
-from convert_to_XML import json_to_xml
 
 
 def generate_combinations(
@@ -23,14 +22,13 @@ def generate_combinations(
     unavailable_probability = 0.2  # Start at 20%
     
     for size in available_sizes:
-        # Check if this size should be unavailable (not visible in shop)
+        # Check if this size should be unavailable
         if random.random() < unavailable_probability:
-            # Size is unavailable - skip creating this combination
+            # Size is unavailable
             # Reset probability back to 20%
             unavailable_probability = 0.2
             continue
         
-        # Size is available - create combination
         quantity = random.randint(1, 10)  
         attribute_id = size_id_map.get(size)
         
@@ -38,7 +36,7 @@ def generate_combinations(
             print(f"Warning: No attribute ID found for size {size}")
             continue
 
-        # Create combination (without quantity - that's set via stock_availables)
+        # Create combination
         data = f"""<?xml version="1.0" encoding="UTF-8"?>
 <prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
     <combination>
@@ -59,7 +57,6 @@ def generate_combinations(
             combination_id = int(response['combination']['id'])
             print(f"Created combination: Size {size} (ID: {combination_id})")
             
-            # Now set stock for this combination
             set_combination_stock(product_id, combination_id, quantity, api_client)
             
         except Exception as e:
@@ -83,7 +80,6 @@ def set_combination_stock(
             f"stock_availables?filter[id_product]={product_id}&filter[id_product_attribute]={combination_id}&display=full"
         )
         
-        # Handle both dict and list responses
         if isinstance(response, dict):
             stock_availables = response.get('stock_availables', [])
         else:
@@ -95,7 +91,7 @@ def set_combination_stock(
         
         stock_id = int(stock_availables[0]['id'])
         
-        # Update stock quantity for this combination
+        # Update stock quantity for combination
         xml_data = f"""<?xml version="1.0" encoding="UTF-8"?>
 <prestashop xmlns:xlink="http://www.w3.org/1999/xlink">
     <stock_available>
