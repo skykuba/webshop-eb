@@ -35,8 +35,10 @@
     <div class="col-md-12">
       <div id="menu_newsletter" class="newsletter_main_page">
         <div class="newsletter_main_page__content">
+          <h1>Dołącz do naszego newslettera</h1>
+          <p style="font-size: 26px;">Bądź na bieżąco i zyskaj 25 zł na pierwsze zakupy</p>
           <a href="{$urls.base_url}content/16-newsletter" class="newsletter_main_page__button">
-            {l s='Subscribe' d='Shop.Theme.Actions'}
+            Zapisz się
           </a>
         </div>
       </div>

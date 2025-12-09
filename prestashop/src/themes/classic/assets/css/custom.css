@@ -267,11 +267,41 @@ header#header {
     z-index: 2;
 }
 
+.newsletter_main_page__content h1 {
+    color: white;
+    margin-bottom: 8px;
+    position: relative;
+    display: inline-block;
+}
+
+.newsletter_main_page__content h1::after {
+    content: "";
+    position: absolute;
+    width: 36px;
+    height: 4px;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgb(227, 84, 32);
+    border-radius: 4px;
+}
+
+.newsletter_main_page__content p {
+    color: white;
+    margin-bottom: 16px;
+    font-size: 16px;
+    padding-top: 20px;
+}
+
+.newsletter_main_page__button a {
+    color: white;
+}
+
 .newsletter_main_page__button {
     display: inline-block;
     padding: 12px 32px;
-    background-color: white;
-    color: #667eea;
+    background-color: rgb(221, 103, 0);
+    color: #ffffff !important;
     text-decoration: none;
     border-radius: 4px;
     font-weight: 600;
@@ -279,10 +309,10 @@ header#header {
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
+    margin-top: 12px;
 }
 
 .newsletter_main_page__button:hover {
-    background-color: #f0f0f0;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     color: #667eea;
@@ -619,7 +649,7 @@ nav[role="navigation"],
 }
 
 .newsletter-container .form-group .email-input {
-    width: 400px;
+    width: 100%;
 }
 
 .newsletter-container .form-group .form-control-feedback {
