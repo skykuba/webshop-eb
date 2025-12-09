@@ -17,7 +17,7 @@ class PrestaShopAPIClient:
         base_url: str = "https://localhost",
         ws_key: Optional[str] = None,
         verify_ssl: bool = False,
-        timeout: int = 10,
+        timeout: int = 30,
     ):
         """
         Initialize PrestaShop API Client
@@ -44,6 +44,19 @@ class PrestaShopAPIClient:
             raise ValueError("API_KEY not found. Set it in .env.dev or pass as argument")
 
         self.ws_key = ws_key
+        
+        # Create persistent session for connection reuse
+        self.session = requests.Session()
+        self.session.verify = self.verify_ssl
+        
+        # Configure connection pooling for better performance
+        adapter = requests.adapters.HTTPAdapter(
+            pool_connections=10,
+            pool_maxsize=10,
+            max_retries=3
+        )
+        self.session.mount('https://', adapter)
+        self.session.mount('http://', adapter)
 
     def _build_url(self, endpoint: str) -> str:
         """Build full URL for endpoint"""
@@ -85,13 +98,12 @@ class PrestaShopAPIClient:
             request_data = data.encode('utf-8')
 
         try:
-            response = requests.request(
+            response = self.session.request(
                 method=method,
                 url=url,
                 data=request_data,
                 params=params,
                 headers=headers,
-                verify=self.verify_ssl,
                 timeout=self.timeout,
             )
             
@@ -142,11 +154,10 @@ class PrestaShopAPIClient:
         try:
             with open(image_path, 'rb') as image_file:
                 files = {'image': image_file}
-                response = requests.post(
+                response = self.session.post(
                     url,
                     files=files,
                     params=params,
-                    verify=self.verify_ssl,
                     timeout=self.timeout
                 )
                 
