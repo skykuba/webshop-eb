@@ -1,6 +1,3 @@
-scraper/data/photos/
-scraper/data/categories.txt
-scraper/data/products.json
 .env.*
 
 nginx/ssl/
