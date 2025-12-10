@@ -924,6 +924,7 @@ class Install extends AbstractInstall
             'ps_shoppingcart',
             'ps_socialfollow',
             'ps_themecusto',
+            'ps_cashondelivery',
             'ps_wirepayment',
             'statsbestcategories',
             'statsbestcustomers',
