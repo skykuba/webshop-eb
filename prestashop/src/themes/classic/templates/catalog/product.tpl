@@ -248,13 +248,6 @@
       {include file='catalog/_partials/product-images-modal.tpl'}
     {/block}
 
-    {block name='page_footer_container'}
-      <footer class="page-footer">
-        {block name='page_footer'}
-          <!-- Footer content -->
-        {/block}
-      </footer>
-    {/block}
   </section>
 
 {/block}

@@ -183,6 +183,7 @@ modules/*
 !modules/ps_mywishlist/
 !modules/ps_wishlistbutton/
 !modules/ps_custom_menu/
+!modules/ps_customtext/
 override/*
 themes/*/
 !themes/classic
