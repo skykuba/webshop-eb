@@ -7,7 +7,7 @@ Sprawdź nasze listy sprzetowe
 <ul class="zakupowe_list">
   <li class="benefit_item">
     <div class="benefit_icon_wrapper">
-      <a href="">
+      <a href="{$cmsLink1}">
         <img height="130" width="130" src="modules/ps_listyzakupowe/views/templates/hook/2_5_i_4104.webp" alt="ikona" class="benefit-icon">
       </a>
     </div>
@@ -18,7 +18,7 @@ Sprawdź nasze listy sprzetowe
   
   <li class="benefit_item">
     <div class="benefit_icon_wrapper">
-      <a href="">
+      <a href="{$cmsLink2}">
         <img height="130" width="130" src="modules/ps_listyzakupowe/views/templates/hook/2_5_i_4105.webp" alt="ikona" class="benefit-icon">
       </a>
     </div>
@@ -26,9 +26,10 @@ Sprawdź nasze listy sprzetowe
       <span class="benefit_headline1 orange"><a href="{$cmsLink2}">Góry</a></span>
     </div>
   </li>
+
   <li class="benefit_item">
     <div class="benefit_icon_wrapper">
-      <a href="">
+      <a href="{$cmsLink3}">
         <img height="130" width="130" src="modules/ps_listyzakupowe/views/templates/hook/2_5_i_4106.webp" alt="ikona" class="benefit-icon">
       </a>
     </div>
@@ -36,9 +37,10 @@ Sprawdź nasze listy sprzetowe
       <span class="benefit_headline1 orange"><a href="{$cmsLink3}">Apteczka</a></span>
     </div>
   </li>
+
   <li class="benefit_item">
     <div class="benefit_icon_wrapper">
-      <a href="">
+      <a href="{$cmsLink4}">
         <img height="130" width="130" src="modules/ps_listyzakupowe/views/templates/hook/2_5_i_4107.webp" alt="ikona" class="benefit-icon">
       </a>
     </div>
@@ -46,9 +48,10 @@ Sprawdź nasze listy sprzetowe
       <span class="benefit_headline1 orange"><a href="{$cmsLink4}">Kajak</a></span>
     </div>
   </li>
+
   <li class="benefit_item">
     <div class="benefit_icon_wrapper">
-      <a href="">
+      <a href="{$cmsLink5}">
         <img height="130" width="130" src="modules/ps_listyzakupowe/views/templates/hook/2_5_i_4108.webp" alt="ikona" class="benefit-icon">
       </a>
     </div>
@@ -56,9 +59,10 @@ Sprawdź nasze listy sprzetowe
       <span class="benefit_headline1 orange"><a href="{$cmsLink5}">Skitury</a></span>
     </div>
   </li>
+
   <li class="benefit_item">
     <div class="benefit_icon_wrapper">
-      <a href="">
+      <a href="{$cmsLink6}">
         <img height="130" width="130" src="modules/ps_listyzakupowe/views/templates/hook/2_5_i_4109.webp" alt="ikona" class="benefit-icon">
       </a>
     </div>
@@ -66,9 +70,10 @@ Sprawdź nasze listy sprzetowe
       <span class="benefit_headline1 orange"><a href="{$cmsLink6}">Narty Zjazdowe</a></span>
     </div>
   </li>
+
   <li class="benefit_item">
     <div class="benefit_icon_wrapper">
-      <a href="">
+      <a href="{$cmsLink6}">
         <img height="130" width="130" src="modules/ps_listyzakupowe/views/templates/hook/2_5_i_4110.webp" alt="ikona" class="benefit-icon">
       </a>
     </div>
@@ -76,9 +81,10 @@ Sprawdź nasze listy sprzetowe
       <span class="benefit_headline1 orange"><a href="{$cmsLink6}">Tropiki</a></span>
     </div>
   </li>
+
   <li class="benefit_item">
     <div class="benefit_icon_wrapper">
-      <a href="">
+      <a href="{$cmsLink7}">
         <img height="130" width="130" src="modules/ps_listyzakupowe/views/templates/hook/2_5_i_4111.webp" alt="ikona" class="benefit-icon">
       </a>
     </div>
@@ -86,9 +92,10 @@ Sprawdź nasze listy sprzetowe
       <span class="benefit_headline1 orange"><a href="{$cmsLink7}">Skały</a></span>
     </div>
   </li>
+
   <li class="benefit_item">
     <div class="benefit_icon_wrapper">
-      <a href="">
+      <a href="{$cmsLink8}">
         <img height="130" width="130" src="modules/ps_listyzakupowe/views/templates/hook/2_5_i_4112.webp" alt="ikona" class="benefit-icon">
       </a>
     </div>
@@ -96,9 +103,10 @@ Sprawdź nasze listy sprzetowe
       <span class="benefit_headline1 orange"><a href="{$cmsLink8}">Camping</a></span>
     </div>
   </li>
+
   <li class="benefit_item">
     <div class="benefit_icon_wrapper">
-      <a href="">
+      <a href="{$cmsLink9}">
         <img height="130" width="130" src="modules/ps_listyzakupowe/views/templates/hook/2_5_i_4113.webp" alt="ikona" class="benefit-icon">
       </a>
     </div>
@@ -195,7 +203,6 @@ ul.zakupowe_list {
 .top_spacer {
   height: 40px; /* wysokość pustego miejsca nad tytułem */
   width: 100%;
-  background: url('ŚCIEŻKA/DO/TŁA.jpg') no-repeat center center;
   background-size: cover;
 }
 

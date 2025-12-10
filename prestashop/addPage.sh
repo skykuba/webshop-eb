@@ -29,6 +29,10 @@ VALUES (
     '<h1>Gwarancja</h1><p>Treść strony dotyczącej gwarancji.</p>',
     'gwarancja'
 );
+-- --------------------------------
+-- LISTY ZAKUPOWE
+
+-- -------------------------------
 
 INSERT INTO ps_cms_shop (id_cms, id_shop)
 VALUES(@last_id,1);
@@ -151,6 +155,71 @@ VALUES
 
 INSERT INTO ps_cms_shop (id_cms, id_shop)
 VALUES(@last_id, 1);
+
+
+
+-- -----------------------------------
+-- LOKALIZACJE SKLEPOW
+
+-- -----------------------------------
+
+INSERT INTO ps_cms (id_cms_category, active, position, indexation)
+VALUES (1, 1, 2, 1);
+
+SET @last_id = LAST_INSERT_ID();
+
+INSERT INTO ps_cms_lang (id_cms, id_lang, meta_title, meta_description, meta_keywords, content, link_rewrite)
+VALUES 
+(@last_id, 1, 'Warszawa', 'lokalizacja Warszawa', 'warszawa', '<h1>warszawa</h1><p>Treść strony o warszawa.</p>', 'warszawa');
+
+INSERT INTO ps_cms_shop (id_cms, id_shop)
+VALUES(@last_id, 1);
+-- -----------------------------------
+
+INSERT INTO ps_cms (id_cms_category, active, position, indexation)
+VALUES (1, 1, 2, 1);
+
+SET @last_id = LAST_INSERT_ID();
+
+INSERT INTO ps_cms_lang (id_cms, id_lang, meta_title, meta_description, meta_keywords, content, link_rewrite)
+VALUES 
+(@last_id, 1, 'Wroclaw', 'Informacje o wroclaw', 'wroclaw', '<h1>wroclaw</h1><p>Treść strony o camino.</p>', 'wroclaw');
+
+INSERT INTO ps_cms_shop (id_cms, id_shop)
+VALUES(@last_id, 1);
+-- -----------------------------------
+
+
+INSERT INTO ps_cms (id_cms_category, active, position, indexation)
+VALUES (1, 1, 2, 1);
+
+SET @last_id = LAST_INSERT_ID();
+
+INSERT INTO ps_cms_lang (id_cms, id_lang, meta_title, meta_description, meta_keywords, content, link_rewrite)
+VALUES 
+(@last_id, 1, 'Gdansk', 'Informacje o camino', 'gdansk', '<h1>gdansk</h1><p>Treść strony o camino.</p>', 'gdansk');
+
+INSERT INTO ps_cms_shop (id_cms, id_shop)
+VALUES(@last_id, 1);
+
+-- -----------------------------------
+-- lista zakupowa
+
+-- -----------------------------------
+
+INSERT INTO ps_cms (id_cms_category, active, position, indexation)
+VALUES (1, 1, 2, 1);
+
+SET @last_id = LAST_INSERT_ID();
+
+INSERT INTO ps_cms_lang (id_cms, id_lang, meta_title, meta_description, meta_keywords, content, link_rewrite)
+VALUES 
+(@last_id, 1, 'Lista-Zakupowa', 'lista-zakupowa', 'lista-zakupowa', '<h1>gdansk</h1><p>Treść strony o camino.</p>', 'lista-zakupowa');
+
+INSERT INTO ps_cms_shop (id_cms, id_shop)
+VALUES(@last_id, 1);
+
+
 EOF
 )
 

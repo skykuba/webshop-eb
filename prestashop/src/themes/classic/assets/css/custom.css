@@ -55,6 +55,7 @@ header#header {
 #header .header-nav {
     background: #ffffff;
     border-bottom: 1px solid #e5e5e5;
+    font-size: 12px !important;  
 }
 
 
@@ -87,8 +88,8 @@ header#header {
 /* Usunięcie ograniczenia kontenera */
 .header-top .container,
 .header-nav .container {
-    max-width: 95% !important;
-    width: 95% !important;
+    max-width: 97% !important;
+    width: 97% !important;
 }
 .header-top .container{
     text-align: center;
@@ -175,8 +176,13 @@ header#header {
     display: flex !important;
     align-items: center !important;
     margin-top: 10px !important;
+    padding-right: 10px !important;
+    margin-right: 10px !important;
 }
-
+.user-info {
+    margin-right: 2px; /* zmniejsza odstęp od kolejnego elementu po prawej */
+    margin-left: 10px !important; /* przesuwa bardziej w lewo */
+}
 #_desktop_cart .blockcart .header {
     display: flex !important;
     align-items: center !important;
@@ -241,6 +247,7 @@ header#header {
 /* Top menu */
 #header .header-nav .top-menu a {
     font-weight: 600;
+    size: 2px;
     color: #333 !important;
 }
 
@@ -276,13 +283,69 @@ header#header {
     border-radius: 10px;
     overflow: hidden;
     margin: 0 auto 32px auto;
-    width: 90%;
-
+    width: 95%;
 }
+
+#carousel,
+#carousel .carousel-inner,
+#carousel .carousel-item,
+#carousel .carousel-item img {
+    height: auto !important;
+    max-height: none !important;
+}
+
+#carousel .carousel-item img {
+    object-fit: contain !important;
+}
+
 
 #carousel .carousel-item img {
     border-radius: 10px;
 }
+
+/* Kontenery nawigacji obejmujące całą wysokość slidera */
+#carousel .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;          /* szerokość kwadratu */
+    height: 50px;         /* wysokość kwadratu */
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 8px;     /* kwadrat */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.25s ease;
+    opacity: 1 !important;
+}
+
+
+#carousel .left.carousel-control {
+    left: -5px;
+}
+
+#carousel .right.carousel-control {
+    right: -10px;
+}
+
+/* Ikony strzałek – czarne */
+#carousel .carousel-control i {
+    color: #000;
+    font-size: 32px;
+}
+
+/* Hover — pełne białe tło */
+#carousel .carousel-control:hover {
+    background: rgb(228, 228, 228, 0.9);
+}
+
+/* Usunięcie Bootstrapowych efektów */
+#carousel .carousel-control:focus,
+#carousel .carousel-control:active {
+    outline: none;
+    box-shadow: none;
+}
+
 
 /* Sekcje */
 h2.h2 {

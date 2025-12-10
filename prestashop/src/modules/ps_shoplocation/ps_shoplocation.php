@@ -26,23 +26,32 @@ class Ps_Shoplocation extends Module
             && $this->registerHook('displayNav2');
     }
 
-    public function hookDisplayNav2($params)
-    {
-        // TU DEFINIUJESZ MIASTA
-        $cities = [
-            'Warszawa',
-            'Kraków',
-            'Poznań',
-            'Wrocław',
-            'Gdańsk',
-            'Łódź',
-            'Szczecin'
-        ];
+public function hookDisplayNav2($params)
+{
+    // Tablica miast z linkami i numerem telefonu
+    $cities = [
+        [
+            'name' => 'Warszawa',
+            'link' => $this->context->link->getCMSLink(16),
+            'phone' => '22 123 45 67'
+        ],
+        [
+            'name' => 'Wrocław',
+            'link' => $this->context->link->getCMSLink(17),
+            'phone' => '71 987 65 43'
+        ],
+        [
+            'name' => 'Gdańsk',
+            'link' => $this->context->link->getCMSLink(18),
+            'phone' => '58 123 45 67'
+        ]
+    ];
 
-        $this->context->smarty->assign([
-            'cities' => $cities
-        ]);
+    $this->context->smarty->assign([
+        'cities' => $cities
+    ]);
 
-        return $this->display(__FILE__, 'displayNav2.tpl');
-    }
+    return $this->display(__FILE__, 'displayNav2.tpl');
+}
+
 }
