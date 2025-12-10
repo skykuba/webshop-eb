@@ -364,3 +364,4 @@ tools/build/releases/*
 
 ## Docker configuration
 install.lock
+!modules/ps_wirepayment/
