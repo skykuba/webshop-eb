@@ -866,6 +866,323 @@ body#authentication .tuttu-auth-login {
   border-right: none !important;  /* usuwa pionową kreskę */
 }
 
+/*************************************************
+ * PRODUCT PAGE – TUTTU LAYOUT
+ *************************************************/
 
+body#product {
+  background: #f8f9fa;
+}
 
+/* główny wrapper strony produktu */
+body#product .tuttu-product-main {
+  max-width: 1300px;
+  width: 95%;
+  margin: 30px auto 70px;
+}
 
+/* układ dwóch kolumn */
+body#product .tuttu-product-main-row {
+  align-items: flex-start;
+}
+
+/* lewa kolumna (galeria) trochę szerzej */
+body#product .tuttu-product-main-row .tuttu-product-gallery {
+  flex: 0 0 55%;
+  max-width: 55%;
+}
+
+/* prawa kolumna (buy-box) */
+body#product .tuttu-product-main-row .tuttu-product-info {
+  flex: 0 0 45%;
+  max-width: 45%;
+}
+
+/* karta ze zdjęciem */
+body#product .tuttu-product-gallery-inner {
+  background: #ffffff;
+  padding: 30px 30px 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+/* pasek gwarancji pod zdjęciem */
+body#product .tuttu-product-reassurance {
+  margin-top: 20px;
+}
+
+/* karta po prawej */
+body#product .tuttu-product-info-inner {
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+/* brand + nazwa produktu */
+body#product .tuttu-product-brand {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+body#product .tuttu-product-name {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* kod produktu pod nazwą */
+body#product .tuttu-product-ref {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 12px;
+}
+
+body#product .tuttu-product-ref span {
+  font-weight: 600;
+}
+
+/* ceny */
+body#product .tuttu-product-prices {
+  margin: 10px 0 18px;
+}
+
+/* krótki opis */
+body#product .tuttu-product-short {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 18px;
+}
+
+/* formularz zakupu */
+body#product .tuttu-product-actions {
+  margin-top: 10px;
+}
+
+/* główny przycisk DO KOSZYKA – jak na TUTTU */
+body#product .tuttu-product-atc .btn.add-to-cart {
+  display: block;
+  width: 100%;
+  background-color: #f16522;
+  border-color: #f16522;
+  border-radius: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 12px 24px;
+}
+
+body#product .tuttu-product-atc .btn.add-to-cart:hover {
+  background-color: #d95517;
+  border-color: #d95517;
+}
+
+/* dodatkowe info (dostępność, wysyłka itd.) */
+body#product .tuttu-product-additional {
+  margin-top: 18px;
+  font-size: 13px;
+}
+
+/* TABY (opis, szczegóły, załączniki) pod całym boxem */
+body#product .tuttu-product-tabs {
+  margin-top: 40px;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  padding: 24px 32px;
+}
+
+/* RWD – na telefonie kolumny jedna pod drugą */
+@media (max-width: 991px) {
+  body#product .tuttu-product-main-row .tuttu-product-gallery,
+  body#product .tuttu-product-main-row .tuttu-product-info {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  body#product .tuttu-product-info-inner {
+    margin-top: 24px;
+  }
+}
+/**********************************************
+ *  PRODUCT PAGE – UKŁAD JAK NA TUTTU
+ **********************************************/
+
+/* id="product" jest na body tylko na stronie produktu */
+body#product {
+  background: #f8f9fa;
+}
+
+/* zawężamy całą kolumnę do rozsądnej szerokości */
+body#product #main .product-container {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+}
+
+/* =========================
+   GALERIA – MINIATURKI Z LEWEJ
+   ========================= */
+
+body#product .images-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* duże zdjęcie po prawej */
+body#product .images-container .product-cover {
+  order: 2;
+  flex: 1 1 auto;
+}
+
+/* pasek z miniaturkami po lewej */
+body#product .images-container .js-qv-mask {
+  order: 1;
+  flex: 0 0 90px;
+  margin-right: 24px;
+}
+
+body#product .images-container .js-qv-product-images {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* usuwamy niepotrzebny margines miniatur */
+body#product .images-container .thumb-container {
+  margin: 0;
+}
+
+/* miniatury w kolumnie */
+body#product .images-container .product-images > li img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+/* strzałki scrolla miniatur niepotrzebne */
+body#product .scroll-box-arrows {
+  display: none;
+}
+
+/* =========================
+   PRAWA KOLUMNA – CENA POD ROZMIARÓWKĄ
+   ========================= */
+
+body#product .tuttu-product-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* trochę ciaśniej między polami */
+body#product .product-variants {
+  margin-bottom: 10px;
+}
+
+/* cena tuż pod wariantami */
+body#product .product-prices {
+  margin: 6px 0 16px;
+}
+
+/* opis pod ceną trochę mniejszy */
+body#product .product-description {
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* =========================
+   PRZYCISKI – DODAJ DO KOSZYKA + KUP TERAZ
+   ========================= */
+
+/* główny przycisk "Dodaj do koszyka" */
+body#product .product-actions .add-to-cart {
+  width: 100%;
+  border-radius: 28px;
+  background-color: #f16522;
+  border-color: #f16522;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 14px 20px;
+}
+
+body#product .product-actions .add-to-cart:hover,
+body#product .product-actions .add-to-cart:focus {
+  background-color: #d95517;
+  border-color: #d95517;
+}
+
+/* dodatkowy guzik "Kup teraz" */
+body#product .tuttu-btn-buy-now {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 28px;
+  background-color: #ff8a30;
+  border-color: #ff8a30;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 14px 20px;
+}
+
+body#product .tuttu-btn-buy-now:hover,
+body#product .tuttu-btn-buy-now:focus {
+  background-color: #f06b07;
+  border-color: #f06b07;
+}
+
+/* trochę luzu pod przyciskami */
+body#product .product-additional-info {
+  margin-top: 12px;
+}
+
+/* break-point – na telefonach wracamy do układu pionowego */
+@media (max-width: 991px) {
+  body#product .images-container {
+    flex-direction: column;
+  }
+
+  body#product .images-container .js-qv-mask {
+    order: 2;
+    flex: 0 0 auto;
+    margin: 10px 0 0;
+  }
+
+  body#product .images-container .js-qv-product-images {
+    flex-direction: row;
+  }
+}
+/* Pomarańczowy przycisk "Dodaj do koszyka" */
+.product-add-to-cart .btn.add-to-cart,
+.product-add-to-cart .btn.add-to-cart:focus,
+.product-add-to-cart .btn.add-to-cart:hover {
+  background-color: #f3611c;   /* pomarańcz jak na tuttu.pl */
+  border-color: #f3611c;
+}
+
+/* jeśli masz gdzieś jeszcze zielony btn-primary na produkcie */
+#product .btn.btn-primary.add-to-cart {
+  background-color: #f3611c;
+  border-color: #f3611c;
+}
+/* PRZYCISK "DODAJ DO KOSZYKA" – POMARAŃCZOWY JAK NA TUTTU */
+body .product-actions .add-to-cart,
+body .product-add-to-cart .add-to-cart,
+body .btn.btn-primary.add-to-cart,
+body button[name="add"],
+body button[data-button-action="add-to-cart"] {
+    background-color: #ff7a1a !important;
+    border-color: #ff7a1a !important;
+    color: #ffffff !important;
+}
+
+/* HOVER */
+body .product-actions .add-to-cart:hover,
+body .product-add-to-cart .add-to-cart:hover,
+body .btn.btn-primary.add-to-cart:hover,
+body button[name="add"]:hover,
+body button[data-button-action="add-to-cart"]:hover {
+    background-color: #e86a11 !important;
+    border-color: #e86a11 !important;
+    color: #ffffff !important;
+}
