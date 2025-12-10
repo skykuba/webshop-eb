@@ -34,7 +34,7 @@ class Ps_wishlistbutton extends Module
         );
         
         // link do CMS w metodzie, w kontekście
-        $idCms = 6; // ID strony CMS
+        $idCms = 19; // ID strony CMS
         $linkCms = $this->context->link->getCMSLink($idCms);
 
         // przekazanie do tpl

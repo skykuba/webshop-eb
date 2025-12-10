@@ -2,33 +2,41 @@
 
   <div class="wishlistbutton-trigger">
       <a href="{$cmsLink}">
-      <i class="material-icons" aria-hidden="true">favorite</i>
-      <span>listy zakupowe</span>
+        <i class="material-icons" aria-hidden="true">favorite</i>
+        <span>listy zakupowe</span>
+         <i class="material-icons dropdown-arrow" aria-hidden="true">arrow_drop_down</i>
       </a>
+  </div>
+
+  <div class="wishlistbutton-dropdown">
+      <div class="wishlist-info">
+          Dodaj do nich swoje produkty, które chcesz kupić później
+      </div>
   </div>
 
 </div>
 
+
 <style>
+
 /* wrapper jak koszyk */
 .wishlistbutton-wrapper {
-    margin-top: 25px;
-    display: flex !important;
-    align-items: center !important;
-    border-radius: 4px;
-    cursor: pointer;
     position: relative;
+    display: inline-block;
+    margin-top: 30px;
+
 }
 
-/* trigger jak nagłówek koszyka */
-.wishlistbutton-trigger {
+/* trigger */
+.wishlistbutton-trigger a {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 6px;
     color: #333;
+    text-decoration: none;
 }
 
-.wishlistbutton-trigger:hover {
+.wishlistbutton-trigger a:hover {
     color: rgb(255, 136, 0) !important;
 }
 
@@ -36,51 +44,28 @@
 .wishlistbutton-dropdown {
     display: none;
     position: absolute;
-    right: 0;
-    top: 100%;
+    left: 0;
+    top: calc(100% + 5px);
+    width: 260px;
     background: #fff;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 8px 0;
-    width: 200px;
+    border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 12px 14px;
     z-index: 9999;
 }
 
-/* lista elementów */
-.wishlistbutton-dropdown ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+/* pokazanie dropdownu po hover */
+.wishlistbutton-wrapper:hover .wishlistbutton-dropdown {
+    display: block;
 }
 
-.wishlistbutton-dropdown li {
-    padding: 8px 15px;
-    font-weight: 600;
+/* tekst w dropdownie */
+.wishlist-info {
+    font-size: 13px;
+    font-weight: 500;
+    color: #333;
+    line-height: 1.4;
 }
 
-.wishlistbutton-dropdown li:hover {
-    background: #f5f5f5;
-    cursor: pointer;
-}   
 </style>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    const trigger = document.querySelector('.wishlistbutton-trigger');
-    const dropdown = document.querySelector('.wishlistbutton-dropdown');
-
-    trigger.addEventListener('click', function() {
-        dropdown.style.display =
-            dropdown.style.display === 'block' ? 'none' : 'block';
-    });
-
-    // klik poza dropdown zamyka
-    document.addEventListener('click', function(e) {
-        if (!trigger.contains(e.target) && !dropdown.contains(e.target)) {
-            dropdown.style.display = 'none';
-        }
-    });
-});
-</script>
-

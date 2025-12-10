@@ -30,7 +30,7 @@ VALUES (
     'gwarancja'
 );
 -- --------------------------------
-LISTY ZAKUPOWE
+-- LISTY ZAKUPOWE
 
 -- -------------------------------
 
@@ -159,7 +159,7 @@ VALUES(@last_id, 1);
 
 
 -- -----------------------------------
-LOKALIZACJE SKLEPOW
+-- LOKALIZACJE SKLEPOW
 
 -- -----------------------------------
 
@@ -202,6 +202,22 @@ VALUES
 INSERT INTO ps_cms_shop (id_cms, id_shop)
 VALUES(@last_id, 1);
 
+-- -----------------------------------
+-- lista zakupowa
+
+-- -----------------------------------
+
+INSERT INTO ps_cms (id_cms_category, active, position, indexation)
+VALUES (1, 1, 2, 1);
+
+SET @last_id = LAST_INSERT_ID();
+
+INSERT INTO ps_cms_lang (id_cms, id_lang, meta_title, meta_description, meta_keywords, content, link_rewrite)
+VALUES 
+(@last_id, 1, 'Lista-Zakupowa', 'lista-zakupowa', 'lista-zakupowa', '<h1>gdansk</h1><p>Treść strony o camino.</p>', 'lista-zakupowa');
+
+INSERT INTO ps_cms_shop (id_cms, id_shop)
+VALUES(@last_id, 1);
 
 
 EOF

@@ -203,7 +203,6 @@ ul.zakupowe_list {
 .top_spacer {
   height: 40px; /* wysokość pustego miejsca nad tytułem */
   width: 100%;
-  background: url('ŚCIEŻKA/DO/TŁA.jpg') no-repeat center center;
   background-size: cover;
 }
 

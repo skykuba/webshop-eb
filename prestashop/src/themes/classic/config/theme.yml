@@ -81,6 +81,7 @@ global_settings:
       displayHome:
         - ps_imageslider
         - ps_tuttubenefits
+        - ps_custom_menu
         - ps_featuredproducts
         - ps_listyzakupowe
         - ps_banner
@@ -109,6 +110,8 @@ global_settings:
         - ps_featuredproducts
       displayProductActions:
         - blockwishlist
+      displayMyWishlist:
+        - ps_mywishlist
   
   image_types:
     cart_default:

@@ -88,8 +88,8 @@ header#header {
 /* Usunięcie ograniczenia kontenera */
 .header-top .container,
 .header-nav .container {
-    max-width: 95% !important;
-    width: 95% !important;
+    max-width: 97% !important;
+    width: 97% !important;
 }
 .header-top .container{
     text-align: center;
