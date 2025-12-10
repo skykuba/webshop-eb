@@ -165,7 +165,7 @@ header#header {
 .search-bar-wrapper {
     margin-top: 10px;
     width: 100%;
-    max-width: 600px; 
+    max-width: 600px;
 }
 
 /*shopping cart*/
@@ -231,7 +231,7 @@ header#header {
     font-size: 40px;         /* większa strzałka */
     vertical-align: middle;  /* wyrównanie do środka ikony/tekstu */
     display: inline-block;
-    color: #333;   
+    color: #333;
     vertical-align: middle;   /* można zostawić lub zmienić */
     transform: translateY(-8px);          /* kolor strzałki */
 }
@@ -451,3 +451,421 @@ nav[role="navigation"],
     background-image: none !important;
     outline: none !important;
 }
+
+.tuttu-auth {
+  margin-top: 40px;
+}
+
+.tuttu-auth__inner {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.tuttu-auth__column {
+  flex: 1;
+}
+
+.tuttu-auth__column--left {
+  max-width: 650px;
+}
+
+.tuttu-auth__heading {
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+
+.tuttu-auth__social {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.tuttu-social-btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 18px;
+}
+
+.tuttu-auth__or {
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+}
+
+.tuttu-auth__or::before,
+.tuttu-auth__or::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+}
+
+.tuttu-auth__or span {
+  margin: 0 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+}
+
+.tuttu-auth__reg-heading {
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.tuttu-auth__reg-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 28px;
+  border-radius: 4px;
+  background: #f47216; /* pomarańcz jak na tuttu */
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+/* Kontener całej strony logowania */
+.page-authentication-tuttu .auth-container {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 40px 15px 80px;
+}
+
+/* Nagłówek „Logowanie” */
+.page-authentication-tuttu .auth-main-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+/* Układ 2 kolumn */
+.page-authentication-tuttu .auth-layout {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* Lewa kolumna – logowanie */
+.page-authentication-tuttu .auth-left {
+  flex: 2;
+}
+
+/* Prawa kolumna – rejestracja */
+.page-authentication-tuttu .auth-right {
+  flex: 1;
+  padding: 30px 0 0 40px;
+  border-left: 1px solid #e5e5e5;
+}
+
+/* Tytuł „Rejestracja” */
+.page-authentication-tuttu .auth-right-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+/* Tekst rejestracji */
+.page-authentication-tuttu .auth-right-text {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* Przycisk „Załóż nowe konto” */
+.page-authentication-tuttu .auth-register-btn {
+  padding: 14px 35px;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 0;
+}
+
+/* Wiersz z social login (wizualnie jak na Tuttu) */
+.page-authentication-tuttu .auth-social-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.page-authentication-tuttu .auth-social-btn {
+  flex: 1;
+  height: 52px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Separator „LUB” */
+.page-authentication-tuttu .auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.page-authentication-tuttu .auth-divider::before,
+.page-authentication-tuttu .auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e5e5e5;
+}
+
+.page-authentication-tuttu .auth-divider span {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* Formularz logowania – szerokie pola jak na Tuttu */
+.page-authentication-tuttu .auth-login-form form {
+  max-width: 600px;
+}
+
+.page-authentication-tuttu .auth-login-form .form-group {
+  margin-bottom: 18px;
+}
+
+.page-authentication-tuttu .auth-login-form input[type="email"],
+.page-authentication-tuttu .auth-login-form input[type="text"],
+.page-authentication-tuttu .auth-login-form input[type="password"] {
+  height: 54px;
+  font-size: 15px;
+}
+
+/* Przycisk „Zaloguj się” */
+.page-authentication-tuttu .auth-login-form button,
+.page-authentication-tuttu .auth-login-form .btn {
+  padding: 14px 60px;
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 0;
+}
+
+/* Link „Nie pamiętam hasła” – poniżej przycisku */
+.page-authentication-tuttu .auth-login-form .forgotten-password {
+  display: block;
+  margin-top: 15px;
+}
+
+/* RWD – pod telefonami kolumny jedna pod drugą */
+@media (max-width: 991px) {
+  .page-authentication-tuttu .auth-layout {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .page-authentication-tuttu .auth-right {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid #e5e5e5;
+    padding-top: 30px;
+  }
+}
+
+/* Główne pudełko */
+.tuttu-auth-box {
+  display: flex;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 40px 60px;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+/* Lewa i prawa kolumna */
+.tuttu-auth-login {
+  flex: 0 0 60%;
+  padding-right: 40px;
+  border-right: 1px solid #e5e5e5;
+}
+
+.tuttu-auth-register {
+  flex: 0 0 40%;
+  padding-left: 40px;
+}
+
+/* Tytuły */
+.tuttu-auth-title {
+  font-size: 26px;
+  margin-bottom: 25px;
+}
+
+/* SOCIAL */
+.tuttu-auth-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.tuttu-auth-social-btn {
+  flex: 1;
+  height: 54px;
+  border-radius: 6px;
+  border: 1px solid #dadada;
+  background: #ffffff;
+  font-size: 20px;
+}
+
+/* separator „LUB” */
+.tuttu-auth-separator {
+  margin: 25px 0;
+  text-align: center;
+  position: relative;
+}
+
+.tuttu-auth-separator::before,
+.tuttu-auth-separator::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background: #e5e5e5;
+}
+
+.tuttu-auth-separator::before {
+  left: 0;
+}
+
+.tuttu-auth-separator::after {
+  right: 0;
+}
+
+.tuttu-auth-separator span {
+  padding: 0 10px;
+  font-size: 13px;
+  color: #777;
+}
+
+/* Pola login/hasło */
+.tuttu-login-form .form-group {
+  margin-bottom: 15px;
+}
+
+.tuttu-login-form .tuttu-input {
+  height: 56px;
+  border-radius: 6px;
+  border: 1px solid #dadada;
+  box-shadow: none;
+}
+
+/* Link „Nie pamiętam…” */
+.tuttu-auth-forgot a {
+  font-size: 13px;
+  text-decoration: underline;
+  color: #444;
+}
+
+/* POMARAŃCZOWE, ZAOKRĄGLONE PRZYCISKI */
+.tuttu-btn-orange {
+  background-color: #f16522;   /* pomarańczowy */
+  border-color: #f16522;
+  color: #fff;
+  border-radius: 28px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 14px 40px;
+}
+
+.tuttu-btn-orange:hover,
+.tuttu-btn-orange:focus {
+  background-color: #d95517;
+  border-color: #d95517;
+  color: #fff;
+}
+
+/* szerokość przycisku logowania jak na TUTTU */
+.tuttu-btn-login {
+  display: block;
+  width: 260px;
+  margin: 20px auto 0;
+}
+
+/* przycisk rejestracji po prawej */
+.tuttu-btn-register {
+  display: inline-block;
+  margin-top: 40px;
+}
+
+/* --- POPRAWKA: żeby blok logowania mieścił się na ekranie --- */
+
+/* mniejsze, bardziej kompaktowe pudełko */
+.page-authentication-tuttu .tuttu-auth-box {
+  max-width: 960px;          /* było 1100px */
+  margin: 30px auto 50px;    /* mniej odstępów góra/dół */
+  padding: 30px 40px;        /* mniejsze paddingi */
+}
+
+/* trochę węższe kolumny i mniejsze odstępy */
+.page-authentication-tuttu .tuttu-auth-login {
+  flex: 0 0 55%;
+  padding-right: 30px;
+}
+
+.page-authentication-tuttu .tuttu-auth-register {
+  flex: 0 0 45%;
+  padding-left: 30px;
+}
+
+/* zmniejszamy trochę wysokość pól i odstępy,
+   żeby całość była niższa */
+.page-authentication-tuttu .tuttu-login-form .tuttu-input {
+  height: 50px;
+}
+
+.page-authentication-tuttu .tuttu-auth-title {
+  font-size: 24px;
+  margin-bottom: 18px;
+}
+
+.page-authentication-tuttu .tuttu-auth-separator {
+  margin: 18px 0;
+}
+
+.page-authentication-tuttu .tuttu-btn-login {
+  margin-top: 15px;
+}
+
+/* RWD – na węższych ekranach jedna kolumna pod drugą
+   i jeszcze mniej paddingów, żeby wszystko się mieściło */
+@media (max-width: 991px) {
+  .page-authentication-tuttu .tuttu-auth-box {
+    flex-direction: column;
+    padding: 20px 15px;
+    margin: 20px auto 30px;
+  }
+
+  .page-authentication-tuttu .tuttu-auth-login,
+  .page-authentication-tuttu .tuttu-auth-register {
+    flex: 0 0 100%;
+    padding: 0;
+    border-right: none;
+  }
+
+  .page-authentication-tuttu .tuttu-auth-register {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .page-authentication-tuttu .tuttu-btn-login {
+    width: 100%;
+  }
+}
+/* 1. Schowanie newslettera i stopki TYLKO na stronie logowania */
+body#authentication .block_newsletter,
+body#authentication #footer,
+body#authentication .footer-container,
+body#authentication .page-footer {
+  display: none !important;
+}
+
+
+body#authentication .tuttu-auth-login {
+  border-right: none !important;  /* usuwa pionową kreskę */
+}
+
+
+
+
