@@ -166,9 +166,8 @@ INSERT INTO ps_cms (id_cms_category, active, position, indexation)
 VALUES (1, 1, 2, 1);
 
 SET @last_id = LAST_INSERT_ID();
-
-INSERT INTO ps_cms_shop (id_cms, id_shop)
-VALUES(@last_id, 1);
+INSERT INTO ps_cms_lang (id_cms, id_lang, meta_title, meta_description, meta_keywords, content, link_rewrite)
+VALUES 
 (@last_id, 1, 'Warszawa', 'lokalizacja Warszawa', 'warszawa', '<h1>warszawa</h1><p>Treść strony o warszawa.</p>', 'warszawa');
 
 INSERT INTO ps_cms_shop (id_cms, id_shop)
