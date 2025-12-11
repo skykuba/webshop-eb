@@ -1,4 +1,5 @@
-{**
+<?php
+/**
  * Copyright since 2007 PrestaShop SA and Contributors
  * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
  *
@@ -21,30 +22,35 @@
  * @author    PrestaShop SA and Contributors <contact@prestashop.com>
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
- *}
-{extends file=$layout}
+ */
+if (!defined('_PS_VERSION_')) {
+    exit;
+}
 
-{block name='content'}
+/**
+ * Upgrade the Ps_Customtext module to V3.0.0
+ *
+ * @param Ps_Customtext $module
+ *
+ * @return bool
+ */
+function upgrade_module_3_0_0($module)
+{
+    require_once _PS_MODULE_DIR_ . $module->name . '/classes/MigrateData.php';
+    $migration = new MigrateData();
 
-  <section id="main">
+    $return = true;
 
-    {block name='page_header_container'}
-      {block name='page_title' hide}
-        <header class="page-header">
-          <h1>{$smarty.block.child}</h1>
-        </header>
-      {/block}
-    {/block}
+    $migration->retrieveOldData();
+    $return &= $module->uninstallDB();
 
-    {block name='page_content_container'}
-      <div id="content" class="page-content card card-block">
-        {block name='page_content_top'}{/block}
-        {block name='page_content'}
-          <!-- Page content -->
-        {/block}
-      </div>
-    {/block}
+    /* Register the hook responsible for adding custom text when adding a new store */
+    $return &= $module->registerHook('actionShopDataDuplication');
 
-  </section>
+    $return &= $module->installDB();
 
-{/block}
+    /* Reset DB data */
+    $return &= $migration->insertData();
+
+    return (bool) $return;
+}
