@@ -315,7 +315,6 @@ header#header {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: background 0.25s ease;
     opacity: 1 !important;
 }
 
@@ -513,9 +512,6 @@ nav[role="navigation"],
     background: transparent !important;
     background-image: none !important;
     outline: none !important;
-<<<<<<< Updated upstream
-}
-=======
 }
 
 /* ------------------------------------------------------- */
@@ -750,4 +746,3 @@ nav[role="navigation"],
     object-fit: cover;
     border-radius: 8px;
 }
->>>>>>> Stashed changes
