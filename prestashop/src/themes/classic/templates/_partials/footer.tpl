@@ -22,13 +22,31 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
+
+  {if $page.page_name === 'index'}
 <div class="container">
   <div class="row">
     {block name='hook_footer_before'}
       {hook h='displayFooterBefore'}
     {/block}
   </div>
+  <!-- Newsletter - only on homepage -->
+  <div class="row">
+    <div class="col-md-12">
+      <div id="menu_newsletter" class="newsletter_main_page">
+        <div class="newsletter_main_page__content">
+          <h1>Dołącz do naszego newslettera</h1>
+          <p style="font-size: 26px;">Bądź na bieżąco i zyskaj 25 zł na pierwsze zakupy</p>
+          <a href="{$urls.base_url}content/20-newsletter" class="newsletter_main_page__button">
+            Zapisz się
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+  {/if}
+
 <div class="footer-container">
   <div class="container">
     <div class="row">
