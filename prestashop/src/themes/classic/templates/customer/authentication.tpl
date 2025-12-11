@@ -1,7 +1,7 @@
 {extends file='page.tpl'}
 
 {block name='page_title'}
-  {l s='Logowanie' d='Shop.Theme.CustomerAccount'}
+  {l s='Log in to your account' d='Shop.Theme.Customeraccount'}
 {/block}
 
 {block name='page_content'}
@@ -10,9 +10,11 @@
 
     {* LEWA KOLUMNA – LOGOWANIE *}
     <div class="tuttu-auth-login">
-      <h1 class="tuttu-auth-title">Logowanie</h1>
+      <h1 class="tuttu-auth-title">
+        {l s='Logowanie' d='Shop.Theme.Customeraccount'}
+      </h1>
 
-      {* Ikony social (na razie tylko „atrappa”) *}
+      {* Ikony social (dekoracja) *}
       <div class="tuttu-auth-socials">
         <button type="button" class="tuttu-auth-social-btn">G</button>
         <button type="button" class="tuttu-auth-social-btn">f</button>
@@ -24,56 +26,27 @@
         <span>LUB</span>
       </div>
 
-      {* WŁAŚCIWY FORMULARZ LOGOWANIA *}
-      <form id="login-form"
-            class="tuttu-login-form"
-            action="{$urls.pages.authentication}"
-            method="post">
-        <input type="hidden" name="back" value="{$back}">
-        <input type="hidden" name="submitLogin" value="1">
+      {* TU WSTAWIAMY PRAWDZIWY FORMULARZ PRESTASHOP *}
+      <div class="tuttu-login-form-wrapper">
+        {render file='customer/_partials/login-form.tpl' ui=$login_form}
+      </div>
 
-        <div class="form-group">
-          <input
-            class="form-control tuttu-input"
-            type="text"
-            name="email"
-            value="{$email}"
-            placeholder="Login / Nr karty stałego klienta / E-mail"
-          >
-        </div>
-
-        <div class="form-group">
-          <input
-            class="form-control tuttu-input"
-            type="password"
-            name="password"
-            placeholder="Hasło / Pin karty stałego klienta"
-          >
-        </div>
-
-
-
-        <button class="btn tuttu-btn-orange tuttu-btn-login" type="submit">
-          ZALOGUJ SIĘ
-        </button>
-
-        <div class="tuttu-auth-forgot text-center">
-                  <a href="{$urls.pages.password}">
-                    Nie pamiętam loginu lub hasła
-                  </a>
-        </div>
-      </form>
+      {block name='display_after_login_form'}
+        {hook h='displayCustomerLoginFormAfter'}
+      {/block}
     </div>
 
     {* PRAWA KOLUMNA – REJESTRACJA *}
     <div class="tuttu-auth-register">
-      <h2 class="tuttu-auth-title">Rejestracja</h2>
+      <h2 class="tuttu-auth-title">
+        {l s='Rejestracja' d='Shop.Theme.Customeraccount'}
+      </h2>
       <p>
         Jeżeli wcześniej nie zakładałeś konta w naszym sklepie,
         zostaniesz poproszony o podanie swoich danych i adresu dostawy.
       </p>
 
-      <a href="{$urls.pages.registration}"
+      <a href="{$urls.pages.register}"
          class="btn tuttu-btn-orange tuttu-btn-register">
         ZAŁÓŻ NOWE KONTO
       </a>
