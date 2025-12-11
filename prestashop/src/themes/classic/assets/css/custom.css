@@ -881,3 +881,117 @@ nav[role="navigation"],
     object-fit: cover;
     border-radius: 8px;
 }
+
+
+.product-flag.new {
+    display: none !important;
+}
+
+.product-flags {
+    top: 10px !important;
+    left: auto !important;
+    right: 10px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.product-flag.discount {
+    background: #ff5c2b !important; /* ładny pomarańcz */
+    color: #fff !important;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.wishlist-button-add {
+    display: none !important;
+}
+
+.thumbnail-container {
+    border: 1px solid #e9e9e9;
+    border-radius: 10px;
+    padding: 15px;
+    background: #fff;
+    position: relative;
+}
+
+.thumbnail-container .thumbnail-top {
+    margin-bottom: 10px;
+}
+
+.product-description {
+    text-align: center;
+}
+
+.product-title a {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.product-price-and-shipping .price {
+    color: #d9534f !important; /* czerwony jak na screenie */
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.quick-view,
+.variant-links {
+    display: none !important;
+}
+
+/* Kontener z flagami – ustawiony po prawej */
+.thumbnail-container .product-flags {
+    position: absolute !important;
+    top: 10px;
+    right: 10px;
+    left: auto !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+    pointer-events: none;
+}
+
+/* Styl zniżki */
+.product-flag.discount {
+    background: #ff5c2b !important;
+    color: #fff !important;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    pointer-events: auto;
+}
+
+
+
+/* Wyłącz ciemny pasek z przyciskami */
+.thumbnail-container .highlighted-informations {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: none !important;
+}
+
+/* Nie pokazuj nic po hover */
+.thumbnail-container:hover .highlighted-informations {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    transform: none !important;
+}
+
+/* Wyłącz animację obrazka po hover (powiększanie itp.) */
+.thumbnail-container img {
+    transform: none !important;
+    transition: none !important;
+}
+
+.thumbnail-container:hover img {
+    transform: none !important;
+}
+
+
+/* Ukryj Quick View na stałe */
+.thumbnail-container .quick-view {
+    display: none !important;
+}
