@@ -13,6 +13,7 @@ from config import (
     SIZE_CATEGORIES,
     CATEGORIES_FILE,
     INPUT_DATA_FILE,
+    INPUT_TEST_DATA_FILE,
     OUTPUT_DATA_FILE,
     PHOTOS_OUTPUT_DIR
 )
@@ -64,37 +65,68 @@ def main() -> None:
     prepared_products = []
     discount_chance = 0.10  # chance for discount
     
-    for i, product in enumerate(filtered_products, 1):
+    # Load and process test products first
+    print("\n[5a/8] Processing test products with fixed quantity...")
+    test_products = load_products(INPUT_TEST_DATA_FILE)
+    test_filtered_products = filter_products(test_products, WANTED_SUBCATEGORIES)
+    print(f"Loaded {len(test_filtered_products)} test products")
+    
+    for i, product in enumerate(test_filtered_products, 1):
         product_name = product.get('name', 'Unknown')
+        print(f"\n--- Processing TEST product {i}/{len(test_filtered_products)}: {product_name} ---")
         
-        print(f"\n--- Processing product {i}/{len(filtered_products)}: {product_name} ---")
-        
-        # Prepare product data
         prepared = prepare_product_data(product, category_id_map)
         product_id = post_product(prepared, api_client)
         
         if product_id > 0:
-            # Apply random discount
             if random.random() < discount_chance:
                 apply_discount(product_id, api_client=api_client)
             
             if product.get('category') in SIZE_CATEGORIES:
-                generate_combinations(product_id, size_id_map, api_client)
+                # For test products: fixed quantity, if_random_quantity=False
+                generate_combinations(product_id, size_id_map, api_client, if_random_quantity=False)
             else:
-                if random.random() < 0.05:
-                    quantity = 0  # Out of stock
-                else:
-                    quantity = random.randint(3, 10)
-                set_product_stock(product_id, quantity, api_client, is_sized=False)
+                # For test products: fixed quantity = 10
+                set_product_stock(product_id, 10, api_client, is_sized=False)
             
             photos = save_product_photos(product, PHOTOS_OUTPUT_DIR)
             post_photos(product_id, photos, api_client)
         
         prepared_products.append(prepared)
     
+    # Process regular filtered products
+    print("\n[5b/8] Processing regular products...")
+    # for i, product in enumerate(filtered_products, 1):
+    #     product_name = product.get('name', 'Unknown')
+        
+    #     print(f"\n--- Processing product {i}/{len(filtered_products)}: {product_name} ---")
+        
+    #     # Prepare product data
+    #     prepared = prepare_product_data(product, category_id_map)
+    #     product_id = post_product(prepared, api_client)
+        
+    #     if product_id > 0:
+    #         # Apply random discount
+    #         if random.random() < discount_chance:
+    #             apply_discount(product_id, api_client=api_client)
+            
+    #         if product.get('category') in SIZE_CATEGORIES:
+    #             generate_combinations(product_id, size_id_map, api_client)
+    #         else:
+    #             if random.random() < 0.10:
+    #                 quantity = 0  # Out of stock
+    #             else:
+    #                 quantity = random.randint(3, 10)
+    #             set_product_stock(product_id, quantity, api_client, is_sized=False)
+            
+    #         photos = save_product_photos(product, PHOTOS_OUTPUT_DIR)
+    #         post_photos(product_id, photos, api_client)
+        
+    #     prepared_products.append(prepared)
+    
     # Save prepared data
-    print("\n[8/8] Saving prepared data to JSON...")
-    save_prepared_data(prepared_products, OUTPUT_DATA_FILE)
+    # print("\n[8/8] Saving prepared data to JSON...")
+    # save_prepared_data(prepared_products, OUTPUT_DATA_FILE)
     
     print("\n" + "=" * 80)
     print(f"Total products processed: {len(prepared_products)}")

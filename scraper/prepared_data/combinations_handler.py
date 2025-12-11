@@ -10,6 +10,7 @@ def generate_combinations(
     product_id: int,
     size_id_map: Dict[int, int],
     api_client: PrestaShopAPIClient,
+    if_random_quantity: bool = True,
     available_sizes: Optional[List[int]] = None
 ) -> None:
     """ Generate and post size combinations for a product. """
@@ -28,8 +29,10 @@ def generate_combinations(
             # Reset probability back to 20%
             unavailable_probability = 0.2
             continue
-        
-        quantity = random.randint(1, 10)  
+        if if_random_quantity:
+            quantity = random.randint(1, 10)
+        else:
+            quantity = 10
         attribute_id = size_id_map.get(size)
         
         if attribute_id is None:
