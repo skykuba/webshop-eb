@@ -1186,3 +1186,21 @@ body button[data-button-action="add-to-cart"]:hover {
     border-color: #e86a11 !important;
     color: #ffffff !important;
 }
+/* Podgląd zdjęcia produktu – schowaj miniatury po prawej */
+#product-modal .modal-body-aside {
+  display: none;
+}
+
+/* Niech główne zdjęcie wykorzysta całą szerokość modału */
+#product-modal .modal-dialog {
+  max-width: 900px; /* możesz zmienić */
+}
+
+#product-modal figure {
+  margin: 0 auto;
+}
+.quick-view,
+.quick-view:hover,
+.quick-view:focus {
+  display: none !important;
+}
