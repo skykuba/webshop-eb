@@ -33,10 +33,24 @@
     <div class="container">
       <div class="row">
         <div class="hidden-sm-down">
-          <div class="col-md-5 col-xs-12">
-            {hook h='displayNav1'}
+          <div class="col-md-4 col-xs-12">
+            <div class="col-md-6 hidden-sm-down" id="_desktop_logo">
+          {if $shop.logo_details}
+            {if $page.page_name == 'index'}
+              <h1>
+                {renderLogo}
+              </h1>
+            {else}
+              {renderLogo}
+            {/if}
+          {/if}
+            </div>
           </div>
-          <div class="col-md-7 right-nav">
+
+          <div class="col-md-2 search-bar-wrapper">
+          {hook h='displaySearch'}
+          </div>
+          <div class="col-md-0 right-nav">
               {hook h='displayNav2'}
           </div>
         </div>
@@ -58,19 +72,9 @@
   <div class="header-top">
     <div class="container">
        <div class="row">
-        <div class="col-md-2 hidden-sm-down" id="_desktop_logo">
-          {if $shop.logo_details}
-            {if $page.page_name == 'index'}
-              <h1>
-                {renderLogo}
-              </h1>
-            {else}
-              {renderLogo}
-            {/if}
-          {/if}
-        </div>
+
         <div class="header-top-right col-md-10 col-sm-12 position-static">
-          {hook h='displayTop'}
+          {widget name='ps_mainmenu'}
         </div>
       </div>
       <div id="mobile_top_menu_wrapper" class="row hidden-md-up" style="display:none;">

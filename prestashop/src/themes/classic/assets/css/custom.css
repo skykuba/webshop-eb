@@ -1,0 +1,883 @@
+body {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: #f8f9fa;
+    color: #111;
+}
+@font-face {
+  font-family: 'Google Symbols';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url(https://fonts.gstatic.com/icon/font?kit=HhzMU5Ak9u-oMExPeInvcuEmPosC9zyteYEFU68cPrjdKM1XLPTxlGmzczpgWvF1d8Yp7AudBnt3CPar1JFWjoLAUv3G-tSNljixIIGUsC62cYrKiAweYkj-0ruzD3Wq4c0iDTbWp0ubCc7u&skey=f8ec4d50247dc1c1&v=v383) format('woff2');
+}
+
+/* Buttons */
+.btn-primary,
+.btn-primary:active,
+.btn-primary:focus {
+    background-color: #0b6651 !important;
+    border-color: #0b6651 !important;
+}
+
+.btn-primary:hover {
+    background-color: #f39c12!important;
+    border-color: #f39c12!important;
+}
+
+.btn-secondary {
+    background-color: #eee !important;
+    border-color: #ddd !important;
+    color: #222 !important;
+}
+
+/* Links */
+a {
+    color: #333;
+}
+
+a:hover {
+    color: #f39c12;
+}
+
+/* ------------------------------------------------------- */
+/*  Header */
+/* ------------------------------------------------------- */
+
+header#header {
+    margin-bottom: 0 !important; /* usuwa margines na dole nagłówka */
+    padding-bottom: 0 !important; /* usuwa padding na dole nagłówka */
+}
+#wrapper {
+    margin-top: 0;  /* usuwa margines na górze */
+    padding-top: 3px; /* usuwa padding na górze */
+}
+
+#header .header-nav {
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 12px !important;  
+}
+
+
+#header .header-top {
+    padding: 10px 0;
+}
+
+
+.right-nav a:hover,
+.header-top-right a:hover {
+    color: rgb(255, 136, 0) !important;
+}
+/*szerokosc*/
+#_desktop_top_menu,
+#top-menu,
+.menu.js-top-menu.position-static {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+#main .container,
+#wrapper .container,
+.container {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+#wrapper {
+    margin-top: 0px;
+}
+/* Usunięcie ograniczenia kontenera */
+.header-top .container,
+.header-nav .container {
+    max-width: 97% !important;
+    width: 97% !important;
+}
+.header-top .container{
+    text-align: center;
+}
+.header-nav {
+    margin-bottom: 40px !important; /* ustaw dowolną wartość */
+}
+.header-top {
+    margin-bottom: 0px !important; /* ustaw dowolną wartość */
+}
+
+.header-nav,
+.header-nav .container,
+.header-nav .row {
+    border-bottom: none !important;
+    box-shadow: none !important;
+}
+/* searchbar */
+/* ==== KONTEJNER SEARCHBARA ==== */
+#search_widget .search-form {
+    position: relative;
+    width: 100%;
+}
+
+/* ==== POLE TEKSTOWE ==== */
+#search_widget .search-form input[type="text"] {
+    width: 100%;
+    max-width: 600px;
+    padding: 10px 40px 10px 12px; /* miejsce na ikonę po prawej */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+}
+#search_widget input::placeholder {
+    font-style: italic;
+}
+#search_widget input {
+    background-color: white !important;
+    color: #333; /* jeśli chcesz czarny tekst */
+}
+
+/* ==== PRZYCISK (z ikoną) ==== */
+#search_widget .search-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ==== IKONKA W ŚRODKU ==== */
+#search_widget .search-button img {
+    width: 18px !important;
+    height: 18px !important;
+    object-fit: contain;
+    display: block;
+}
+
+/* ==== HOVER ==== */
+#search_widget .search-button:hover img {
+    filter: brightness(0.6);
+}
+#search_widget .search-button:hover img {
+    filter: invert(54%) sepia(94%) saturate(1400%) hue-rotate(2deg) brightness(101%) contrast(102%);
+}
+.search-bar-wrapper {
+    margin-top: 10px;
+    width: 100%;
+    max-width: 600px; 
+}
+
+/*shopping cart*/
+/* ===== WYRÓWNANIE W JEDNEJ LINII Z LOGINEM ===== */
+#_desktop_user_info,
+#_desktop_cart{
+    display: flex !important;
+    align-items: center !important;
+    margin-top: 10px !important;
+    padding-right: 10px !important;
+    margin-right: 10px !important;
+}
+.user-info {
+    margin-right: 2px; /* zmniejsza odstęp od kolejnego elementu po prawej */
+    margin-left: 10px !important; /* przesuwa bardziej w lewo */
+}
+#_desktop_cart .blockcart .header {
+    display: flex !important;
+    align-items: center !important;
+}
+
+
+/* ===== USUNIĘCIE SZAREGO TŁA, RAMKI I PROBLEMÓW Z KLIKANIEM ===== */
+#_desktop_cart .blockcart,
+#_desktop_cart .cart-preview {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+/* ===== BIAŁE TŁO KOSZYKA + CZARNY TEKST ===== */
+#_desktop_cart .blockcart .header {
+    border-radius: 4px;
+    padding: 6px 10px;
+    color: #333 !important;
+}
+
+
+/* ===== KOLOR TEKSTU I IKONY ===== */
+#_desktop_cart .blockcart .header a,
+#_desktop_cart .blockcart .header i,
+#_desktop_cart .blockcart .header span {
+    color: #333 !important;
+}
+
+
+/* ===== PODŚWIETLENIE NA HOVER (TAK JAK LOGIN) ===== */
+#_desktop_cart .blockcart .header:hover,
+#_desktop_cart .blockcart .header:hover a,
+#_desktop_cart .blockcart .header:hover i,
+#_desktop_cart .blockcart .header:hover span {
+    color: rgb(255, 136, 0) !important; /* pomarańcz jak w menu */
+    cursor: pointer;
+}
+
+
+/* ===== NAPRAWA KLIKALNOŚCI ===== */
+#_desktop_cart *,
+#_desktop_cart a {
+    pointer-events: auto !important;
+    z-index: 999;
+}
+
+
+#_desktop_cart .cart-arrow {
+    margin-left: 12px;      /* większy odstęp od liczby produktów */
+    font-size: 40px;         /* większa strzałka */
+    vertical-align: middle;  /* wyrównanie do środka ikony/tekstu */
+    display: inline-block;
+    color: #333;   
+    vertical-align: middle;   /* można zostawić lub zmienić */
+    transform: translateY(-8px);          /* kolor strzałki */
+}
+
+/* Newsletter main page (migrated from footer.tpl) */
+.newsletter_main_page {
+    background: url('/img/newsletter-bg.png') center/cover no-repeat;
+    border-radius: 8px;
+    color: white;
+    min-height: 451px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.newsletter_main_page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+    border-radius: 8px;
+}
+
+.newsletter_main_page__content {
+    position: relative;
+    z-index: 2;
+}
+
+.newsletter_main_page__content h1 {
+    color: white;
+    margin-bottom: 8px;
+    position: relative;
+    display: inline-block;
+}
+
+.newsletter_main_page__content h1::after {
+    content: "";
+    position: absolute;
+    width: 36px;
+    height: 4px;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgb(227, 84, 32);
+    border-radius: 4px;
+}
+
+.newsletter_main_page__content p {
+    color: white;
+    margin-bottom: 16px;
+    font-size: 16px;
+    padding-top: 20px;
+}
+
+.newsletter_main_page__button a {
+    color: white;
+}
+
+.newsletter_main_page__button {
+    display: inline-block;
+    padding: 12px 32px;
+    background-color: rgb(221, 103, 0);
+    color: #ffffff !important;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+.newsletter_main_page__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    color: #667eea;
+    text-decoration: none;
+}
+
+.newsletter_main_page__form {
+    width: 100%;
+}
+
+.newsletter_main_page__input-group {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    align-items: center;
+}
+
+.newsletter_main_page__form input[type="email"],
+.newsletter_main_page__form input[type="text"] {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+}
+
+.newsletter_main_page__form button,
+.newsletter_main_page__form input[type="submit"] {
+    padding: 12px 32px;
+    background-color: white;
+    color: #667eea;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter_main_page__form button:hover,
+.newsletter_main_page__form input[type="submit"]:hover {
+    background-color: #f0f0f0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .newsletter_main_page {
+        padding: 20px;
+    }
+
+    .newsletter_main_page__button {
+        width: 100%;
+        padding: 12px 20px;
+    }
+}
+
+
+
+/* Top menu */
+#header .header-nav .top-menu a {
+    font-weight: 600;
+    size: 2px;
+    color: #333 !important;
+}
+
+#header .header-nav .top-menu a:hover {
+    color: #0b6651 !important;
+}
+
+/* ------------------------------------------------------- */
+/*  Menu główne */
+/* ------------------------------------------------------- */
+
+#_desktop_top_menu {
+    padding: 0px 0;
+}
+
+#_desktop_top_menu .top-menu a {
+    color: #3f3f3f !important;
+    font-weight: 600;
+    padding: 0px 14px;
+    border-radius: 6px;
+}
+
+#_desktop_top_menu .top-menu a:hover {
+    color: rgb(255, 136, 0) !important;
+}
+
+/* ------------------------------------------------------- */
+/*  HOME PAGE */
+/* ------------------------------------------------------- */
+
+/* Hero / Slider */
+#carousel {
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto 32px auto;
+    width: 95%;
+}
+
+#carousel,
+#carousel .carousel-inner,
+#carousel .carousel-item,
+#carousel .carousel-item img {
+    height: auto !important;
+    max-height: none !important;
+}
+
+#carousel .carousel-item img {
+    object-fit: contain !important;
+}
+
+
+#carousel .carousel-item img {
+    border-radius: 10px;
+}
+
+/* Kontenery nawigacji obejmujące całą wysokość slidera */
+#carousel .carousel-control {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;          /* szerokość kwadratu */
+    height: 50px;         /* wysokość kwadratu */
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 8px;     /* kwadrat */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background 0.25s ease;
+    opacity: 1 !important;
+}
+
+
+#carousel .left.carousel-control {
+    left: -5px;
+}
+
+#carousel .right.carousel-control {
+    right: -10px;
+}
+
+/* Ikony strzałek – czarne */
+#carousel .carousel-control i {
+    color: #000;
+    font-size: 32px;
+}
+
+/* Hover — pełne białe tło */
+#carousel .carousel-control:hover {
+    background: rgb(228, 228, 228, 0.9);
+}
+
+/* Usunięcie Bootstrapowych efektów */
+#carousel .carousel-control:focus,
+#carousel .carousel-control:active {
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* Sekcje */
+h2.h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 16px;
+}
+
+/* ------------------------------------------------------- */
+/*  Product list (kategorie) */
+/* ------------------------------------------------------- */
+
+#products .product-miniature {
+    background: #fff;
+    border-radius: 10px;
+    padding: 12px;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+#products .product-miniature:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+}
+
+#products .product-miniature .thumbnail-container {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Product name */
+#products .product-miniature .product-title a {
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+}
+
+#products .product-miniature .product-title a:hover {
+    color: #f39c12;
+}
+
+/* Price */
+#products .product-price-and-shipping .price {
+    color: #f39c12;
+    font-weight: 700;
+    font-size: 17px;
+}
+
+/* ------------------------------------------------------- */
+/*  Product page */
+/* ------------------------------------------------------- */
+
+#product #main h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #0b3d33;
+}
+
+#product .current-price {
+    color: #f39c12;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+#product .product-actions .btn {
+    padding: 14px 20px;
+    font-size: 17px;
+    border-radius: 8px;
+}
+
+/* Tabs */
+#product .tabs {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#product .nav-tabs .nav-link.active {
+    background: #0b6651 !important;
+    color: #fff !important;
+    border-color: #0b6651 !important;
+}
+
+/* ------------------------------------------------------- */
+/*  Footer */
+/* ------------------------------------------------------- */
+
+footer {
+    background: #ffffff;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 28px;
+    padding-bottom: 28px;
+}
+
+footer h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0b3d33;
+}
+
+footer a {
+    color: #555 !important;
+}
+
+footer a:hover {
+    color: #f39c12 !important;
+}
+
+/* ------------------------------------------------------- */
+/*  Breadcrumbs */
+/* ------------------------------------------------------- */
+
+.breadcrumb {
+    background: transparent;
+    padding-left: 0;
+}
+
+.breadcrumb li a {
+    color: #0b6651;
+}
+
+.breadcrumb li:last-child {
+    color: #333;
+}
+
+/* ------------------------------------------------------- */
+/*  Cart page */
+/* ------------------------------------------------------- */
+
+#cart .card {
+    border-radius: 10px;
+}
+
+#cart .checkout .btn-primary {
+    padding: 14px 20px;
+    font-size: 18px;
+}
+
+/* ------------------------------------------------------- */
+/*  Utility */
+/* ------------------------------------------------------- */
+
+/* USUNIĘCIE PODŚWIETLENIA / LINII POD MENU */
+#_desktop_top_menu,
+#_desktop_top_menu .top-menu,
+#header .header-nav {
+    box-shadow: none !important;
+    border-bottom: none !important;
+}
+#header,
+header,
+.header-nav,
+.header-top,
+.header-wrapper,
+.header-inner,
+#_desktop_top_menu,
+#_desktop_top_menu .top-menu,
+#top-menu,
+.navbar,
+nav,
+nav[role="navigation"],
+.header-nav .container {
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    background-image: none !important;
+    outline: none !important;
+}
+
+/* ------------------------------------------------------- */
+/*  Newsletter */
+/* ------------------------------------------------------- */
+
+.newsletter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.newsletter-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+}
+
+.newsletter-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0b3d33;
+    margin: 0;
+}
+
+.newsletter-intro {
+    font-size: 15px;
+    color: #666;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.newsletter-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.newsletter-container a {
+    text-decoration: underline;
+    color: #ffa600;
+}
+
+
+.newsletter-container a:hover {
+    color: #cc8400;
+}
+
+.newsletter-container .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+
+.newsletter-container .form-group .email-input {
+    width: 100%;
+}
+
+.newsletter-container .form-group .form-control-feedback {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(148, 148, 148);
+    font-size: 28px;
+}
+
+.newsletter-container .form-label {
+    font-weight: 600;
+    color: #a6d300;
+    font-size: 14px;
+}
+
+.newsletter-container .form-control {
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.newsletter-container .email-input {
+    width: 400px;
+    background-color: white !important;    
+}
+
+.newsletter-container .form-control:focus {
+    outline: none;
+    border-color: #0b6651;
+    box-shadow: 0 0 0 3px rgba(11, 102, 81, 0.1);
+}
+
+.newsletter-container .checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin: 10px 0;
+    max-width: 100%;
+    width: 100%;
+}
+
+.newsletter-container .form-check-input {
+    margin-top: 2px;
+    cursor: pointer;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    margin-left: 0;
+    margin-right: 2px;
+}
+
+.newsletter-container .form-check-label {
+    cursor: pointer;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.4;
+    flex: 1;
+    text-align: left !important;
+}
+
+.newsletter-container .form-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 8px;
+    justify-content: center;
+}
+
+.newsletter-container .form-actions .btn {
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter-container .subscribe-btn {
+    background-color: #f25101 !important;
+    color: white !important;
+}
+
+.newsletter-container .subscribe-btn:hover {
+    background-color: #2a2a2a !important;
+}
+
+.newsletter-container .unsubscribe-btn {
+    background-color: #2a2a2a !important;
+    color: white !important;
+}
+
+.newsletter-container .unsubscribe-btn:hover {
+    background-color: #f25101 !important;
+}
+
+/* Newsletter Promo Section */
+.newsletter-promo {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    margin: 0 auto;
+    padding: 40px 20px;
+    max-height: 500px;
+}
+
+.newsletter-promo-text {
+    flex: 1;
+}
+
+.newsletter-promo-text h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0b3d33;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.newsletter-promo-text h4 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #0b3d33;
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+
+.newsletter-promo-text p {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.newsletter-promo-image {
+    flex: 1;
+    border-radius: 8px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.newsletter-promo-image a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.newsletter-promo-img {
+
+    object-fit: cover;
+    border-radius: 8px;
+}

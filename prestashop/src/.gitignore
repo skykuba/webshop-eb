@@ -177,10 +177,18 @@ app/config/config.php
 # Themes, modules and overrides
 
 modules/*
+!modules/ps_shoplocation/
+!modules/ps_tuttubenefits/
+!modules/ps_listyzakupowe/
+!modules/ps_mywishlist/
+!modules/ps_wishlistbutton/
+!modules/ps_custom_menu/
+!modules/ps_customtext/
 override/*
 themes/*/
 !themes/classic
-themes/classic/assets
+themes/classic/assets/cache
+
 !themes/_core
 !themes/_libraries
 themes/classic/assets/css/*_rtl.css
@@ -364,3 +372,9 @@ tools/build/releases/*
 
 ## Docker configuration
 install.lock
+!modules/ps_wirepayment/
+!modules/ps_cashondelivery/
+
+# Img for newsletter page customization 
+!img/bon.png
+!img/newsletter-bg.png

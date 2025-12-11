@@ -70,19 +70,24 @@ global_settings:
       displayNav2:
         - ps_languageselector
         - ps_currencyselector
+        - ps_shoplocation
         - ps_customersignin
+        - ps_wishlistbutton
         - ps_shoppingcart
+      displaySearch:
+        - ps_searchbar
       displayTop:
         - ps_mainmenu
-        - ps_searchbar
       displayHome:
         - ps_imageslider
+        - ps_tuttubenefits
+        - ps_custom_menu
         - ps_featuredproducts
+        - ps_listyzakupowe
         - ps_banner
         - ps_customtext
       displayFooterBefore:
         - blockreassurance
-        - ps_emailsubscription
         - ps_socialfollow
       displayFooter:
         - ps_linklist
@@ -94,8 +99,6 @@ global_settings:
       displayLeftColumn:
         - ps_categorytree
         - ps_facetedsearch
-      displaySearch:
-        - ps_searchbar
       displayProductAdditionalInfo:
         - ps_sharebuttons
       displayReassurance:
@@ -106,7 +109,9 @@ global_settings:
         - ps_featuredproducts
       displayProductActions:
         - blockwishlist
-
+      displayMyWishlist:
+        - ps_mywishlist
+  
   image_types:
     cart_default:
       width: 125
