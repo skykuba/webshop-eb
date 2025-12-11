@@ -55,7 +55,7 @@ header#header {
 #header .header-nav {
     background: #ffffff;
     border-bottom: 1px solid #e5e5e5;
-    font-size: 12px !important;  
+    font-size: 12px !important;
 }
 
 
@@ -166,7 +166,7 @@ header#header {
 .search-bar-wrapper {
     margin-top: 10px;
     width: 100%;
-    max-width: 600px; 
+    max-width: 600px;
 }
 
 /*shopping cart*/
@@ -237,7 +237,7 @@ header#header {
     font-size: 40px;         /* większa strzałka */
     vertical-align: middle;  /* wyrównanie do środka ikony/tekstu */
     display: inline-block;
-    color: #333;   
+    color: #333;
     vertical-align: middle;   /* można zostawić lub zmienić */
     transform: translateY(-8px);          /* kolor strzałki */
 }
@@ -649,6 +649,9 @@ nav[role="navigation"],
     outline: none !important;
 }
 
+.tuttu-auth {
+  margin-top: 40px;
+}
 /* ------------------------------------------------------- */
 /*  Newsletter */
 /* ------------------------------------------------------- */
@@ -746,7 +749,7 @@ nav[role="navigation"],
 
 .newsletter-container .email-input {
     width: 400px;
-    background-color: white !important;    
+    background-color: white !important;
 }
 
 .newsletter-container .form-control:focus {
@@ -880,4 +883,752 @@ nav[role="navigation"],
 
     object-fit: cover;
     border-radius: 8px;
+}
+.tuttu-auth__inner {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+.tuttu-auth__column {
+  flex: 1;
+}
+
+.tuttu-auth__column--left {
+  max-width: 650px;
+}
+
+.tuttu-auth__heading {
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+
+.tuttu-auth__social {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.tuttu-social-btn {
+  flex: 1;
+  padding: 10px 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 18px;
+}
+
+.tuttu-auth__or {
+  display: flex;
+  align-items: center;
+  margin: 24px 0;
+}
+
+.tuttu-auth__or::before,
+.tuttu-auth__or::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+}
+
+.tuttu-auth__or span {
+  margin: 0 12px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+}
+
+.tuttu-auth__reg-heading {
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.tuttu-auth__reg-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 28px;
+  border-radius: 4px;
+  background: #f47216; /* pomarańcz jak na tuttu */
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+/* Kontener całej strony logowania */
+.page-authentication-tuttu .auth-container {
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 40px 15px 80px;
+}
+
+/* Nagłówek „Logowanie” */
+.page-authentication-tuttu .auth-main-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+
+/* Układ 2 kolumn */
+.page-authentication-tuttu .auth-layout {
+  display: flex;
+  gap: 60px;
+  align-items: flex-start;
+}
+
+/* Lewa kolumna – logowanie */
+.page-authentication-tuttu .auth-left {
+  flex: 2;
+}
+
+/* Prawa kolumna – rejestracja */
+.page-authentication-tuttu .auth-right {
+  flex: 1;
+  padding: 30px 0 0 40px;
+  border-left: 1px solid #e5e5e5;
+}
+
+/* Tytuł „Rejestracja” */
+.page-authentication-tuttu .auth-right-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+/* Tekst rejestracji */
+.page-authentication-tuttu .auth-right-text {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+/* Przycisk „Załóż nowe konto” */
+.page-authentication-tuttu .auth-register-btn {
+  padding: 14px 35px;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 0;
+}
+
+/* Wiersz z social login (wizualnie jak na Tuttu) */
+.page-authentication-tuttu .auth-social-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.page-authentication-tuttu .auth-social-btn {
+  flex: 1;
+  height: 52px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Separator „LUB” */
+.page-authentication-tuttu .auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 25px 0;
+}
+
+.page-authentication-tuttu .auth-divider::before,
+.page-authentication-tuttu .auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e5e5e5;
+}
+
+.page-authentication-tuttu .auth-divider span {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* Formularz logowania – szerokie pola jak na Tuttu */
+.page-authentication-tuttu .auth-login-form form {
+  max-width: 600px;
+}
+
+.page-authentication-tuttu .auth-login-form .form-group {
+  margin-bottom: 18px;
+}
+
+.page-authentication-tuttu .auth-login-form input[type="email"],
+.page-authentication-tuttu .auth-login-form input[type="text"],
+.page-authentication-tuttu .auth-login-form input[type="password"] {
+  height: 54px;
+  font-size: 15px;
+}
+
+/* Przycisk „Zaloguj się” */
+.page-authentication-tuttu .auth-login-form button,
+.page-authentication-tuttu .auth-login-form .btn {
+  padding: 14px 60px;
+  font-size: 15px;
+  text-transform: uppercase;
+  border-radius: 0;
+}
+
+/* Link „Nie pamiętam hasła” – poniżej przycisku */
+.page-authentication-tuttu .auth-login-form .forgotten-password {
+  display: block;
+  margin-top: 15px;
+}
+
+/* RWD – pod telefonami kolumny jedna pod drugą */
+@media (max-width: 991px) {
+  .page-authentication-tuttu .auth-layout {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .page-authentication-tuttu .auth-right {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px solid #e5e5e5;
+    padding-top: 30px;
+  }
+}
+
+/* Główne pudełko */
+.tuttu-auth-box {
+  display: flex;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 40px 60px;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+}
+
+/* Lewa i prawa kolumna */
+.tuttu-auth-login {
+  flex: 0 0 60%;
+  padding-right: 40px;
+  border-right: 1px solid #e5e5e5;
+}
+
+.tuttu-auth-register {
+  flex: 0 0 40%;
+  padding-left: 40px;
+}
+
+/* Tytuły */
+.tuttu-auth-title {
+  font-size: 26px;
+  margin-bottom: 25px;
+}
+
+/* SOCIAL */
+.tuttu-auth-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.tuttu-auth-social-btn {
+  flex: 1;
+  height: 54px;
+  border-radius: 6px;
+  border: 1px solid #dadada;
+  background: #ffffff;
+  font-size: 20px;
+}
+
+/* separator „LUB” */
+.tuttu-auth-separator {
+  margin: 25px 0;
+  text-align: center;
+  position: relative;
+}
+
+.tuttu-auth-separator::before,
+.tuttu-auth-separator::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background: #e5e5e5;
+}
+
+.tuttu-auth-separator::before {
+  left: 0;
+}
+
+.tuttu-auth-separator::after {
+  right: 0;
+}
+
+.tuttu-auth-separator span {
+  padding: 0 10px;
+  font-size: 13px;
+  color: #777;
+}
+
+/* Pola login/hasło */
+.tuttu-login-form .form-group {
+  margin-bottom: 15px;
+}
+
+.tuttu-login-form .tuttu-input {
+  height: 56px;
+  border-radius: 6px;
+  border: 1px solid #dadada;
+  box-shadow: none;
+}
+
+/* Link „Nie pamiętam…” */
+.tuttu-auth-forgot a {
+  font-size: 13px;
+  text-decoration: underline;
+  color: #444;
+}
+
+/* POMARAŃCZOWE, ZAOKRĄGLONE PRZYCISKI */
+.tuttu-btn-orange {
+  background-color: #f16522;   /* pomarańczowy */
+  border-color: #f16522;
+  color: #fff;
+  border-radius: 28px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 14px 40px;
+}
+
+.tuttu-btn-orange:hover,
+.tuttu-btn-orange:focus {
+  background-color: #d95517;
+  border-color: #d95517;
+  color: #fff;
+}
+
+/* szerokość przycisku logowania jak na TUTTU */
+.tuttu-btn-login {
+  display: block;
+  width: 260px;
+  margin: 20px auto 0;
+}
+
+/* przycisk rejestracji po prawej */
+.tuttu-btn-register {
+  display: inline-block;
+  margin-top: 40px;
+}
+
+/* --- POPRAWKA: żeby blok logowania mieścił się na ekranie --- */
+
+/* mniejsze, bardziej kompaktowe pudełko */
+.page-authentication-tuttu .tuttu-auth-box {
+  max-width: 960px;          /* było 1100px */
+  margin: 30px auto 50px;    /* mniej odstępów góra/dół */
+  padding: 30px 40px;        /* mniejsze paddingi */
+}
+
+/* trochę węższe kolumny i mniejsze odstępy */
+.page-authentication-tuttu .tuttu-auth-login {
+  flex: 0 0 55%;
+  padding-right: 30px;
+}
+
+.page-authentication-tuttu .tuttu-auth-register {
+  flex: 0 0 45%;
+  padding-left: 30px;
+}
+
+/* zmniejszamy trochę wysokość pól i odstępy,
+   żeby całość była niższa */
+.page-authentication-tuttu .tuttu-login-form .tuttu-input {
+  height: 50px;
+}
+
+.page-authentication-tuttu .tuttu-auth-title {
+  font-size: 24px;
+  margin-bottom: 18px;
+}
+
+.page-authentication-tuttu .tuttu-auth-separator {
+  margin: 18px 0;
+}
+
+.page-authentication-tuttu .tuttu-btn-login {
+  margin-top: 15px;
+}
+
+/* RWD – na węższych ekranach jedna kolumna pod drugą
+   i jeszcze mniej paddingów, żeby wszystko się mieściło */
+@media (max-width: 991px) {
+  .page-authentication-tuttu .tuttu-auth-box {
+    flex-direction: column;
+    padding: 20px 15px;
+    margin: 20px auto 30px;
+  }
+
+  .page-authentication-tuttu .tuttu-auth-login,
+  .page-authentication-tuttu .tuttu-auth-register {
+    flex: 0 0 100%;
+    padding: 0;
+    border-right: none;
+  }
+
+  .page-authentication-tuttu .tuttu-auth-register {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .page-authentication-tuttu .tuttu-btn-login {
+    width: 100%;
+  }
+}
+/* 1. Schowanie newslettera i stopki TYLKO na stronie logowania */
+body#authentication .block_newsletter,
+body#authentication #footer,
+body#authentication .footer-container,
+body#authentication .page-footer {
+  display: none !important;
+}
+
+
+body#authentication .tuttu-auth-login {
+  border-right: none !important;  /* usuwa pionową kreskę */
+}
+
+/*************************************************
+ * PRODUCT PAGE – TUTTU LAYOUT
+ *************************************************/
+
+body#product {
+  background: #f8f9fa;
+}
+
+/* główny wrapper strony produktu */
+body#product .tuttu-product-main {
+  max-width: 1300px;
+  width: 95%;
+  margin: 30px auto 70px;
+}
+
+/* układ dwóch kolumn */
+body#product .tuttu-product-main-row {
+  align-items: flex-start;
+}
+
+/* lewa kolumna (galeria) trochę szerzej */
+body#product .tuttu-product-main-row .tuttu-product-gallery {
+  flex: 0 0 55%;
+  max-width: 55%;
+}
+
+/* prawa kolumna (buy-box) */
+body#product .tuttu-product-main-row .tuttu-product-info {
+  flex: 0 0 45%;
+  max-width: 45%;
+}
+
+/* karta ze zdjęciem */
+body#product .tuttu-product-gallery-inner {
+  background: #ffffff;
+  padding: 30px 30px 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+/* pasek gwarancji pod zdjęciem */
+body#product .tuttu-product-reassurance {
+  margin-top: 20px;
+}
+
+/* karta po prawej */
+body#product .tuttu-product-info-inner {
+  background: #ffffff;
+  padding: 30px 40px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+
+/* brand + nazwa produktu */
+body#product .tuttu-product-brand {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #999;
+  margin-bottom: 4px;
+}
+
+body#product .tuttu-product-name {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+/* kod produktu pod nazwą */
+body#product .tuttu-product-ref {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 12px;
+}
+
+body#product .tuttu-product-ref span {
+  font-weight: 600;
+}
+
+/* ceny */
+body#product .tuttu-product-prices {
+  margin: 10px 0 18px;
+}
+
+/* krótki opis */
+body#product .tuttu-product-short {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 18px;
+}
+
+/* formularz zakupu */
+body#product .tuttu-product-actions {
+  margin-top: 10px;
+}
+
+/* główny przycisk DO KOSZYKA – jak na TUTTU */
+body#product .tuttu-product-atc .btn.add-to-cart {
+  display: block;
+  width: 100%;
+  background-color: #f16522;
+  border-color: #f16522;
+  border-radius: 30px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 12px 24px;
+}
+
+body#product .tuttu-product-atc .btn.add-to-cart:hover {
+  background-color: #d95517;
+  border-color: #d95517;
+}
+
+/* dodatkowe info (dostępność, wysyłka itd.) */
+body#product .tuttu-product-additional {
+  margin-top: 18px;
+  font-size: 13px;
+}
+
+/* TABY (opis, szczegóły, załączniki) pod całym boxem */
+body#product .tuttu-product-tabs {
+  margin-top: 40px;
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  padding: 24px 32px;
+}
+
+/* RWD – na telefonie kolumny jedna pod drugą */
+@media (max-width: 991px) {
+  body#product .tuttu-product-main-row .tuttu-product-gallery,
+  body#product .tuttu-product-main-row .tuttu-product-info {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  body#product .tuttu-product-info-inner {
+    margin-top: 24px;
+  }
+}
+/**********************************************
+ *  PRODUCT PAGE – UKŁAD JAK NA TUTTU
+ **********************************************/
+
+/* id="product" jest na body tylko na stronie produktu */
+body#product {
+  background: #f8f9fa;
+}
+
+/* zawężamy całą kolumnę do rozsądnej szerokości */
+body#product #main .product-container {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+}
+
+/* =========================
+   GALERIA – MINIATURKI Z LEWEJ
+   ========================= */
+
+body#product .images-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* duże zdjęcie po prawej */
+body#product .images-container .product-cover {
+  order: 2;
+  flex: 1 1 auto;
+}
+
+/* pasek z miniaturkami po lewej */
+body#product .images-container .js-qv-mask {
+  order: 1;
+  flex: 0 0 90px;
+  margin-right: 24px;
+}
+
+body#product .images-container .js-qv-product-images {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* usuwamy niepotrzebny margines miniatur */
+body#product .images-container .thumb-container {
+  margin: 0;
+}
+
+/* miniatury w kolumnie */
+body#product .images-container .product-images > li img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+/* strzałki scrolla miniatur niepotrzebne */
+body#product .scroll-box-arrows {
+  display: none;
+}
+
+/* =========================
+   PRAWA KOLUMNA – CENA POD ROZMIARÓWKĄ
+   ========================= */
+
+body#product .tuttu-product-title {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+/* trochę ciaśniej między polami */
+body#product .product-variants {
+  margin-bottom: 10px;
+}
+
+/* cena tuż pod wariantami */
+body#product .product-prices {
+  margin: 6px 0 16px;
+}
+
+/* opis pod ceną trochę mniejszy */
+body#product .product-description {
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* =========================
+   PRZYCISKI – DODAJ DO KOSZYKA + KUP TERAZ
+   ========================= */
+
+/* główny przycisk "Dodaj do koszyka" */
+body#product .product-actions .add-to-cart {
+  width: 100%;
+  border-radius: 28px;
+  background-color: #f16522;
+  border-color: #f16522;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 14px 20px;
+}
+
+body#product .product-actions .add-to-cart:hover,
+body#product .product-actions .add-to-cart:focus {
+  background-color: #d95517;
+  border-color: #d95517;
+}
+
+/* dodatkowy guzik "Kup teraz" */
+body#product .tuttu-btn-buy-now {
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 28px;
+  background-color: #ff8a30;
+  border-color: #ff8a30;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 14px 20px;
+}
+
+body#product .tuttu-btn-buy-now:hover,
+body#product .tuttu-btn-buy-now:focus {
+  background-color: #f06b07;
+  border-color: #f06b07;
+}
+
+/* trochę luzu pod przyciskami */
+body#product .product-additional-info {
+  margin-top: 12px;
+}
+
+/* break-point – na telefonach wracamy do układu pionowego */
+@media (max-width: 991px) {
+  body#product .images-container {
+    flex-direction: column;
+  }
+
+  body#product .images-container .js-qv-mask {
+    order: 2;
+    flex: 0 0 auto;
+    margin: 10px 0 0;
+  }
+
+  body#product .images-container .js-qv-product-images {
+    flex-direction: row;
+  }
+}
+/* Pomarańczowy przycisk "Dodaj do koszyka" */
+.product-add-to-cart .btn.add-to-cart,
+.product-add-to-cart .btn.add-to-cart:focus,
+.product-add-to-cart .btn.add-to-cart:hover {
+  background-color: #f3611c;   /* pomarańcz jak na tuttu.pl */
+  border-color: #f3611c;
+}
+
+/* jeśli masz gdzieś jeszcze zielony btn-primary na produkcie */
+#product .btn.btn-primary.add-to-cart {
+  background-color: #f3611c;
+  border-color: #f3611c;
+}
+/* PRZYCISK "DODAJ DO KOSZYKA" – POMARAŃCZOWY JAK NA TUTTU */
+body .product-actions .add-to-cart,
+body .product-add-to-cart .add-to-cart,
+body .btn.btn-primary.add-to-cart,
+body button[name="add"],
+body button[data-button-action="add-to-cart"] {
+    background-color: #ff7a1a !important;
+    border-color: #ff7a1a !important;
+    color: #ffffff !important;
+}
+
+/* HOVER */
+body .product-actions .add-to-cart:hover,
+body .product-add-to-cart .add-to-cart:hover,
+body .btn.btn-primary.add-to-cart:hover,
+body button[name="add"]:hover,
+body button[data-button-action="add-to-cart"]:hover {
+    background-color: #e86a11 !important;
+    border-color: #e86a11 !important;
+    color: #ffffff !important;
+}
+/* Podgląd zdjęcia produktu – schowaj miniatury po prawej */
+#product-modal .modal-body-aside {
+  display: none;
+}
+
+/* Niech główne zdjęcie wykorzysta całą szerokość modału */
+#product-modal .modal-dialog {
+  max-width: 900px; /* możesz zmienić */
+}
+
+#product-modal figure {
+  margin: 0 auto;
+}
+.quick-view,
+.quick-view:hover,
+.quick-view:focus {
+  display: none !important;
 }
