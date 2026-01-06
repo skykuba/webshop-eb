@@ -1,7 +1,14 @@
 body {
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-    background: #f8f9fa;
+    background: #ffffff;
     color: #111;
+}
+
+#page,
+#wrapper,
+#content,
+#main {
+    background: #ffffff;
 }
 @font-face {
   font-family: 'Google Symbols';
@@ -1299,7 +1306,16 @@ body#authentication .tuttu-auth-login {
  *************************************************/
 
 body#product {
-  background: #f8f9fa;
+  background: #ffffff;
+}
+body#product #page,
+body#product #wrapper,
+body#product #content,
+body#product #main {
+  background: #ffffff !important;
+}
+body#product #wrapper {
+  background-color: #ffffff !important;
 }
 
 /* główny wrapper strony produktu */
@@ -1791,7 +1807,7 @@ body#product .tuttu-accessories-price {
 
 /* id="product" jest na body tylko na stronie produktu */
 body#product {
-  background: #f8f9fa;
+  background: #ffffff;
 }
 
 /* zawężamy całą kolumnę do rozsądnej szerokości */
@@ -2142,4 +2158,13 @@ body button[data-button-action="add-to-cart"]:hover {
 /* Ukryj Quick View na stałe */
 .thumbnail-container .quick-view {
     display: none !important;
+}
+
+/* Produkt: wymus biale tlo strony */
+body#product,
+body#product #page,
+body#product #wrapper,
+body#product #content,
+body#product #main {
+    background: #ffffff !important;
 }
