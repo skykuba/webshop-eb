@@ -27,23 +27,33 @@
     <span class="control-label">{l s='Quantity' d='Shop.Theme.Catalog'}</span>
 
     {block name='product_quantity'}
-      <div class="product-quantity clearfix">
-        <div class="qty">
+      {assign var='initialQty' value=$product.quantity_wanted|default:1}
+      <div class="product-quantity clearfix tuttu-quantity">
+        <input
+          type="hidden"
+          name="qty"
+          id="quantity_wanted"
+          value="{$initialQty}"
+          min="{if $product.minimal_quantity}{$product.minimal_quantity}{else}1{/if}"
+          aria-label="{l s='Quantity' d='Shop.Theme.Actions'}"
+          class="no-touchspin tuttu-qty-hidden"
+          data-touchspin="false"
+        >
+
+        <div class="tuttu-qty-dropdown">
+          <select id="tuttu-qty-select" aria-label="{l s='Select quantity' d='Shop.Theme.Actions'}">
+            <option value="1" {if $initialQty==1}selected{/if}>1</option>
+            <option value="2" {if $initialQty==2}selected{/if}>2</option>
+            <option value="3" {if $initialQty==3}selected{/if}>3</option>
+            <option value="4" {if $initialQty==4}selected{/if}>4</option>
+            <option value="more" {if $initialQty>4}selected{/if}>{l s='Więcej' d='Shop.Theme.Actions'}</option>
+          </select>
           <input
+            id="tuttu-qty-custom"
             type="number"
-            name="qty"
-            id="quantity_wanted"
-            inputmode="numeric"
-            pattern="[0-9]*"
-            {if $product.quantity_wanted}
-              value="{$product.quantity_wanted}"
-              min="{$product.minimal_quantity}"
-            {else}
-              value="1"
-              min="1"
-            {/if}
-            class="input-group"
-            aria-label="{l s='Quantity' d='Shop.Theme.Actions'}"
+            min="{if $product.minimal_quantity}{$product.minimal_quantity}{else}1{/if}"
+            value="{$initialQty}"
+            aria-label="{l s='Enter quantity' d='Shop.Theme.Actions'}"
           >
         </div>
 
@@ -56,13 +66,64 @@
               disabled
             {/if}
           >
-            <i class="material-icons shopping-cart">&#xE547;</i>
-            {l s='Add to cart' d='Shop.Theme.Actions'}
+            {l s='Do koszyka' d='Shop.Theme.Actions'}
           </button>
         </div>
 
         {hook h='displayProductActions' product=$product}
       </div>
+      {literal}
+      <script>
+        (function() {
+          var select = document.getElementById('tuttu-qty-select');
+          var custom = document.getElementById('tuttu-qty-custom');
+          var qtyInput = document.getElementById('quantity_wanted');
+          if (!select || !custom || !qtyInput) return;
+
+          var syncQty = function(value) {
+            qtyInput.value = value;
+            qtyInput.dispatchEvent(new Event('change', { bubbles: true }));
+          };
+
+          var coerceValue = function(value) {
+            var parsed = parseInt(value, 10);
+            if (!parsed || parsed <= 0) {
+              parsed = parseInt(qtyInput.getAttribute('min'), 10) || 1;
+            }
+            return String(parsed);
+          };
+
+          var updateMode = function() {
+            var useCustom = select.value === 'more';
+            custom.style.display = useCustom ? 'inline-block' : 'none';
+            if (useCustom) {
+              custom.value = coerceValue(custom.value);
+              syncQty(custom.value);
+              custom.focus();
+            } else {
+              syncQty(select.value);
+            }
+          };
+
+          select.addEventListener('change', updateMode);
+
+          custom.addEventListener('input', function() {
+            if (select.value === 'more') {
+              syncQty(coerceValue(custom.value));
+            }
+          });
+
+          custom.addEventListener('change', function() {
+            if (select.value === 'more') {
+              custom.value = coerceValue(custom.value);
+              syncQty(custom.value);
+            }
+          });
+
+          updateMode();
+        })();
+      </script>
+      {/literal}
     {/block}
 
     {block name='product_availability'}

@@ -1307,6 +1307,9 @@ body#product .tuttu-product-main {
   max-width: 1300px;
   width: 95%;
   margin: 30px auto 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
 /* układ dwóch kolumn */
@@ -1337,6 +1340,10 @@ body#product .tuttu-product-gallery-inner {
 /* pasek gwarancji pod zdjęciem */
 body#product .tuttu-product-reassurance {
   margin-top: 20px;
+  background: #ffffff;
+  padding: 16px 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
 }
 
 /* karta po prawej */
@@ -1345,6 +1352,8 @@ body#product .tuttu-product-info-inner {
   padding: 30px 40px;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  display: flex;
+  flex-direction: column;
 }
 
 /* brand + nazwa produktu */
@@ -1366,7 +1375,7 @@ body#product .tuttu-product-name {
 body#product .tuttu-product-ref {
   font-size: 13px;
   color: #777;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 body#product .tuttu-product-ref span {
@@ -1388,6 +1397,165 @@ body#product .tuttu-product-short {
 /* formularz zakupu */
 body#product .tuttu-product-actions {
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body#product .tuttu-quantity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* całkowicie chowamy stary input z touchspinem */
+body#product .product-quantity .qty {
+  display: none !important;
+}
+
+/* ukryj domyślne przyciski touchspin, zostawiamy tylko dropdown */
+body#product .product-quantity .bootstrap-touchspin,
+body#product .product-quantity .input-group-btn-vertical {
+  display: none !important;
+}
+
+/* schowaj też ewentualne przyciski touchspin generowane inline */
+body#product .product-quantity .btn-touchspin,
+body#product .product-quantity .bootstrap-touchspin .btn,
+body#product .product-quantity .bootstrap-touchspin .fa,
+body#product .product-quantity .bootstrap-touchspin .material-icons {
+  display: none !important;
+}
+
+/* jeśli kontener zostaje w DOM, niech nie zajmuje miejsca */
+body#product .product-quantity .bootstrap-touchspin {
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* globalne schowanie touchspinów w produkcie na wypadek innego drzewa DOM */
+body#product .input-group-btn-vertical,
+body#product .bootstrap-touchspin,
+body#product .bootstrap-touchspin-up,
+body#product .bootstrap-touchspin-down {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+/* dodatkowo wyłącz wszystko z klasą js-touchspin (PrestaShop) */
+body#product .js-touchspin {
+  display: none !important;
+}
+
+body#product .bootstrap-touchspin * {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+body#product .tuttu-qty-hidden {
+  display: none;
+}
+
+/* schowaj strzałki touchspin także w innych kontekstach (np. quickview) */
+.product-quantity .input-group-btn-vertical,
+.product-quantity .bootstrap-touchspin,
+.product-quantity .bootstrap-touchspin-up,
+.product-quantity .bootstrap-touchspin-down,
+.product-quantity .btn-touchspin,
+.product-quantity .js-touchspin {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+/* koszyk/checkout: schowaj strzałki touchspin przy ilości */
+.cart-overview .bootstrap-touchspin .input-group-btn-vertical,
+.cart-overview .bootstrap-touchspin .bootstrap-touchspin-up,
+.cart-overview .bootstrap-touchspin .bootstrap-touchspin-down,
+.cart-overview .bootstrap-touchspin .btn,
+.cart-overview .bootstrap-touchspin .fa,
+.cart-overview .bootstrap-touchspin .material-icons {
+  display: none !important;
+}
+
+.cart-overview .bootstrap-touchspin {
+  width: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* awaryjnie schowaj pionowe przyciski touchspin wszędzie */
+.bootstrap-touchspin .input-group-btn-vertical,
+.bootstrap-touchspin .bootstrap-touchspin-up,
+.bootstrap-touchspin .bootstrap-touchspin-down,
+.bootstrap-touchspin .btn-touchspin,
+.bootstrap-touchspin .fa,
+.bootstrap-touchspin .material-icons {
+  display: none !important;
+}
+
+.bootstrap-touchspin {
+  position: relative;
+}
+
+/* mocniejsze schowanie pionowych strzałek touchspin (również gdy JS nadpisuje style) */
+.bootstrap-touchspin .input-group-btn-vertical {
+  display: none !important;
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+
+.bootstrap-touchspin .input-group-btn-vertical .btn {
+  display: none !important;
+}
+
+/* schowaj sekcję komentarzy/recenzji na stronie produktu */
+#product-comments-list-header,
+#product-comments-list,
+#product-comments-list-footer,
+.product-comments-additional-info {
+  display: none !important;
+}
+
+body#product .tuttu-qty-dropdown select,
+body#product .tuttu-qty-dropdown input {
+  height: 40px;
+  min-width: 110px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  padding: 6px 10px;
+  box-sizing: border-box;
+}
+
+body#product .tuttu-qty-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+body#product #tuttu-qty-custom {
+  width: 90px;
 }
 
 /* główny przycisk DO KOSZYKA – jak na TUTTU */
@@ -1422,6 +1590,175 @@ body#product .tuttu-product-tabs {
   padding: 24px 32px;
 }
 
+body#product .tuttu-product-details-row {
+  margin: 0;
+}
+
+body#product .tuttu-product-details-main {
+  padding-right: 32px;
+}
+
+body#product .tuttu-details-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+body#product .tuttu-product-details-main .product-description {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.7;
+}
+
+body#product .tuttu-product-details-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+body#product .tuttu-params-card {
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 18px 20px;
+  background: #fff;
+}
+
+body#product .tuttu-params-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+body#product .tuttu-params {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+  margin: 0;
+}
+
+body#product .tuttu-params dt {
+  font-size: 12px;
+  color: #777;
+  font-weight: 600;
+  margin: 0;
+}
+
+body#product .tuttu-params dd {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+  text-align: right;
+}
+
+body#product .tuttu-checklist-box {
+  background: #f16522;
+  color: #fff;
+  border-radius: 6px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+body#product .tuttu-checklist-text strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+body#product .tuttu-checklist-text span {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+body#product .tuttu-checklist-button {
+  display: inline-block;
+  background: #1f1f1f;
+  color: #fff;
+  border-radius: 18px;
+  padding: 7px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+body#product .tuttu-checklist-button:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+body#product .tuttu-checklist-graphic {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  flex: 0 0 auto;
+}
+
+body#product .tuttu-accessories h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+body#product .tuttu-accessories-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body#product .tuttu-accessories-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+body#product .tuttu-accessories-thumb {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+body#product .tuttu-accessories-thumb img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+body#product .tuttu-accessories-info {
+  flex: 1 1 auto;
+}
+
+body#product .tuttu-accessories-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+  text-decoration: none;
+}
+
+body#product .tuttu-accessories-price {
+  font-size: 12px;
+  font-weight: 700;
+  color: #f16522;
+  margin-left: auto;
+}
+
 /* RWD – na telefonie kolumny jedna pod drugą */
 @media (max-width: 991px) {
   body#product .tuttu-product-main-row .tuttu-product-gallery,
@@ -1432,6 +1769,20 @@ body#product .tuttu-product-tabs {
 
   body#product .tuttu-product-info-inner {
     margin-top: 24px;
+  }
+
+  body#product .tuttu-product-details-main {
+    padding-right: 0;
+    margin-bottom: 24px;
+  }
+
+  body#product .tuttu-checklist-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  body#product .tuttu-checklist-graphic {
+    align-self: flex-end;
   }
 }
 /**********************************************
@@ -1508,6 +1859,14 @@ body#product .product-variants {
   margin-bottom: 10px;
 }
 
+body#product .tuttu-product-actions .product-quantity {
+  align-items: center;
+}
+
+body#product .tuttu-product-actions .product-quantity .qty {
+  flex: 0 0 120px;
+}
+
 /* cena tuż pod wariantami */
 body#product .product-prices {
   margin: 6px 0 16px;
@@ -1562,6 +1921,46 @@ body#product .tuttu-btn-buy-now:focus {
 /* trochę luzu pod przyciskami */
 body#product .product-additional-info {
   margin-top: 12px;
+}
+
+body#product .tuttu-product-additional {
+  font-size: 13px;
+  color: #444;
+}
+
+body#product .tuttu-product-shipping {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #444;
+}
+
+body#product .tuttu-availability {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+body#product .tuttu-availability-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #79c142;
+  display: inline-block;
+}
+
+body#product .tuttu-delivery-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+body#product .tuttu-delivery-list li a {
+  color: inherit;
+  text-decoration: underline;
 }
 
 /* break-point – na telefonach wracamy do układu pionowego */
