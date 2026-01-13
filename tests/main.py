@@ -75,8 +75,15 @@ class PrestashopTest(unittest.TestCase):
             products += 1
 
     def test_2_add_random_product_to_cart(self):
-        self.browser.get("https://localhost:443/szukaj?controller=search&s=buty+terlan")
+        self.browser.get("https://localhost:443")
         sleep(1)
+
+        search_input = self.browser.find_element(by=By.NAME, value='s')
+        search_input.clear()
+        search_input.send_keys('buty terlan')
+        search_input.send_keys(Keys.ENTER)
+        sleep(2)
+
         self.browser.find_element(by=By.CSS_SELECTOR, value='a.product-thumbnail').click()
         sleep(1)
         self.browser.find_element(by=By.CSS_SELECTOR, value='button.add-to-cart').click()
