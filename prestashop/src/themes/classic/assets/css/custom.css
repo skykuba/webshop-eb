@@ -2418,3 +2418,38 @@ body#product #content,
 body#product #main {
     background: #ffffff !important;
 }
+
+/* Subcategories: make items look like small buttons and increase clickable area */
+.subcategories-list {
+  padding: 0;
+  margin: 0;
+}
+.subcategories-list li {
+  list-style: none;
+  margin-bottom: 10px;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.subcategories-list li a.img,
+.subcategories-list li a.subcategory-name {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+.subcategories-list li a.img {
+  padding: 6px;
+}
+.subcategories-list li a.subcategory-name {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  font-weight: 600;
+}
+.subcategories-list li:hover a.img,
+.subcategories-list li:hover a.subcategory-name {
+  background: rgba(11,102,81,0.06); /* subtle greenish hover */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+.subcategories-list li { cursor: pointer; }
+.subcategories-list li:hover { transform: translateY(-2px); }
+
