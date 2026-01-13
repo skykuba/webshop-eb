@@ -19,6 +19,11 @@ body {
 }
 
 /* Buttons */
+.btn {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #fff;
+}
+
 .btn-primary,
 .btn-primary:active,
 .btn-primary:focus {
@@ -956,7 +961,8 @@ nav[role="navigation"],
   margin-top: 20px;
   padding: 10px 28px;
   border-radius: 4px;
-  background: #f47216; /* pomarańcz jak na tuttu */
+  background: #e35420; /* pomarańcz jak na tuttu */
+  border: 1px solid #e35420;
   color: #fff;
   text-transform: uppercase;
   font-weight: 600;
@@ -1340,8 +1346,8 @@ body#authentication #content {
 }
 
 .page-authentication-tuttu #submit-login {
-  background-color: #e46312 !important;
-  border-color: #e46312 !important;
+  background-color: #e35420 !important;
+  border-color: #e35420 !important;
   color: #ffffff;
   padding: 10px 32px;
   border-radius: 8px;
@@ -1352,15 +1358,15 @@ body#authentication #content {
 
 .page-authentication-tuttu #submit-login:hover,
 .page-authentication-tuttu #submit-login:focus {
-  background-color: #cc5910;
-  border-color: #cc5910;
+  background-color: #e35420;
+  border-color: #e35420;
   color: #ffffff;
 }
 
 /* POMARAŃCZOWE, ZAOKRĄGLONE PRZYCISKI */
 .tuttu-btn-orange {
-  background-color: #e46312;   /* pomaranczowy, ciemniejszy */
-  border-color: #e46312;
+  background-color: #e35420;   /* pomaranczowy, ciemniejszy */
+  border-color: #e35420;
   color: #fff;
   border-radius: 8px;
   font-weight: 600;
@@ -1371,8 +1377,8 @@ body#authentication #content {
 
 .tuttu-btn-orange:hover,
 .tuttu-btn-orange:focus {
-  background-color: #cc5910;
-  border-color: #cc5910;
+  background-color: #e35420;
+  border-color: #e35420;
   color: #fff;
 }
 
