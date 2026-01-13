@@ -1263,6 +1263,23 @@ body#authentication #content {
   max-width: 560px;
 }
 
+.tuttu-login-panels {
+  position: relative;
+}
+
+.tuttu-forgot-password {
+  display: none;
+  max-width: 560px;
+}
+
+#forgot-password:target {
+  display: block;
+}
+
+#forgot-password:target ~ #login-panel {
+  display: none;
+}
+
 .page-authentication-tuttu .tuttu-login-form .form-group {
   margin: 0 0 10px;
 }
@@ -1291,6 +1308,10 @@ body#authentication #content {
   border-radius: 6px;
   border: 1px solid #cfcfcf;
   box-shadow: none;
+}
+
+.forgotten-password .center-email-fields .form-control {
+  border-radius: 4px;
 }
 
 .page-authentication-tuttu .tuttu-login-form .input-group {
@@ -1353,6 +1374,76 @@ body#authentication #content {
   background-color: #cc5910;
   border-color: #cc5910;
   color: #fff;
+}
+
+.forgotten-password .reset-actions {
+  margin-top: 12px;
+  clear: both;
+  padding-left: 180px;
+  box-sizing: border-box;
+}
+
+.forgotten-password .center-email-fields::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.forgotten-password .center-email-fields {
+  min-height: 150px;
+}
+
+.forgotten-password .center-email-fields .form-control-label {
+  display: none;
+}
+
+.forgotten-password .center-email-fields .email {
+  max-width: 100%;
+  flex: 0 0 100%;
+  padding-left: 0;
+}
+
+.forgotten-password .reset-actions .btn {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.forgotten-password .reset-actions .back-to-login-link {
+  display: block;
+  margin-top: 12px;
+  color: #232323;
+  text-decoration: underline;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.forgotten-password .reset-actions .col-md-5 {
+  text-align: left;
+  position: relative;
+  top: -90px;
+  left: 0;
+  margin-left: 0;
+}
+
+.forgotten-password .reset-actions .offset-md-3 {
+  margin-left: 0;
+}
+
+.forgotten-password .send-renew-password-link,
+.forgotten-password .forgotten-password-help {
+  color: #000;
+}
+
+.forgotten-password .forgotten-password-help {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #747474;
+}
+
+.forgotten-password .reset-actions .back-to-login-link:hover,
+.forgotten-password .reset-actions .back-to-login-link:focus {
+  color: #e46312;
+  text-decoration: underline;
 }
 
 .page-authentication-tuttu {
