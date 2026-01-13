@@ -1129,7 +1129,11 @@ body#authentication #content {
 }
 
 .page-authentication-tuttu .tuttu-auth-logo img {
-  max-height: 40px;
+  max-height: 81px;
+  max-width: 420px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
 }
 
 /* Glowne ulozenie */
@@ -1139,6 +1143,7 @@ body#authentication #content {
   justify-content: space-between;
   gap: 40px;
   width: 100% !important;
+  max-width: 1100px;
   margin: 0 auto 70px;
   padding: 0 12px;
 }
@@ -1152,7 +1157,9 @@ body#authentication #content {
 .tuttu-auth-register {
   flex: 0 0 320px;
   margin-left: auto;
-  padding-left: 0;
+  padding-left: 40px;
+  border-left: 0;
+  align-self: flex-start;
 }
 
 /* Tytuly */
@@ -1166,21 +1173,46 @@ body#authentication #content {
 .tuttu-auth-socials {
   display: flex;
   gap: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
+  justify-content: center;
 }
 
 .tuttu-auth-social-btn {
-  flex: 0 0 44px;
-  height: 34px;
-  border-radius: 6px;
+  flex: 0 0 56px;
+  height: 36px;
+  border-radius: 8px;
   border: 1px solid #cfcfcf;
   background: #ffffff;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
   color: #222;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.tuttu-auth-social-btn--google {
+  color: #ea4335;
+}
+
+.tuttu-auth-social-btn--facebook {
+  color: #1877f2;
+}
+
+.tuttu-auth-social-btn--linkedin {
+  color: #0a66c2;
+}
+
+.tuttu-auth-social-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  fill: currentColor;
+}
+
+.tuttu-auth-social-icon--google {
+  width: 18px;
+  height: 18px;
 }
 
 /* separator „LUB” */
@@ -1227,6 +1259,10 @@ body#authentication #content {
   display: contents;
 }
 
+.tuttu-login-form-wrapper {
+  max-width: 560px;
+}
+
 .page-authentication-tuttu .tuttu-login-form .form-group {
   margin: 0 0 10px;
 }
@@ -1251,8 +1287,8 @@ body#authentication #content {
 .page-authentication-tuttu .tuttu-login-form input[type="email"],
 .page-authentication-tuttu .tuttu-login-form input[type="text"],
 .page-authentication-tuttu .tuttu-login-form input[type="password"] {
-  height: 36px;
-  border-radius: 4px;
+  height: 40px;
+  border-radius: 6px;
   border: 1px solid #cfcfcf;
   box-shadow: none;
 }
@@ -1283,8 +1319,8 @@ body#authentication #content {
 }
 
 .page-authentication-tuttu #submit-login {
-  background-color: #ff7a00 !important;
-  border-color: #ff7a00 !important;
+  background-color: #e46312 !important;
+  border-color: #e46312 !important;
   color: #ffffff;
   padding: 10px 32px;
   border-radius: 8px;
@@ -1295,15 +1331,15 @@ body#authentication #content {
 
 .page-authentication-tuttu #submit-login:hover,
 .page-authentication-tuttu #submit-login:focus {
-  background-color: #e06b00;
-  border-color: #e06b00;
+  background-color: #cc5910;
+  border-color: #cc5910;
   color: #ffffff;
 }
 
 /* POMARAŃCZOWE, ZAOKRĄGLONE PRZYCISKI */
 .tuttu-btn-orange {
-  background-color: #f16522;   /* pomaranczowy */
-  border-color: #f16522;
+  background-color: #e46312;   /* pomaranczowy, ciemniejszy */
+  border-color: #e46312;
   color: #fff;
   border-radius: 8px;
   font-weight: 600;
@@ -1314,9 +1350,13 @@ body#authentication #content {
 
 .tuttu-btn-orange:hover,
 .tuttu-btn-orange:focus {
-  background-color: #d95517;
-  border-color: #d95517;
+  background-color: #cc5910;
+  border-color: #cc5910;
   color: #fff;
+}
+
+.page-authentication-tuttu {
+  color: #000;
 }
 
 /* szerokość przycisku logowania jak na TUTTU */
@@ -1335,6 +1375,48 @@ body#authentication #content {
   font-size: 12px;
   line-height: 1.5;
   color: #333;
+}
+
+.tuttu-auth-contact {
+  max-width: 1100px;
+  margin: 0 auto 24px;
+  padding: 0 12px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.tuttu-auth-contact__item {
+  color: #000;
+  text-decoration: underline;
+}
+
+.tuttu-auth-contact__item--no-underline {
+  text-decoration: none;
+}
+
+.tuttu-auth-contact__sep {
+  margin: 0 6px;
+  color: #666;
+}
+
+@media (max-width: 991px) {
+  .tuttu-auth-box {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .tuttu-auth-login,
+  .tuttu-login-form-wrapper {
+    max-width: 100%;
+  }
+
+  .tuttu-auth-register {
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid #e5e5e5;
+    padding-top: 24px;
+    width: 100%;
+  }
 }
 
 .page-authentication-tuttu .tuttu-login-form {
