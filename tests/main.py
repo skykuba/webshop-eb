@@ -66,13 +66,21 @@ class PrestashopTest(unittest.TestCase):
             sleep(1)
             
             value = randint(1, 9)
-            self.browser.find_element(by=By.NAME, value='qty').send_keys(Keys.CONTROL + "a")
-            self.browser.find_element(by=By.NAME, value='qty').send_keys(str(value))
+
+            self.browser.find_element(by=By.ID, value='tuttu-qty-select').click()
+            self.browser.find_element(by=By.CSS_SELECTOR, value="#tuttu-qty-select option[value='more']").click()
+
+            self.browser.find_element(by=By.ID, value='tuttu-qty-custom').click()
+            self.browser.find_element(by=By.ID, value='tuttu-qty-custom').send_keys(Keys.BACKSPACE)
+            self.browser.find_element(by=By.ID, value='tuttu-qty-custom').send_keys(str(value))
+
             self.browser.find_element(by=By.CSS_SELECTOR, value='button.add-to-cart').click()
+
             sleep(1)
             if products == 10:
-              break
+                break
             products += 1
+        print("=== Produkty dodane do koszyka ===")
 
     def test_2_add_random_product_to_cart(self):
         self.browser.get("https://localhost:443")
@@ -88,6 +96,7 @@ class PrestashopTest(unittest.TestCase):
         sleep(1)
         self.browser.find_element(by=By.CSS_SELECTOR, value='button.add-to-cart').click()
         sleep(1)
+        print("=== Losowy produkt dodany do koszyka ===")
     
     def test_3_remove_3_products_from_cart(self):
         self.browser.get("https://localhost:443")
@@ -101,32 +110,38 @@ class PrestashopTest(unittest.TestCase):
             if to_remove:
                 to_remove[0].click()
                 sleep(1)
+        print("=== 3 produkty usunięte z koszyka ===")
 
     def test_4_register(self):
         self.browser.get("https://localhost:443")
         sleep(1)
         self.browser.find_element(by=By.CSS_SELECTOR, value='#_desktop_user_info a').click()
-        sleep(2)
+        sleep(1)
 
         self.browser.find_element(by=By.CSS_SELECTOR, value='a.tuttu-btn-register').click()
-        sleep(2)
+        sleep(1)
 
         self.browser.find_element(by=By.ID, value='field-id_gender-1').click()
         self.browser.find_element(by=By.ID, value='field-firstname').send_keys('Test')
         self.browser.find_element(by=By.ID, value='field-lastname').send_keys('User')
-        self.browser.find_element(by=By.ID, value='field-email').send_keys('skykuba0@gmail.com')
+        self.browser.find_element(by=By.ID, value='field-email').send_keys('1232321@gmail.com')
         self.browser.find_element(by=By.ID, value='field-password').send_keys('TestPassword123')
         self.browser.find_element(by=By.NAME, value='customer_privacy').click()
         self.browser.find_element(by=By.NAME, value='psgdpr').click()
         self.browser.find_element(by=By.CSS_SELECTOR, value='button.btn-primary').click()
         sleep(2)
+        print("=== Rejestracja zakończona ===")
 
     def test_5_checkout(self):
-        self.browser.get("https://localhost:443/koszyk?action=show")
-        sleep(2)
+        self.browser.get("https://localhost:443")
+        sleep(1)
+
+        self.browser.find_element(by=By.CSS_SELECTOR, value='#_desktop_cart a').click()
+        sleep(1)
+        
         self.browser.find_element(by=By.CSS_SELECTOR, value='a.btn-primary').click()
-        sleep(2)
-        self.browser.find_element(by=By.ID, value='field-address1').send_keys('Hynka 126')
+        sleep(1)
+        self.browser.find_element(by=By.ID, value='field-address1').send_keys('Hynka 125')
         self.browser.find_element(by=By.ID, value='field-postcode').send_keys('80-251')
         self.browser.find_element(by=By.ID, value='field-city').send_keys('Gdańsk')
         sleep(2)
@@ -137,19 +152,34 @@ class PrestashopTest(unittest.TestCase):
         self.browser.find_element(by=By.ID, value='payment-option-2').click()
         sleep(1)
         self.browser.find_element(by=By.NAME, value='conditions_to_approve[terms-and-conditions]').click()
-        self.browser.find_element(by=By.CSS_SELECTOR, value='button.btn-primary').click()
-    
+        sleep(2)
+        self.browser.find_element(by=By.CSS_SELECTOR, value='button.btn.btn-primary.center-block').click()
+        sleep(5)
+
+        print("=== Zamówienie złożone ===")
+
     def test_6_status_order(self):
-        self.browser.get("https://localhost:443/historia-zamowien")
+        self.browser.get("https://localhost:443")
         sleep(1)
-        status = self.browser.find_element(by=By.CSS_SELECTOR, value='span.label.label-pill').text
+
+        self.browser.find_element(by=By.CSS_SELECTOR, value='a.account').click()
+        sleep(1)
+
+        self.browser.find_element(by=By.ID, value='history-link').click()
+        sleep(1)
+        
+        status_elem = self.browser.find_element(by=By.CSS_SELECTOR, value='span.label.label-pill.dark')
+        status = status_elem.text
         print(f"Status zamówienia: {status}")
+        print("=== Status zamówienia sprawdzony ===")
 
     def test_7_download_invoice(self):
         self.browser.get("https://localhost:443/historia-zamowien")
         sleep(1)
-        self.browser.find_element(by=By.CSS_SELECTOR, value='td.text-sm-center').click()
+        invoice_link = self.browser.find_element(by=By.CSS_SELECTOR, value="a[href*='controller=pdf-invoice']")
+        invoice_link.click()
         sleep(5)
+        print("=== Faktura pobrana ===")
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
