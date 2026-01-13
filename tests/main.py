@@ -103,8 +103,14 @@ class PrestashopTest(unittest.TestCase):
                 sleep(1)
 
     def test_4_register(self):
-        self.browser.get("https://localhost:443/logowanie?create_account=1")
+        self.browser.get("https://localhost:443")
         sleep(1)
+        self.browser.find_element(by=By.CSS_SELECTOR, value='#_desktop_user_info a').click()
+        sleep(2)
+
+        self.browser.find_element(by=By.CSS_SELECTOR, value='a.tuttu-btn-register').click()
+        sleep(2)
+
         self.browser.find_element(by=By.ID, value='field-id_gender-1').click()
         self.browser.find_element(by=By.ID, value='field-firstname').send_keys('Test')
         self.browser.find_element(by=By.ID, value='field-lastname').send_keys('User')
