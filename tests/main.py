@@ -90,8 +90,12 @@ class PrestashopTest(unittest.TestCase):
         sleep(1)
     
     def test_3_remove_3_products_from_cart(self):
-        self.browser.get("https://localhost:443/koszyk?action=show")
+        self.browser.get("https://localhost:443")
         sleep(1)
+
+        self.browser.find_element(by=By.CSS_SELECTOR, value='#_desktop_cart a').click()
+        sleep(1)
+
         for _ in range(3):
             to_remove = self.browser.find_elements(by=By.CLASS_NAME, value='remove-from-cart')
             if to_remove:
