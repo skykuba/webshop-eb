@@ -1,7 +1,14 @@
 body {
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-    background: #f8f9fa;
+    background: #ffffff;
     color: #111;
+}
+
+#page,
+#wrapper,
+#content,
+#main {
+    background: #ffffff;
 }
 @font-face {
   font-family: 'Google Symbols';
@@ -12,6 +19,11 @@ body {
 }
 
 /* Buttons */
+.btn {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    color: #fff;
+}
+
 .btn-primary,
 .btn-primary:active,
 .btn-primary:focus {
@@ -949,6 +961,7 @@ nav[role="navigation"],
   margin-top: 20px;
   padding: 10px 28px;
   border-radius: 4px;
+  border: 1px solid #e35420;
   background: #f47216; /* pomarańcz jak na tuttu */
   color: #fff;
   text-transform: uppercase;
@@ -956,10 +969,12 @@ nav[role="navigation"],
 }
 /* Kontener całej strony logowania */
 .page-authentication-tuttu .auth-container {
-  max-width: 1150px;
+  max-width: 80% !important;
+  width: 80% !important;
   margin: 0 auto;
   padding: 40px 15px 80px;
 }
+
 
 /* Nagłówek „Logowanie” */
 .page-authentication-tuttu .auth-main-title {
@@ -1092,52 +1107,123 @@ nav[role="navigation"],
   }
 }
 
-/* Główne pudełko */
+body#authentication #header,
+body#authentication .breadcrumb,
+body#authentication .page-header {
+  display: none;
+}
+
+body#authentication #content,
+body#authentication #wrapper,
+body#authentication #main {
+  background: transparent;
+}
+
+body#authentication #content {
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+
+/* Logo i gorna linia */
+.page-authentication-tuttu .tuttu-auth-top {
+  max-width: 1100px;
+  margin: 18px auto 28px;
+  padding: 0 12px 18px;
+  border-bottom: 1px solid #dcdcdc;
+  text-align: center;
+}
+
+.page-authentication-tuttu .tuttu-auth-logo img {
+  max-height: 81px;
+  max-width: 420px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Glowne ulozenie */
 .tuttu-auth-box {
   display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100% !important;
   max-width: 1100px;
-  margin: 40px auto;
-  padding: 40px 60px;
-  background: #ffffff;
-  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  margin: 0 auto 70px;
+  padding: 0 12px;
 }
 
 /* Lewa i prawa kolumna */
 .tuttu-auth-login {
-  flex: 0 0 60%;
-  padding-right: 40px;
-  border-right: 1px solid #e5e5e5;
+  flex: 1 1 620px;
+  max-width: 640px;
 }
 
 .tuttu-auth-register {
-  flex: 0 0 40%;
+  flex: 0 0 320px;
+  margin-left: auto;
   padding-left: 40px;
+  border-left: 0;
+  align-self: flex-start;
 }
 
-/* Tytuły */
+/* Tytuly */
 .tuttu-auth-title {
-  font-size: 26px;
-  margin-bottom: 25px;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 12px;
 }
 
 /* SOCIAL */
 .tuttu-auth-socials {
   display: flex;
   gap: 10px;
+  margin-bottom: 14px;
+  justify-content: center;
 }
 
 .tuttu-auth-social-btn {
-  flex: 1;
-  height: 54px;
-  border-radius: 6px;
-  border: 1px solid #dadada;
+  flex: 0 0 56px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid #cfcfcf;
   background: #ffffff;
-  font-size: 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tuttu-auth-social-btn--google {
+  color: #ea4335;
+}
+
+.tuttu-auth-social-btn--facebook {
+  color: #1877f2;
+}
+
+.tuttu-auth-social-btn--linkedin {
+  color: #0a66c2;
+}
+
+.tuttu-auth-social-icon {
+  width: 16px;
+  height: 16px;
+  display: block;
+  fill: currentColor;
+}
+
+.tuttu-auth-social-icon--google {
+  width: 18px;
+  height: 18px;
 }
 
 /* separator „LUB” */
 .tuttu-auth-separator {
-  margin: 25px 0;
+  margin: 12px 0 16px;
   text-align: center;
   position: relative;
 }
@@ -1147,9 +1233,9 @@ nav[role="navigation"],
   content: "";
   position: absolute;
   top: 50%;
-  width: 45%;
+  width: 46%;
   height: 1px;
-  background: #e5e5e5;
+  background: #e1e1e1;
 }
 
 .tuttu-auth-separator::before {
@@ -1161,126 +1247,297 @@ nav[role="navigation"],
 }
 
 .tuttu-auth-separator span {
-  padding: 0 10px;
-  font-size: 13px;
-  color: #777;
+  padding: 0 8px;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #666;
 }
 
-/* Pola login/hasło */
-.tuttu-login-form .form-group {
-  margin-bottom: 15px;
+/* Formularz logowania */
+.page-authentication-tuttu #login-form {
+  display: flex;
+  flex-direction: column;
+}
+.page-authentication #content{
+  max-width: 100% !important;
+}
+.page-authentication-tuttu #login-form > div {
+  display: contents;
 }
 
-.tuttu-login-form .tuttu-input {
-  height: 56px;
+.tuttu-login-form-wrapper {
+  max-width: 560px;
+}
+
+.tuttu-login-panels {
+  position: relative;
+}
+
+.tuttu-forgot-password {
+  display: none;
+  max-width: 560px;
+}
+
+#forgot-password:target {
+  display: block;
+}
+
+#forgot-password:target ~ #login-panel {
+  display: none;
+}
+
+.page-authentication-tuttu .tuttu-login-form .form-group {
+  margin: 0 0 10px;
+}
+
+.page-authentication-tuttu .tuttu-login-form .form-group.row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.page-authentication-tuttu .tuttu-login-form .form-control-label,
+.page-authentication-tuttu .tuttu-login-form .form-control-comment {
+  display: none;
+}
+
+.page-authentication-tuttu .tuttu-login-form .col-md-6 {
+  max-width: 100%;
+  flex: 0 0 100%;
+  padding: 0;
+}
+
+.page-authentication-tuttu .tuttu-login-form .form-control,
+.page-authentication-tuttu .tuttu-login-form input[type="email"],
+.page-authentication-tuttu .tuttu-login-form input[type="text"],
+.page-authentication-tuttu .tuttu-login-form input[type="password"] {
+  height: 40px;
   border-radius: 6px;
-  border: 1px solid #dadada;
+  border: 1px solid #cfcfcf;
   box-shadow: none;
 }
 
-/* Link „Nie pamiętam…” */
-.tuttu-auth-forgot a {
-  font-size: 13px;
+.forgotten-password .center-email-fields .form-control {
+  border-radius: 4px;
+}
+
+.page-authentication-tuttu .tuttu-login-form .input-group {
+  width: 100%;
+}
+
+.page-authentication-tuttu .tuttu-login-form .input-group-btn {
+  display: none;
+}
+
+.page-authentication-tuttu .tuttu-login-form .form-footer {
+  order: 1;
+  text-align: left;
+  margin-top: 10px;
+}
+
+.page-authentication-tuttu .tuttu-login-form .forgot-password {
+  order: 2;
+  margin-top: 10px;
+}
+
+.page-authentication-tuttu .tuttu-login-form .forgot-password a {
+  font-size: 12px;
   text-decoration: underline;
-  color: #444;
+  color: #333;
+}
+
+.page-authentication-tuttu #submit-login {
+  background-color: #e35420 !important;
+  border-color: #e35420 !important;
+  color: #ffffff;
+  padding: 10px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.page-authentication-tuttu #submit-login:hover,
+.page-authentication-tuttu #submit-login:focus {
+  background-color: #e35420;
+  border-color: #e35420;
+  color: #ffffff;
 }
 
 /* POMARAŃCZOWE, ZAOKRĄGLONE PRZYCISKI */
 .tuttu-btn-orange {
-  background-color: #f16522;   /* pomarańczowy */
-  border-color: #f16522;
+  background-color: #e35420;   /* pomaranczowy, ciemniejszy */
+  border-color: #e35420;
   color: #fff;
-  border-radius: 28px;
+  border-radius: 8px;
   font-weight: 600;
   text-transform: uppercase;
-  padding: 14px 40px;
+  padding: 10px 24px;
+  font-size: 12px;
 }
 
 .tuttu-btn-orange:hover,
 .tuttu-btn-orange:focus {
-  background-color: #d95517;
-  border-color: #d95517;
+  background-color: #e35420;
+  border-color: #e35420;
   color: #fff;
+}
+
+.forgotten-password .reset-actions {
+  margin-top: 12px;
+  clear: both;
+  padding-left: 180px;
+  box-sizing: border-box;
+}
+
+.forgotten-password .center-email-fields::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.forgotten-password .center-email-fields {
+  min-height: 150px;
+}
+
+.forgotten-password .center-email-fields .form-control-label {
+  display: none;
+}
+
+.forgotten-password .center-email-fields .email {
+  max-width: 100%;
+  flex: 0 0 100%;
+  padding-left: 0;
+}
+
+.forgotten-password .reset-actions .btn {
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.forgotten-password .reset-actions .back-to-login-link {
+  display: block;
+  margin-top: 12px;
+  color: #232323;
+  text-decoration: underline;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.forgotten-password .reset-actions .col-md-5 {
+  text-align: left;
+  position: relative;
+  top: -90px;
+  left: 0;
+  margin-left: 0;
+}
+
+.forgotten-password .reset-actions .offset-md-3 {
+  margin-left: 0;
+}
+
+.forgotten-password .send-renew-password-link,
+.forgotten-password .forgotten-password-help {
+  color: #000;
+}
+
+.forgotten-password .forgotten-password-help {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #747474;
+}
+
+.forgotten-password .reset-actions .back-to-login-link:hover,
+.forgotten-password .reset-actions .back-to-login-link:focus {
+  color: #e46312;
+  text-decoration: underline;
+}
+
+.page-authentication-tuttu {
+  color: #000;
 }
 
 /* szerokość przycisku logowania jak na TUTTU */
 .tuttu-btn-login {
-  display: block;
-  width: 260px;
-  margin: 20px auto 0;
+  display: inline-block;
+  margin: 0;
 }
 
 /* przycisk rejestracji po prawej */
 .tuttu-btn-register {
   display: inline-block;
-  margin-top: 40px;
+  margin-top: 16px;
+}
+
+.tuttu-auth-register-text {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.tuttu-auth-contact {
+  max-width: 1100px;
+  margin: 0 auto 24px;
+  padding: 0 12px;
+  text-align: left;
+  font-size: 12px;
+}
+
+.tuttu-auth-contact__item {
+  color: #000;
+  text-decoration: underline;
+}
+
+.tuttu-auth-contact__item--no-underline {
+  text-decoration: none;
+}
+
+.tuttu-auth-contact__sep {
+  margin: 0 6px;
+  color: #666;
+}
+
+@media (max-width: 991px) {
+  .tuttu-auth-box {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .tuttu-auth-login,
+  .tuttu-login-form-wrapper {
+    max-width: 100%;
+  }
+
+  .tuttu-auth-register {
+    border-left: 0;
+    padding-left: 0;
+    border-top: 1px solid #e5e5e5;
+    padding-top: 24px;
+    width: 100%;
+  }
+}
+
+.page-authentication-tuttu .tuttu-login-form {
+  max-width: 100%;
+}
+
+.page-authentication-tuttu .tuttu-login-form .col-md-3 {
+  display: none;
+}
+
+.page-authentication-tuttu .tuttu-login-form .col-md-6 {
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+
+.page-authentication-tuttu .tuttu-login-form .form-control {
+  width: 100%;
 }
 
 /* --- POPRAWKA: żeby blok logowania mieścił się na ekranie --- */
 
 /* mniejsze, bardziej kompaktowe pudełko */
-.page-authentication-tuttu .tuttu-auth-box {
-  max-width: 960px;          /* było 1100px */
-  margin: 30px auto 50px;    /* mniej odstępów góra/dół */
-  padding: 30px 40px;        /* mniejsze paddingi */
-}
+/* RWD – na węższych ekranach jedna kolumna pod druga */
 
-/* trochę węższe kolumny i mniejsze odstępy */
-.page-authentication-tuttu .tuttu-auth-login {
-  flex: 0 0 55%;
-  padding-right: 30px;
-}
-
-.page-authentication-tuttu .tuttu-auth-register {
-  flex: 0 0 45%;
-  padding-left: 30px;
-}
-
-/* zmniejszamy trochę wysokość pól i odstępy,
-   żeby całość była niższa */
-.page-authentication-tuttu .tuttu-login-form .tuttu-input {
-  height: 50px;
-}
-
-.page-authentication-tuttu .tuttu-auth-title {
-  font-size: 24px;
-  margin-bottom: 18px;
-}
-
-.page-authentication-tuttu .tuttu-auth-separator {
-  margin: 18px 0;
-}
-
-.page-authentication-tuttu .tuttu-btn-login {
-  margin-top: 15px;
-}
-
-/* RWD – na węższych ekranach jedna kolumna pod drugą
-   i jeszcze mniej paddingów, żeby wszystko się mieściło */
-@media (max-width: 991px) {
-  .page-authentication-tuttu .tuttu-auth-box {
-    flex-direction: column;
-    padding: 20px 15px;
-    margin: 20px auto 30px;
-  }
-
-  .page-authentication-tuttu .tuttu-auth-login,
-  .page-authentication-tuttu .tuttu-auth-register {
-    flex: 0 0 100%;
-    padding: 0;
-    border-right: none;
-  }
-
-  .page-authentication-tuttu .tuttu-auth-register {
-    margin-top: 25px;
-    padding-top: 20px;
-    border-top: 1px solid #e5e5e5;
-  }
-
-  .page-authentication-tuttu .tuttu-btn-login {
-    width: 100%;
-  }
-}
 /* 1. Schowanie newslettera i stopki TYLKO na stronie logowania */
 body#authentication .block_newsletter,
 body#authentication #footer,
@@ -1299,7 +1556,16 @@ body#authentication .tuttu-auth-login {
  *************************************************/
 
 body#product {
-  background: #f8f9fa;
+  background: #ffffff;
+}
+body#product #page,
+body#product #wrapper,
+body#product #content,
+body#product #main {
+  background: #ffffff !important;
+}
+body#product #wrapper {
+  background-color: #ffffff !important;
 }
 
 /* główny wrapper strony produktu */
@@ -1307,6 +1573,9 @@ body#product .tuttu-product-main {
   max-width: 1300px;
   width: 95%;
   margin: 30px auto 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
 /* układ dwóch kolumn */
@@ -1337,6 +1606,10 @@ body#product .tuttu-product-gallery-inner {
 /* pasek gwarancji pod zdjęciem */
 body#product .tuttu-product-reassurance {
   margin-top: 20px;
+  background: #ffffff;
+  padding: 16px 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
 }
 
 /* karta po prawej */
@@ -1345,6 +1618,8 @@ body#product .tuttu-product-info-inner {
   padding: 30px 40px;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  display: flex;
+  flex-direction: column;
 }
 
 /* brand + nazwa produktu */
@@ -1366,7 +1641,7 @@ body#product .tuttu-product-name {
 body#product .tuttu-product-ref {
   font-size: 13px;
   color: #777;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 body#product .tuttu-product-ref span {
@@ -1388,6 +1663,165 @@ body#product .tuttu-product-short {
 /* formularz zakupu */
 body#product .tuttu-product-actions {
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body#product .tuttu-quantity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* całkowicie chowamy stary input z touchspinem */
+body#product .product-quantity .qty {
+  display: none !important;
+}
+
+/* ukryj domyślne przyciski touchspin, zostawiamy tylko dropdown */
+body#product .product-quantity .bootstrap-touchspin,
+body#product .product-quantity .input-group-btn-vertical {
+  display: none !important;
+}
+
+/* schowaj też ewentualne przyciski touchspin generowane inline */
+body#product .product-quantity .btn-touchspin,
+body#product .product-quantity .bootstrap-touchspin .btn,
+body#product .product-quantity .bootstrap-touchspin .fa,
+body#product .product-quantity .bootstrap-touchspin .material-icons {
+  display: none !important;
+}
+
+/* jeśli kontener zostaje w DOM, niech nie zajmuje miejsca */
+body#product .product-quantity .bootstrap-touchspin {
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* globalne schowanie touchspinów w produkcie na wypadek innego drzewa DOM */
+body#product .input-group-btn-vertical,
+body#product .bootstrap-touchspin,
+body#product .bootstrap-touchspin-up,
+body#product .bootstrap-touchspin-down {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+/* dodatkowo wyłącz wszystko z klasą js-touchspin (PrestaShop) */
+body#product .js-touchspin {
+  display: none !important;
+}
+
+body#product .bootstrap-touchspin * {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+body#product .tuttu-qty-hidden {
+  display: none;
+}
+
+/* schowaj strzałki touchspin także w innych kontekstach (np. quickview) */
+.product-quantity .input-group-btn-vertical,
+.product-quantity .bootstrap-touchspin,
+.product-quantity .bootstrap-touchspin-up,
+.product-quantity .bootstrap-touchspin-down,
+.product-quantity .btn-touchspin,
+.product-quantity .js-touchspin {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+/* koszyk/checkout: schowaj strzałki touchspin przy ilości */
+.cart-overview .bootstrap-touchspin .input-group-btn-vertical,
+.cart-overview .bootstrap-touchspin .bootstrap-touchspin-up,
+.cart-overview .bootstrap-touchspin .bootstrap-touchspin-down,
+.cart-overview .bootstrap-touchspin .btn,
+.cart-overview .bootstrap-touchspin .fa,
+.cart-overview .bootstrap-touchspin .material-icons {
+  display: none !important;
+}
+
+.cart-overview .bootstrap-touchspin {
+  width: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* awaryjnie schowaj pionowe przyciski touchspin wszędzie */
+.bootstrap-touchspin .input-group-btn-vertical,
+.bootstrap-touchspin .bootstrap-touchspin-up,
+.bootstrap-touchspin .bootstrap-touchspin-down,
+.bootstrap-touchspin .btn-touchspin,
+.bootstrap-touchspin .fa,
+.bootstrap-touchspin .material-icons {
+  display: none !important;
+}
+
+.bootstrap-touchspin {
+  position: relative;
+}
+
+/* mocniejsze schowanie pionowych strzałek touchspin (również gdy JS nadpisuje style) */
+.bootstrap-touchspin .input-group-btn-vertical {
+  display: none !important;
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  overflow: hidden !important;
+}
+
+.bootstrap-touchspin .input-group-btn-vertical .btn {
+  display: none !important;
+}
+
+/* schowaj sekcję komentarzy/recenzji na stronie produktu */
+#product-comments-list-header,
+#product-comments-list,
+#product-comments-list-footer,
+.product-comments-additional-info {
+  display: none !important;
+}
+
+body#product .tuttu-qty-dropdown select,
+body#product .tuttu-qty-dropdown input {
+  height: 40px;
+  min-width: 110px;
+  border-radius: 8px;
+  border: 1px solid #dcdcdc;
+  padding: 6px 10px;
+  box-sizing: border-box;
+}
+
+body#product .tuttu-qty-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+body#product #tuttu-qty-custom {
+  width: 90px;
 }
 
 /* główny przycisk DO KOSZYKA – jak na TUTTU */
@@ -1422,6 +1856,175 @@ body#product .tuttu-product-tabs {
   padding: 24px 32px;
 }
 
+body#product .tuttu-product-details-row {
+  margin: 0;
+}
+
+body#product .tuttu-product-details-main {
+  padding-right: 32px;
+}
+
+body#product .tuttu-details-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+body#product .tuttu-product-details-main .product-description {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.7;
+}
+
+body#product .tuttu-product-details-side {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+body#product .tuttu-params-card {
+  border: 1px solid #eee;
+  border-radius: 6px;
+  padding: 18px 20px;
+  background: #fff;
+}
+
+body#product .tuttu-params-card h3 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+body#product .tuttu-params {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+  margin: 0;
+}
+
+body#product .tuttu-params dt {
+  font-size: 12px;
+  color: #777;
+  font-weight: 600;
+  margin: 0;
+}
+
+body#product .tuttu-params dd {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+  text-align: right;
+}
+
+body#product .tuttu-checklist-box {
+  background: #f16522;
+  color: #fff;
+  border-radius: 6px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+body#product .tuttu-checklist-text strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+body#product .tuttu-checklist-text span {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 10px;
+  opacity: 0.9;
+}
+
+body#product .tuttu-checklist-button {
+  display: inline-block;
+  background: #1f1f1f;
+  color: #fff;
+  border-radius: 18px;
+  padding: 7px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+body#product .tuttu-checklist-button:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+body#product .tuttu-checklist-graphic {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.2);
+  flex: 0 0 auto;
+}
+
+body#product .tuttu-accessories h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+body#product .tuttu-accessories-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+body#product .tuttu-accessories-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+body#product .tuttu-accessories-thumb {
+  width: 44px;
+  height: 44px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+body#product .tuttu-accessories-thumb img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+body#product .tuttu-accessories-info {
+  flex: 1 1 auto;
+}
+
+body#product .tuttu-accessories-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: #222;
+  text-decoration: none;
+}
+
+body#product .tuttu-accessories-price {
+  font-size: 12px;
+  font-weight: 700;
+  color: #f16522;
+  margin-left: auto;
+}
+
 /* RWD – na telefonie kolumny jedna pod drugą */
 @media (max-width: 991px) {
   body#product .tuttu-product-main-row .tuttu-product-gallery,
@@ -1433,6 +2036,20 @@ body#product .tuttu-product-tabs {
   body#product .tuttu-product-info-inner {
     margin-top: 24px;
   }
+
+  body#product .tuttu-product-details-main {
+    padding-right: 0;
+    margin-bottom: 24px;
+  }
+
+  body#product .tuttu-checklist-box {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  body#product .tuttu-checklist-graphic {
+    align-self: flex-end;
+  }
 }
 /**********************************************
  *  PRODUCT PAGE – UKŁAD JAK NA TUTTU
@@ -1440,7 +2057,7 @@ body#product .tuttu-product-tabs {
 
 /* id="product" jest na body tylko na stronie produktu */
 body#product {
-  background: #f8f9fa;
+  background: #ffffff;
 }
 
 /* zawężamy całą kolumnę do rozsądnej szerokości */
@@ -1508,6 +2125,14 @@ body#product .product-variants {
   margin-bottom: 10px;
 }
 
+body#product .tuttu-product-actions .product-quantity {
+  align-items: center;
+}
+
+body#product .tuttu-product-actions .product-quantity .qty {
+  flex: 0 0 120px;
+}
+
 /* cena tuż pod wariantami */
 body#product .product-prices {
   margin: 6px 0 16px;
@@ -1562,6 +2187,46 @@ body#product .tuttu-btn-buy-now:focus {
 /* trochę luzu pod przyciskami */
 body#product .product-additional-info {
   margin-top: 12px;
+}
+
+body#product .tuttu-product-additional {
+  font-size: 13px;
+  color: #444;
+}
+
+body#product .tuttu-product-shipping {
+  margin-top: 14px;
+  font-size: 13px;
+  color: #444;
+}
+
+body#product .tuttu-availability {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+}
+
+body#product .tuttu-availability-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #79c142;
+  display: inline-block;
+}
+
+body#product .tuttu-delivery-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+body#product .tuttu-delivery-list li a {
+  color: inherit;
+  text-decoration: underline;
 }
 
 /* break-point – na telefonach wracamy do układu pionowego */
@@ -1744,3 +2409,47 @@ body button[data-button-action="add-to-cart"]:hover {
 .thumbnail-container .quick-view {
     display: none !important;
 }
+
+/* Produkt: wymus biale tlo strony */
+body#product,
+body#product #page,
+body#product #wrapper,
+body#product #content,
+body#product #main {
+    background: #ffffff !important;
+}
+
+/* Subcategories: make items look like small buttons and increase clickable area */
+.subcategories-list {
+  padding: 0;
+  margin: 0;
+}
+.subcategories-list li {
+  list-style: none;
+  margin-bottom: 10px;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+.subcategories-list li a.img,
+.subcategories-list li a.subcategory-name {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+.subcategories-list li a.img {
+  padding: 6px;
+}
+.subcategories-list li a.subcategory-name {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  font-weight: 600;
+}
+.subcategories-list li:hover a.img,
+.subcategories-list li:hover a.subcategory-name {
+  background: rgba(11,102,81,0.06); /* subtle greenish hover */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.04);
+}
+.subcategories-list li { cursor: pointer; }
+.subcategories-list li:hover { transform: translateY(-2px); }
+

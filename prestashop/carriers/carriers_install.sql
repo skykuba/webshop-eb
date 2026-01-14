@@ -30,7 +30,7 @@ INSERT INTO ps_carrier (
     2,
     1,
     0,
-    50.000000,
+    0.000000,
     0,
     0,
     0,
@@ -81,7 +81,7 @@ INSERT INTO ps_carrier (
     2,
     1,
     0,
-    50.000000,
+    0.000000,
     0,
     0,
     0,
@@ -140,77 +140,82 @@ INSERT INTO ps_carrier_group (id_carrier, id_group)
 SELECT 12, id_group FROM ps_group
 ON DUPLICATE KEY UPDATE id_group = VALUES(id_group);
 
+-- Insert price ranges for InPost (id_carrier = 11)
+-- Do not hardcode id_range_price: let auto-increment assign IDs so they won't collide with existing rows
 INSERT INTO ps_range_price (
-    id_range_price,
     id_carrier, 
     delimiter1, 
     delimiter2
 ) VALUES
-    (15, 11, 0.000000, 2000.000000),
-    (16, 11, 2000.000000, 1000000000.000000)
+    (11, 0.000000, 2000.000000),
+    (11, 2000.000000, 1000000000.000000)
 ON DUPLICATE KEY UPDATE
     delimiter1 = VALUES(delimiter1),
     delimiter2 = VALUES(delimiter2);
 
+-- Insert price ranges for DHL (id_carrier = 12)
 INSERT INTO ps_range_price (
-    id_range_price,
     id_carrier, 
     delimiter1, 
     delimiter2
 ) VALUES
-    (17, 12, 0.000000, 2000.000000),
-    (18, 12, 2000.000000, 3000.000000)
+    (12, 0.000000, 2000.000000),
+    (12, 2000.000000, 3000.000000)
 ON DUPLICATE KEY UPDATE
     delimiter1 = VALUES(delimiter1),
     delimiter2 = VALUES(delimiter2);
 
-INSERT INTO ps_delivery (
-    id_carrier, 
-    id_zone, 
-    id_range_price, 
-    id_range_weight, 
-    price
-) VALUES
-    (11, 1, 15, 0, 19.000000),
-    (11, 1, 16, 0, 0.000000)
-ON DUPLICATE KEY UPDATE
-    price = VALUES(price);
+-- Insert deliveries for InPost zone 1 using the inserted/selected range IDs
+INSERT INTO ps_delivery (id_carrier, id_zone, id_range_price, id_range_weight, price)
+SELECT 11, 1, id_range_price, 0, 19.000000
+FROM ps_range_price
+WHERE id_carrier = 11 AND delimiter1 = 0.000000 AND delimiter2 = 2000.000000
+ON DUPLICATE KEY UPDATE price = VALUES(price);
 
-INSERT INTO ps_delivery (
-    id_carrier, 
-    id_zone, 
-    id_range_price, 
-    id_range_weight, 
-    price
-) VALUES
-    (11, 2, 15, 0, 39.000000),
-    (11, 2, 16, 0, 0.000000)
-ON DUPLICATE KEY UPDATE
-    price = VALUES(price);
+INSERT INTO ps_delivery (id_carrier, id_zone, id_range_price, id_range_weight, price)
+SELECT 11, 1, id_range_price, 0, 0.000000
+FROM ps_range_price
+WHERE id_carrier = 11 AND delimiter1 = 2000.000000 AND delimiter2 = 1000000000.000000
+ON DUPLICATE KEY UPDATE price = VALUES(price);
 
-INSERT INTO ps_delivery (
-    id_carrier, 
-    id_zone, 
-    id_range_price, 
-    id_range_weight, 
-    price
-) VALUES
-    (12, 1, 17, 0, 16.000000),
-    (12, 1, 18, 0, 0.000000)
-ON DUPLICATE KEY UPDATE
-    price = VALUES(price);
+-- Insert deliveries for InPost zone 2 using the inserted/selected range IDs
+INSERT INTO ps_delivery (id_carrier, id_zone, id_range_price, id_range_weight, price)
+SELECT 11, 2, id_range_price, 0, 39.000000
+FROM ps_range_price
+WHERE id_carrier = 11 AND delimiter1 = 0.000000 AND delimiter2 = 2000.000000
+ON DUPLICATE KEY UPDATE price = VALUES(price);
 
-INSERT INTO ps_delivery (
-    id_carrier, 
-    id_zone, 
-    id_range_price, 
-    id_range_weight, 
-    price
-) VALUES
-    (12, 7, 17, 0, 46.000000),
-    (12, 7, 18, 0, 0.000000)
-ON DUPLICATE KEY UPDATE
-    price = VALUES(price);
+INSERT INTO ps_delivery (id_carrier, id_zone, id_range_price, id_range_weight, price)
+SELECT 11, 2, id_range_price, 0, 0.000000
+FROM ps_range_price
+WHERE id_carrier = 11 AND delimiter1 = 2000.000000 AND delimiter2 = 1000000000.000000
+ON DUPLICATE KEY UPDATE price = VALUES(price);
+
+-- Insert deliveries for DHL zone 1 using the inserted/selected range IDs
+INSERT INTO ps_delivery (id_carrier, id_zone, id_range_price, id_range_weight, price)
+SELECT 12, 1, id_range_price, 0, 16.000000
+FROM ps_range_price
+WHERE id_carrier = 12 AND delimiter1 = 0.000000 AND delimiter2 = 2000.000000
+ON DUPLICATE KEY UPDATE price = VALUES(price);
+
+INSERT INTO ps_delivery (id_carrier, id_zone, id_range_price, id_range_weight, price)
+SELECT 12, 1, id_range_price, 0, 0.000000
+FROM ps_range_price
+WHERE id_carrier = 12 AND delimiter1 = 2000.000000 AND delimiter2 = 3000.000000
+ON DUPLICATE KEY UPDATE price = VALUES(price);
+
+-- Insert deliveries for DHL zone 7 using the inserted/selected range IDs
+INSERT INTO ps_delivery (id_carrier, id_zone, id_range_price, id_range_weight, price)
+SELECT 12, 7, id_range_price, 0, 46.000000
+FROM ps_range_price
+WHERE id_carrier = 12 AND delimiter1 = 0.000000 AND delimiter2 = 2000.000000
+ON DUPLICATE KEY UPDATE price = VALUES(price);
+
+INSERT INTO ps_delivery (id_carrier, id_zone, id_range_price, id_range_weight, price)
+SELECT 12, 7, id_range_price, 0, 0.000000
+FROM ps_range_price
+WHERE id_carrier = 12 AND delimiter1 = 2000.000000 AND delimiter2 = 3000.000000
+ON DUPLICATE KEY UPDATE price = VALUES(price);
 
 INSERT INTO ps_carrier_shop (id_carrier, id_shop) VALUES
     (11, 1),

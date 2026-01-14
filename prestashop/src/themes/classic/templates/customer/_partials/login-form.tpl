@@ -33,14 +33,50 @@
     <div>
       {block name='login_form_fields'}
         {foreach from=$formFields item="field"}
-          {block name='form_field'}
-            {form_field field=$field}
-          {/block}
+          {if $field.name == 'email'}
+            <div class="form-group {if !empty($field.errors)}has-error{/if}">
+              <label class="sr-only{if $field.required} required{/if}" for="field-{$field.name}">
+                {$field.label}
+              </label>
+              <input
+                id="field-{$field.name}"
+                class="form-control w-100"
+                name="{$field.name}"
+                type="{$field.type}"
+                value="{$field.value}"
+                {if $field.autocomplete}autocomplete="{$field.autocomplete}"{/if}
+                placeholder="{l s='Login / Nr karty stałego klienta / E-mail' d='Shop.Theme.Customeraccount'}"
+                {if $field.required}required{/if}
+              >
+              {include file='_partials/form-errors.tpl' errors=$field.errors}
+            </div>
+          {elseif $field.name == 'password'}
+            <div class="form-group {if !empty($field.errors)}has-error{/if}">
+              <label class="sr-only{if $field.required} required{/if}" for="field-{$field.name}">
+                {$field.label}
+              </label>
+              <input
+                id="field-{$field.name}"
+                class="form-control w-100"
+                name="{$field.name}"
+                type="password"
+                value=""
+                {if $field.autocomplete}autocomplete="{$field.autocomplete}"{/if}
+                placeholder="{l s='Hasło / Pin karty stałego klienta' d='Shop.Theme.Customeraccount'}"
+                {if $field.required}required{/if}
+              >
+              {include file='_partials/form-errors.tpl' errors=$field.errors}
+            </div>
+          {else}
+            {block name='form_field'}
+              {form_field field=$field}
+            {/block}
+          {/if}
         {/foreach}
       {/block}
       <div class="forgot-password">
-        <a href="{$urls.pages.password}" rel="nofollow">
-          {l s='Forgot your password?' d='Shop.Theme.Customeraccount'}
+        <a href="#forgot-password" rel="nofollow">
+          {l s='Nie pamiętam loginu lub hasła' d='Shop.Theme.Customeraccount'}
         </a>
       </div>
     </div>
@@ -49,8 +85,8 @@
       <footer class="form-footer text-sm-center clearfix">
         <input type="hidden" name="submitLogin" value="1">
         {block name='form_buttons'}
-          <button id="submit-login" class="btn btn-primary" data-link-action="sign-in" type="submit" class="form-control-submit">
-            {l s='Sign in' d='Shop.Theme.Actions'}
+          <button id="submit-login" class="btn tuttu-btn-orange" data-link-action="sign-in" type="submit" class="form-control-submit">
+            {l s='ZALOGUJ SIĘ' d='Shop.Theme.Actions'}
           </button>
         {/block}
       </footer>

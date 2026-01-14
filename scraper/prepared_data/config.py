@@ -41,5 +41,6 @@ SHOE_SIZES: List[int] = [38, 39, 40, 41, 42, 43, 44, 45]
 SCRIPT_DIR: str = os.path.dirname(os.path.abspath(__file__))
 CATEGORIES_FILE: str = os.path.join(SCRIPT_DIR, "../data/categories.json")
 INPUT_DATA_FILE: str = os.path.join(SCRIPT_DIR, "../data/products.json")
+INPUT_TEST_DATA_FILE: str = os.path.join(SCRIPT_DIR, "../data/products_test.json")
 OUTPUT_DATA_FILE: str = os.path.join(SCRIPT_DIR, "prepared_products.json")
 PHOTOS_OUTPUT_DIR: str = os.path.join(SCRIPT_DIR, "photos")
