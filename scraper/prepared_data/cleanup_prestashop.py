@@ -146,6 +146,9 @@ def delete_all_categories(api_client: PrestaShopAPIClient) -> None:
         deleted_count = 0
         for category in categories_sorted:
             category_id = int(category['id'])
+            # Skip first two categories (ID 1 and 2)
+            if category_id <= 2:
+                continue
             
             try:
                 api_client._make_request("DELETE", f"categories/{category_id}")
