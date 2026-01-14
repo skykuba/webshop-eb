@@ -961,8 +961,8 @@ nav[role="navigation"],
   margin-top: 20px;
   padding: 10px 28px;
   border-radius: 4px;
-  background: #e35420; /* pomarańcz jak na tuttu */
   border: 1px solid #e35420;
+  background: #f47216; /* pomarańcz jak na tuttu */
   color: #fff;
   text-transform: uppercase;
   font-weight: 600;
