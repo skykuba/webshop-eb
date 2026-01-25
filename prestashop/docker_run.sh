@@ -81,24 +81,41 @@ if [ ! -f ./config/settings.inc.php ] && [ ! -f ./app/config/parameters.php ] &&
     fi
 
     if [ $PS_INSTALL_AUTO = 1 ]; then
-        echo "\n* Installing PrestaShop, this may take a while ...";
-
-        if [ "$PS_DOMAIN" = "<to be defined>" ]; then
-            export PS_DOMAIN=$(hostname -i)
-        fi
-
-        echo "\n* Launching the installer script..."
-        runuser -g www-data -u www-data -- php -d memory_limit=-1 /var/www/html/$PS_FOLDER_INSTALL/index_cli.php \
-        --domain="$PS_DOMAIN" --db_server=$DB_SERVER:$DB_PORT --db_name="$DB_NAME" --db_user=$DB_USER \
-        --db_password=$DB_PASSWD --prefix="$DB_PREFIX" --firstname="John" --lastname="Doe" \
-        --password="$ADMIN_PASSWD" --email="$ADMIN_MAIL" --language=$PS_LANGUAGE --country=$PS_COUNTRY \
-        --all_languages=$PS_ALL_LANGUAGES --newsletter=0 --send_email=0 --ssl=$PS_ENABLE_SSL
-
-        if [ $? -ne 0 ]; then
-            echo 'warning: PrestaShop installation failed.'
+        if [ -f /tmp/db_dump/dump.sql ]; then
+            echo "\n* External DB dump found. Restoring database from /tmp/db_dump/dump.sql ..."
+            
+            # Restore DB
+            mysql -h $DB_SERVER -P $DB_PORT -u $DB_USER -p$DB_PASSWD $DB_NAME < /tmp/db_dump/dump.sql
+            
+            if [ $? -eq 0 ]; then
+                echo "\n* Database restored successfully."
+                echo "\n* Removing install folder..."
+                rm -rf /var/www/html/install/
+                rm -rf /var/www/html/$PS_FOLDER_INSTALL/
+            else
+                echo >&2 'error: Database restore failed.'
+                exit 1
+            fi
         else
-            echo "\n* Removing install folder..."
-            rm -r /var/www/html/$PS_FOLDER_INSTALL/
+            echo "\n* Installing PrestaShop, this may take a while ...";
+
+            if [ "$PS_DOMAIN" = "<to be defined>" ]; then
+                export PS_DOMAIN=$(hostname -i)
+            fi
+
+            echo "\n* Launching the installer script..."
+            runuser -g www-data -u www-data -- php -d memory_limit=-1 /var/www/html/$PS_FOLDER_INSTALL/index_cli.php \
+            --domain="$PS_DOMAIN" --db_server=$DB_SERVER:$DB_PORT --db_name="$DB_NAME" --db_user=$DB_USER \
+            --db_password=$DB_PASSWD --prefix="$DB_PREFIX" --firstname="John" --lastname="Doe" \
+            --password="$ADMIN_PASSWD" --email="$ADMIN_MAIL" --language=$PS_LANGUAGE --country=$PS_COUNTRY \
+            --all_languages=$PS_ALL_LANGUAGES --newsletter=0 --send_email=0 --ssl=$PS_ENABLE_SSL
+
+            if [ $? -ne 0 ]; then
+                echo 'warning: PrestaShop installation failed.'
+            else
+                echo "\n* Removing install folder..."
+                rm -r /var/www/html/$PS_FOLDER_INSTALL/
+            fi
         fi
     fi
 
