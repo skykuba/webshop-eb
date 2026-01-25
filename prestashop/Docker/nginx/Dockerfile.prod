@@ -6,6 +6,7 @@ COPY nginx/ssl /etc/nginx/ssl
 
 # Copy static assets (source code)
 COPY src /var/www/html
+COPY static/img /var/www/html/img
 
 # Permissions (ensure readable by nginx)
 # Default nginx user is usually compatible with world-readable files, but we can ensure execution bit on directories if needed. 
