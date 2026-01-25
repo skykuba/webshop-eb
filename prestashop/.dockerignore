@@ -1,0 +1,34 @@
+# Ignore git directory
+.git
+.gitignore
+
+# Environment files
+.env
+.env.*
+
+# Docker configuration
+docker-compose.yml
+docker-compose.*.yml
+Docker/
+!docker_run.sh
+
+# Nginx config (needed for build)
+!nginx/
+!nginx/dev.conf
+!nginx/ssl/
+
+# IDE files
+.idea/
+.vscode/
+
+# PrestaShop Cache and Var
+src/var/cache/
+src/var/logs/
+src/cache/
+
+# Node modules if present
+src/node_modules/
+
+# Local configuration files that should not be in the image
+src/app/config/parameters.php
+src/config/settings.inc.php
