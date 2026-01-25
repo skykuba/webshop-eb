@@ -32,3 +32,15 @@ src/node_modules/
 # Local configuration files that should not be in the image
 src/app/config/parameters.php
 src/config/settings.inc.php
+
+# Non-production files (docs, tests, licenses)
+src/docs/
+src/tests/
+src/gen-cert*
+src/LICENSES
+src/INSTALL.txt
+src/README*
+src/.gitignore
+src/CONTRIBUTING.md
+src/CONTRIBUTORS.md
+src/.git
