@@ -50,6 +50,8 @@ services:
       PS_DEMO_MODE: 0
     networks:
       - prestashop_network
+    volumes:
+      - ./Docker/mysql/init:/tmp/db_dump
 
   nginx:
     image: prestashop-nginx
