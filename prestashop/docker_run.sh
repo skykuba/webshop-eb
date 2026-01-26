@@ -175,4 +175,9 @@ else
     echo "\n* No external DB dump found, skipping restore."
 fi
 
+if [ ! -z "$MEMCACHED_HOST" ]; then
+    echo "\n* Configuring Memcached..."
+    runuser -g www-data -u www-data -- php /tmp/configure_cache.php
+fi
+
 exec php-fpm

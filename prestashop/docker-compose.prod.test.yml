@@ -48,6 +48,8 @@ services:
       PS_ENABLE_SSL: ${PS_SSL}
       PS_HANDLE_DYNAMIC_DOMAIN: 0
       PS_DEMO_MODE: 0
+      MEMCACHED_HOST: memcached
+      MEMCACHED_PORT: 11211
     networks:
       - prestashop_network
     volumes:
@@ -64,6 +66,13 @@ services:
       - prestashop
     ports:
       - "19795:443"
+    networks:
+      - prestashop_network
+
+  memcached:
+    image: memcached:alpine
+    container_name: prestashop-prod-test-memcached
+    restart: unless-stopped
     networks:
       - prestashop_network
 
