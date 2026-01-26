@@ -20,6 +20,7 @@ RUN chmod +x /tmp/docker_run.sh
 # Build: Copy source code
 COPY src /var/www/html
 COPY static/img /var/www/html/img
+COPY Docker/mysql/init/dump.sql /tmp/db_dump/dump.sql
 
 # Permissions & Cleanup
 RUN chown -R www-data:www-data /var/www/html && \
