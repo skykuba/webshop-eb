@@ -1,14 +1,20 @@
 FROM prestashop/prestashop:1.7.8.10-fpm
 
+# Instalacja narzędzi i Memcached
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends default-mysql-client libmemcached-dev zlib1g-dev && \
+    apt-get install -y --no-install-recommends \
+        default-mysql-client \
+        make g++ autoconf pkg-config \
+        libmemcached-dev \
+        zlib1g-dev \
+        libssl-dev && \
     pecl install memcached && \
     docker-php-ext-enable memcached && \
+    apt-get purge -y --auto-remove make g++ autoconf pkg-config libssl-dev && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy modified start script
 COPY docker_run.sh /tmp/docker_run.sh
-COPY configure_cache.php /tmp/configure_cache.php
 RUN chmod +x /tmp/docker_run.sh
 
 # Build: Copy source code
