@@ -52,8 +52,6 @@ services:
       MEMCACHED_PORT: 11211
     networks:
       - prestashop_network
-    volumes:
-      - ./Docker/mysql/init:/tmp/db_dump
 
   nginx:
     image: prestashop-nginx

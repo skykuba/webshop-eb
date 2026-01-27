@@ -148,7 +148,6 @@ else
 fi
 
 echo "\n* Fixing permissions for cache and other directories..."
-chmod -R 777 /var/www/html
 
 if [ -f /tmp/db_dump/dump.sql ]; then
     echo "\n* External DB dump found. Replacing database $DB_NAME ..."

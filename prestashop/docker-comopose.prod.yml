@@ -1,0 +1,67 @@
+services:
+  prestashop:
+    image: krzkacz887/prestashop-app
+    restart: unless-stopped
+    environment:
+      DB_SERVER: admin-mysql_db
+      DB_PORT: 3306
+      DB_NAME: BE_197778
+      DB_USER: root
+      DB_PASSWD: student
+      DB_PREFIX: ps_
+      PS_INSTALL_AUTO: 1
+      PS_ERASE_DB: 1
+      PS_INSTALL_DB: 1
+      PS_DOMAIN: localhost:19795
+      PS_LANGUAGE: pl
+      PS_COUNTRY: pl
+      PS_ALL_LANGUAGES: 0
+      PS_FOLDER_ADMIN: admin4577
+      PS_FOLDER_INSTALL: install4577
+      ADMIN_MAIL: admin@gmial.com
+      ADMIN_PASSWD: AdminPassword123
+      PS_ENABLE_SSL: 1
+      PS_HANDLE_DYNAMIC_DOMAIN: 0
+      PS_DEMO_MODE: 0
+      MEMCACHED_HOST: memcached
+      MEMCACHED_PORT: 11211
+    networks:
+      - network
+      - admin-mysql_default
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 2G
+        reservations:
+          cpus: "0.5"
+          memory: 1G
+
+  nginx:
+    image: krzkacz887/prestashop-nginx
+    restart: unless-stopped
+    depends_on:
+      - prestashop
+    ports:
+      - "19795:443"
+    networks:
+      - network
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1G
+        reservations:
+          cpus: "0.5"
+          memory: 0.5G
+
+  memcached:
+    image: memcached:alpine
+    restart: unless-stopped
+    networks:
+      - network
+
+networks:
+  network:
+  admin-mysql_default:
+      external: true

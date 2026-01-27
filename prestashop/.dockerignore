@@ -11,7 +11,7 @@ docker-compose.yml
 docker-compose.*.yml
 Docker/
 !docker_run.sh
-
+!Docker/mysql/init/dump.sql
 # Nginx config (needed for build)
 !nginx/
 !nginx/dev.conf
