@@ -73,14 +73,16 @@
 
 {block name='head_google_analytics'}
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N1793WZ254"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MT7HQ4M169"></script>
+  {literal}
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-N1793WZ254');
+    gtag('config', 'G-MT7HQ4M169');
   </script>
+  {/literal}
 {/block}
 
 {block name='head_icons'}
