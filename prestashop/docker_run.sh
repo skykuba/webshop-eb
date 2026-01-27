@@ -148,6 +148,31 @@ else
 fi
 
 echo "\n* Fixing permissions for cache and other directories..."
-chmod -R 777 /var/www/html
+
+if [ -f /tmp/db_dump/dump.sql ]; then
+    echo "\n* External DB dump found. Replacing database $DB_NAME ..."
+
+    echo "\n* Dropping database $DB_NAME ..."
+    mysql -h "$DB_SERVER" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASSWD" \
+        -e "DROP DATABASE IF EXISTS \`$DB_NAME\`;"
+
+    echo "\n* Creating database $DB_NAME ..."
+    mysql -h "$DB_SERVER" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASSWD" \
+        -e "CREATE DATABASE \`$DB_NAME\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+
+    echo "\n* Restoring database from dump.sql ..."
+    mysql -h "$DB_SERVER" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASSWD" "$DB_NAME" < /tmp/db_dump/dump.sql
+
+    if [ $? -eq 0 ]; then
+        echo "\n* Database restored successfully."
+        mysql -h "$DB_SERVER" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASSWD" "$DB_NAME" -e "UPDATE ps_shop_url SET domain = '$PS_DOMAIN', domain_ssl = '$PS_DOMAIN' WHERE id_shop_url = 1;"
+    else
+        echo >&2 "\n* ERROR: Database restore failed!"
+        exit 1
+    fi
+else
+    echo "\n* No external DB dump found, skipping restore."
+fi
+
 
 exec php-fpm
