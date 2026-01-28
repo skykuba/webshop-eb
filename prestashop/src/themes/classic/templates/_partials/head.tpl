@@ -71,6 +71,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 {/block}
 
+{block name='head_google_analytics'}
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N1793WZ254"></script>
+  {literal}
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-N1793WZ254');
+  </script>
+  {/literal}
+{/block}
+
 {block name='head_icons'}
   <link rel="icon" type="image/vnd.microsoft.icon" href="{$shop.favicon}?{$shop.favicon_update_time}">
   <link rel="shortcut icon" type="image/x-icon" href="{$shop.favicon}?{$shop.favicon_update_time}">
