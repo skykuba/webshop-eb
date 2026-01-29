@@ -1,9 +1,9 @@
 services:
   prestashop:
-    image: krzkacz887/prestashop-app
+    image: krzkacz887/prestashop-app:v1.2
     restart: unless-stopped
     environment:
-      DB_SERVER: admin-mysql_db
+      DB_SERVER: student-swarm01
       DB_PORT: 3306
       DB_NAME: BE_197778
       DB_USER: root
@@ -12,6 +12,7 @@ services:
       PS_INSTALL_AUTO: 1
       PS_ERASE_DB: 1
       PS_INSTALL_DB: 1
+      PS_PORT: 19795
       PS_DOMAIN: localhost:19795
       PS_LANGUAGE: pl
       PS_COUNTRY: pl
@@ -27,8 +28,11 @@ services:
       MEMCACHED_PORT: 11211
     networks:
       - network
-      - admin-mysql_default
     deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == student-swarm01
       resources:
         limits:
           cpus: "1.0"
@@ -38,15 +42,21 @@ services:
           memory: 1G
 
   nginx:
-    image: krzkacz887/prestashop-nginx
+    image: krzkacz887/prestashop-nginx:v1.2
     restart: unless-stopped
     depends_on:
       - prestashop
     ports:
-      - "19795:443"
+     - target: 443
+       published: 19795
+       mode: host
     networks:
       - network
     deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == student-swarm01
       resources:
         limits:
           cpus: "1.0"
@@ -60,8 +70,19 @@ services:
     restart: unless-stopped
     networks:
       - network
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.hostname == student-swarm01
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
 
 networks:
   network:
-  admin-mysql_default:
-      external: true
