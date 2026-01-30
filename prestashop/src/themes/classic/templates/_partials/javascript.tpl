@@ -39,3 +39,33 @@
     {/foreach}
   </script>
 {/if}
+
+<script>
+{literal}
+document.addEventListener('DOMContentLoaded', function() {
+    const addToCartBtn = document.querySelector('.add-to-cart');
+    
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', function() {
+                const discountElement = document.querySelector('.product-discount');
+                const hasDiscount = discountElement !== null;
+
+                if (hasDiscount) {
+                    const priceValue = document.querySelector('.current-price-value').getAttribute('content');
+
+                    gtag('event', 'promo_product_added', {
+                        'event_category': 'ecommerce',
+                        'event_label': 'Promocyjny produkt dodany do koszyka',
+                        'value': parseFloat(priceValue),
+                        'currency': 'PLN',
+                        'is_promotion': 'yes',
+                        'debug_mode': true
+                    });
+
+                    console.log('Event wysłany do DebugView GA4');
+                }
+        });
+    }
+});
+{/literal}
+</script>

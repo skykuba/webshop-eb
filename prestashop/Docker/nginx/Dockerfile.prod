@@ -1,0 +1,15 @@
+FROM nginx:alpine
+
+# Copy config
+COPY nginx/dev.conf /etc/nginx/conf.d/default.conf
+COPY nginx/ssl /etc/nginx/ssl
+
+# Copy static assets (source code)
+COPY src /var/www/html
+COPY static/img /var/www/html/img
+
+# Permissions (ensure readable by nginx)
+# Default nginx user is usually compatible with world-readable files, but we can ensure execution bit on directories if needed. 
+# src permissions from host are preserved or owned by root in copy if not specified.
+# Ideally we should ensure they are readable.
+RUN chmod -R a+rX /var/www/html
