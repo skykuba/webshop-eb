@@ -1,6 +1,6 @@
 services:
   prestashop:
-    image: krzkacz887/prestashop-app:v1.2
+    image: ghcr.io/skykuba/webshop-eb/prestashop-app:latest
     restart: unless-stopped
     environment:
       DB_SERVER: student-swarm01
@@ -42,7 +42,7 @@ services:
           memory: 1G
 
   nginx:
-    image: krzkacz887/prestashop-nginx:v1.2
+    image: ghcr.io/skykuba/webshop-eb/prestashop-nginx:latest
     restart: unless-stopped
     depends_on:
       - prestashop
@@ -63,7 +63,7 @@ services:
           memory: 1G
         reservations:
           cpus: "0.5"
-          memory: 0.5G
+          memory: 512m
 
   memcached:
     image: memcached:alpine
@@ -71,18 +71,12 @@ services:
     networks:
       - network
     deploy:
-      replicas: 1
-      placement:
-        constraints:
-          - node.hostname == student-swarm01
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
       resources:
         limits:
-          cpus: '0.5'
-          memory: 256M
-
+          cpus: "0.5"
+          memory: 1G
+        reservations:
+          cpus: "0.25"
+          memory: 512m
 networks:
   network:
