@@ -19,9 +19,9 @@ jobs:
       matrix:
         include:
           - component: prestashop-app
-            dockerfile: prestashop/Docker/prestashop/Dockerfile.prod
+            dockerfile: Docker/prestashop/Dockerfile.prod
           - component: prestashop-nginx
-            dockerfile: prestashop/Docker/nginx/Dockerfile.prod
+            dockerfile: Docker/nginx/Dockerfile.prod
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -58,8 +58,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: .
-          file: ${{ matrix.dockerfile }}
+          context: ./prestashop
+          file: prestashop/${{ matrix.dockerfile }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
