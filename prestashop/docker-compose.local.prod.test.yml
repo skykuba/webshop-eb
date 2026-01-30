@@ -1,4 +1,3 @@
-version: '3'
 services:
   mysql:
     container_name: prestashop-prod-test-mysql
@@ -18,7 +17,9 @@ services:
       retries: 5
 
   prestashop:
-    image: ghcr.io/skykuba/webshop-eb/prestashop-app:latest
+    build:
+        context: .
+        dockerfile: ./Docker/prestashop/Dockerfile.prod
     container_name: prestashop-prod-test-app
     restart: unless-stopped
     depends_on:
@@ -51,7 +52,9 @@ services:
       - prestashop_network
 
   nginx:
-    image: ghcr.io/skykuba/webshop-eb/prestashop-nginx:latest
+    build:
+      context: .
+      dockerfile: ./Docker/nginx/Dockerfile.prod
     container_name: prestashop-prod-test-nginx
     restart: unless-stopped
     depends_on:

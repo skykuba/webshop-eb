@@ -1,6 +1,6 @@
 services:
   prestashop:
-    image: krzkacz887/prestashop-app
+    image: ghcr.io/skykuba/webshop-eb/prestashop-app:latest
     restart: unless-stopped
     environment:
       DB_SERVER: admin-mysql_db
@@ -38,7 +38,7 @@ services:
           memory: 1G
 
   nginx:
-    image: krzkacz887/prestashop-nginx
+    image: ghcr.io/skykuba/webshop-eb/prestashop-nginx:latest
     restart: unless-stopped
     depends_on:
       - prestashop
@@ -60,7 +60,14 @@ services:
     restart: unless-stopped
     networks:
       - network
-
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1G
+        reservations:
+          cpus: "0.25"
+          memory: 0.5G
 networks:
   network:
   admin-mysql_default:
