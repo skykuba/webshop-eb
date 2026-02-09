@@ -25,6 +25,8 @@ services:
     depends_on:
       mysql:
         condition: service_healthy
+    ports:
+      - "19795:443"
     environment:
       DB_SERVER: mysql
       DB_PORT: ${DB_PORT}
@@ -48,26 +50,6 @@ services:
       PS_DEMO_MODE: 0
       MEMCACHED_HOST: memcached
       MEMCACHED_PORT: 11211
-    networks:
-      - prestashop_network
-
-  nginx:
-    build:
-      context: .
-      dockerfile: ./Docker/nginx/Dockerfile.prod
-    container_name: prestashop-prod-test-nginx
-    restart: unless-stopped
-    depends_on:
-      - prestashop
-    ports:
-      - "19795:443"
-    networks:
-      - prestashop_network
-
-  memcached:
-    image: memcached:alpine
-    container_name: prestashop-prod-test-memcached
-    restart: unless-stopped
     networks:
       - prestashop_network
 

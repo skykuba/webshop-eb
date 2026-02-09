@@ -21,6 +21,8 @@ services:
     image: ghcr.io/skykuba/webshop-eb/prestashop-app:latest
     container_name: prestashop-prod-test-app
     restart: unless-stopped
+    ports:
+      - "${PS_PORT}:443"
     depends_on:
       mysql:
         condition: service_healthy
@@ -50,16 +52,6 @@ services:
     networks:
       - prestashop_network
 
-  nginx:
-    image: ghcr.io/skykuba/webshop-eb/prestashop-nginx:latest
-    container_name: prestashop-prod-test-nginx
-    restart: unless-stopped
-    depends_on:
-      - prestashop
-    ports:
-      - "19795:443"
-    networks:
-      - prestashop_network
 
   memcached:
     image: memcached:alpine
