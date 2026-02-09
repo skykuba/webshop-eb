@@ -58,7 +58,7 @@ docker-compose -f docker-compose.local.prod.test.yml up -d --build
 
 Environment for testing ready-made images that would go to production, but in a safe local environment.
 - **Images:** Downloaded from the registry (just like in production).
-- **Database:** Local MySQL container (safe testing without risk of damaging production data).
+- **Database:** Local MySQL container.
 
 **Running:**
 ```bash
