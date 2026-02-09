@@ -20,8 +20,6 @@ jobs:
         include:
           - component: prestashop-app
             dockerfile: Docker/prestashop/Dockerfile.prod
-          - component: prestashop-nginx
-            dockerfile: Docker/nginx/Dockerfile.prod
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -36,8 +34,7 @@ jobs:
           username: ${{ env.REGISTRY_USERNAME }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Generate SSL certificates (nginx only)
-        if: matrix.component == 'prestashop-nginx'
+      - name: Generate SSL certificates
         run: |
           mkdir -p prestashop/nginx/ssl
           openssl req -x509 -newkey rsa:4096 -nodes \
