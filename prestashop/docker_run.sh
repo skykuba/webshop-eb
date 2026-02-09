@@ -140,15 +140,25 @@ echo "\n* Almost ! Starting web server now\n";
 
 if [ -d /tmp/init-scripts/ ]; then
     echo "\n* Running init script(s)..."
+    chmod +x /tmp/init-scripts/* || true
     for i in `ls /tmp/init-scripts/`;do
-        /tmp/init-scripts/$i
+        if [ -f /tmp/init-scripts/$i ]; then
+            case "$i" in
+                *.php)
+                    runuser -g www-data -u www-data -- php /tmp/init-scripts/$i || true
+                    ;;
+                *)
+                    /tmp/init-scripts/$i || true
+                    ;;
+            esac
+        fi
     done
 else
     echo "\n* No init script found, let's continue..."
 fi
 
 echo "\n* Fixing permissions for cache and other directories..."
-
+chmod -R 777 /var/www/html
 if [ -f /tmp/db_dump/dump.sql ]; then
     echo "\n* External DB dump found. Replacing database $DB_NAME ..."
 
@@ -175,4 +185,4 @@ else
 fi
 
 
-exec php-fpm
+exec /usr/sbin/apache2 -D FOREGROUND
